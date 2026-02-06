@@ -1,0 +1,113 @@
+/* W2-W17 教學簡報自訂樣式 */
+
+/* 全域置左對齊 */
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  text-align: left;
+}
+
+/* 標題樣式 */
+.reveal h1 {
+  font-size: 2.2em;
+  color: #2c3e50;
+  text-align: left;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  color: #34495e;
+  text-align: left;
+}
+
+/* 表格樣式 */
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.reveal table th {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 16px;
+}
+
+.reveal table td {
+  padding: 8px 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.reveal table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* 引用區塊 */
+.reveal blockquote {
+  background-color: #f1f8ff;
+  border-left: 4px solid #3498db;
+  padding: 15px 20px;
+  margin: 20px auto;
+  font-style: italic;
+  width: 80%;
+}
+
+/* 程式碼區塊 - 淺色背景 */
+.reveal pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  text-align: left;
+}
+
+.reveal pre code {
+  background-color: transparent;
+  color: #333;
+}
+
+.reveal code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background-color: #f0f0f0;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* 重點提示 */
+.reveal .highlight {
+  background-color: #fff3cd;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* 警告文字 */
+.reveal .warning {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* 成功文字 */
+.reveal .success {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+/* 列表間距 */
+.reveal ul li,
+.reveal ol li {
+  margin-bottom: 10px;
+}
+
+/* 中文字型 */
+.reveal {
+  font-family: 'Microsoft JhengHei', '微軟正黑體', 'Noto Sans TC', sans-serif;
+}
+
+/* 投影片編號 */
+.reveal .slide-number {
+  font-size: 14px;
+  color: #666;
+}
