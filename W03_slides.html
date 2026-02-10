@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="慈濟大學" />
-  <meta name="dcterms.date" content="2026-02-03" />
+  <meta name="dcterms.date" content="2026-02-09" />
   <title>W3：研究設計入門——賦予數字意義</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   <h1 class="title">W3：研究設計入門——賦予數字意義</h1>
   <h1 class="subtitle">基礎統計學 2026</h1>
   <h2 class="author">慈濟大學</h2>
-  <h3 class="date">2026-02-03</h3>
+  <h3 class="date">2026-02-09</h3>
 </section>
 
 <section>
@@ -621,7 +621,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <p>心理學家 S.S. Stevens (1946) 提出的分類：</p>
 <ol type="1">
 <li><strong>名義尺度</strong> (Nominal)</li>
-<li><strong>順序尺度</strong> (Ordinal)</li>
+<li><strong>次序尺度</strong> (Ordinal)</li>
 <li><strong>等距尺度</strong> (Interval)</li>
 <li><strong>等比尺度</strong> (Ratio)</li>
 </ol>
@@ -638,8 +638,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </ul>
 <p><strong>jamovi 圖示</strong>：⚪⚪⚪（三個圓圈）</p>
 </section>
-<section id="順序尺度-ordinal" class="slide level2">
-<h2>順序尺度 (Ordinal)</h2>
+<section id="次序尺度-ordinal" class="slide level2">
+<h2>次序尺度 (Ordinal)</h2>
 <blockquote>
 <p><strong>可以排序，但間距不等</strong></p>
 </blockquote>
@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <td>⚪⚪⚪</td>
 </tr>
 <tr class="even">
-<td>順序</td>
+<td>次序</td>
 <td><strong>Ordinal</strong></td>
 <td>📊</td>
 </tr>
@@ -922,6 +922,51 @@ Variable</strong></li>
 </blockquote>
 </section></section>
 <section>
+<section id="part-4.5學術寫作第一步" class="title-slide slide level1">
+<h1>Part 4.5：學術寫作第一步</h1>
+
+</section>
+<section id="如何描述你的變項" class="slide level2">
+<h2>如何描述你的變項？</h2>
+<blockquote>
+<p><strong>統計不只是跑數據，更是「溝通」</strong></p>
+</blockquote>
+<p>在研究報告中，你需要用完整句子介紹你的資料背景。</p>
+</section>
+<section id="變項描述規範" class="slide level2">
+<h2>變項描述規範</h2>
+<p>建議包含以下四個要素：</p>
+<ol type="1">
+<li><strong>變項名稱</strong></li>
+<li><strong>測量尺度</strong>（名義、次序、連續）</li>
+<li><strong>水準/分類</strong>（若是類別變項）</li>
+<li><strong>意義</strong>（縮寫或分數代表什麼）</li>
+</ol>
+</section>
+<section id="範例clinical-trial" class="slide level2">
+<h2>範例：Clinical Trial</h2>
+<blockquote>
+<p><strong>❌ 不良寫法</strong>（條列式）： - drug: nominal, 3 levels -
+mood.gain: continuous</p>
+</blockquote>
+<blockquote>
+<p><strong>✅ 專業寫法</strong>（完整句）：
+「這份資料包含三個變項。<code>drug</code>
+為名義變項，共有三個水準：placebo（安慰劑）、anxifree 與
+joyzepam。<code>mood.gain</code>
+為連續變項，代表參與者情緒改善的分數。」</p>
+</blockquote>
+</section>
+<section id="本週作業要求" class="slide level2">
+<h2>本週作業要求</h2>
+<p>從本週開始，作業報告將加入 <strong>【APA 寫作練習】</strong>
+區塊。</p>
+<ul>
+<li><strong>目標</strong>：練習用完整句描述變項。</li>
+<li><strong>評分重點</strong>：是否包含尺度資訊、是否為完整句子。</li>
+</ul>
+</section></section>
+<section>
 <section id="part-5常見陷阱" class="title-slide slide level1">
 <h1>Part 5：常見陷阱</h1>
 
@@ -953,8 +998,8 @@ Variable</strong></li>
 <strong>ID</strong></p>
 </section></section>
 <section>
-<section id="本週作業" class="title-slide slide level1">
-<h1>本週作業</h1>
+<section id="本週作業1-小時實作" class="title-slide slide level1">
+<h1>本週作業（1 小時實作）</h1>
 
 </section>
 <section id="作業內容" class="slide level2">
@@ -967,8 +1012,8 @@ Variable</strong></li>
 <li>執行分組描述統計</li>
 </ol>
 </section>
-<section id="繳交項目" class="slide level2">
-<h2>繳交項目</h2>
+<section id="繳交項目與時程" class="slide level2">
+<h2>繳交項目與時程</h2>
 <table>
 <thead>
 <tr class="header">
@@ -980,16 +1025,19 @@ Variable</strong></li>
 <tbody>
 <tr class="odd">
 <td>分析檔</td>
-<td><code>.omv</code></td>
+<td><code>學號_姓名_W3_Lab.omv</code></td>
 <td>正確設定變項的 jamovi 專案</td>
 </tr>
 <tr class="even">
 <td>報告</td>
-<td><code>.docx</code></td>
+<td><code>學號_姓名_W3_Report.docx</code></td>
 <td>包含操作紀錄與反思問題</td>
 </tr>
 </tbody>
 </table>
+<p><strong>繳交時間</strong>：本堂課下課前上傳至 Google Classroom</p>
+<p><strong>評量回饋</strong>：2 天內收到個人評量報告</p>
+<p><strong>修正機會</strong>：下次上課前可回報改進版本</p>
 </section>
 <section id="評分標準" class="slide level2">
 <h2>評分標準</h2>
@@ -1053,7 +1101,7 @@ Variable</strong></li>
 <td>性別、組別</td>
 </tr>
 <tr class="even">
-<td>順序</td>
+<td>次序</td>
 <td>排序</td>
 <td>Ordinal</td>
 <td>名次、滿意度</td>
@@ -1079,7 +1127,7 @@ Variable</strong></li>
 <ul>
 <li>集中趨勢：平均數、中位數、眾數</li>
 <li>離散程度：標準差、變異數</li>
-<li>統計圖表：直方圖、盒鬚圖</li>
+<li>統計圖表：直方圖、箱形圖/小提琴圖</li>
 </ul>
 </section></section>
 <section>

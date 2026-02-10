@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="慈濟大學" />
-  <meta name="dcterms.date" content="2026-02-03" />
+  <meta name="dcterms.date" content="2026-02-10" />
   <title>W4：資料清理——處理現實的雜亂</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   <h1 class="title">W4：資料清理——處理現實的雜亂</h1>
   <h1 class="subtitle">基礎統計學 2026</h1>
   <h2 class="author">慈濟大學</h2>
-  <h3 class="date">2026-02-03</h3>
+  <h3 class="date">2026-02-10</h3>
 </section>
 
 <section>
@@ -778,11 +778,12 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <section id="jamovi-操作建立計算變項" class="slide level2">
 <h2>jamovi 操作：建立計算變項</h2>
 <ol type="1">
-<li>點擊「Data」分頁</li>
-<li>點擊欄位標題右側的「+」</li>
+<li>切換「Data Tab」</li>
+<li>選擇資料表最右側變項的下一欄位</li>
 <li>選擇「Computed Variable」</li>
 <li>命名為 <code>Q3_r</code></li>
 <li>輸入公式：<code>6 - Q3</code></li>
+<li>重覆以上步驟，再建立計算變項<code>Total_Score</code></li>
 </ol>
 </section>
 <section id="計算總分" class="slide level2">
@@ -824,8 +825,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <section id="jamovi-操作transform" class="slide level2">
 <h2>jamovi 操作：Transform</h2>
 <ol type="1">
-<li>點擊「Data」→「Transform」</li>
-<li>選擇「Create New Transform」</li>
+<li>切換「Data Tab」</li>
+<li>點選要轉換的Variable→按「Transform」</li>
 <li>設定對應規則：
 <ul>
 <li><code>M</code>, <code>Male</code>, <code>male</code>, <code>1</code>
@@ -855,7 +856,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <ul>
 <li>自動識別空白為遺漏值</li>
 <li>分析時自動排除</li>
-<li>可在變項設定中定義遺漏值代碼</li>
+<li>可在<strong>系統設定</strong>中定義遺漏值代碼</li>
 </ul>
 </section>
 <section id="遺漏值的影響" class="slide level2">
@@ -879,95 +880,233 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </tr>
 </tbody>
 </table>
-<p><strong>jamovi 預設</strong>：listwise deletion（整列排除）</p>
+<p><strong>jamovi 預設</strong>：listwise
+deletion（<em>整列排除</em>）</p>
 </section></section>
 <section>
-<section id="本週作業" class="title-slide slide level1">
-<h1>本週作業</h1>
+<section id="part-6apa-寫作方法段雛形" class="title-slide slide level1">
+<h1>Part 6：APA 寫作——方法段雛形</h1>
+
+</section>
+<section id="學術寫作第二步" class="slide level2">
+<h2>學術寫作第二步</h2>
+<blockquote>
+<p>上週 (W3) 學會了用完整句子描述變項</p>
+<p>這週進階：<strong>記錄你的資料處理過程</strong></p>
+</blockquote>
+<p>在學術論文的「方法（Method）」章節中，你需要清楚記錄資料處理的每一個步驟。</p>
+</section>
+<section id="為什麼要記錄資料處理" class="slide level2">
+<h2>為什麼要記錄資料處理？</h2>
+<p><strong>三個理由</strong>：</p>
+<ol type="1">
+<li><strong>可重製
+(Reproducibility)</strong>：其他研究者能重行驗證你的分析</li>
+<li><strong>透明度 (Transparency)</strong>：審查者能檢驗你的決策</li>
+<li><strong>記錄你的思考</strong>：未來的你（或同事）能理解當初為什麼這樣做</li>
+</ol>
+</section>
+<section id="方法段的標準格式" class="slide level2">
+<h2>方法段的標準格式</h2>
+<p><strong>應包含的資訊</strong>：</p>
+<ol type="1">
+<li><strong>原始樣本數</strong> (<em>N</em>) 與
+<strong>有效樣本數</strong> (<em>N</em>)</li>
+<li><strong>排除準則</strong>（例如：年齡不合理、缺漏值）</li>
+<li><strong>資料轉換</strong>：
+<ul>
+<li>變項重新編碼（例如：Gender 1/2 → Male/Female）</li>
+<li>反向計分（哪些題目？用什麼公式？）</li>
+<li>總分計算（用哪些題目？）</li>
+</ul></li>
+</ol>
+</section>
+<section id="範例資料處理描述" class="slide level2">
+<h2>範例：資料處理描述</h2>
+<blockquote>
+<p>「原始資料包含 <em>N</em> = 150
+筆觀察值。為確保資料品質，移除年齡大於 100
+歲的不合理數值，篩選後有效樣本為 <em>N</em> = 142。性別變項 (Gender)
+的數值編碼統一採用 Male代表男性，Female代表女性。量表第三題
+採用反向計分，其餘題目維持原始分數。最後計算五個量表題目的總分(Total_Score)，總分範圍為
+5 至 25 分。」</p>
+</blockquote>
+</section>
+<section id="注意格式細節" class="slide level2">
+<h2>注意格式細節</h2>
+<p><strong>樣本數符號</strong>：使用斜體 <em>N</em></p>
+<ul>
+<li>✅ 正確：有效樣本為 <strong><em>N</em> = 142</strong></li>
+<li>❌ 錯誤：有效樣本為 <strong>N = 142</strong>（沒有斜體）</li>
+</ul>
+<p><strong>使用完整句子與連貫段落</strong>：</p>
+<ul>
+<li>✅ 正確：「原始資料包含 <em>N</em> = 150
+筆觀測值。為確保資料品質…」</li>
+<li>❌ 錯誤：
+<ul>
+<li>原始樣本：150</li>
+<li>排除異常值</li>
+<li>有效樣本：142</li>
+</ul></li>
+</ul>
+</section>
+<section id="w4-報告新增區塊" class="slide level2">
+<h2>W4 報告新增區塊</h2>
+<p><strong>【APA 寫作練習：方法段（資料處理）】</strong></p>
+<p>請用一段完整的文字描述：</p>
+<ol type="1">
+<li>原始樣本數與有效樣本數（使用 <em>N</em> 符號）</li>
+<li>排除準則（例如：Age &gt; 100）</li>
+<li>Gender 重新編碼</li>
+<li>Q3 反向計分（公式：6 - Q3）</li>
+<li>Total_Score 計算（Q1 + Q2 + Q3_r + Q4 + Q5）</li>
+</ol>
+<p><strong>這是從 W3 的「變項描述」進階到「方法描述」！</strong></p>
+</section>
+<section id="apa-累積進度" class="slide level2">
+<h2>APA 累積進度</h2>
+<table>
+<thead>
+<tr class="header">
+<th>週次</th>
+<th>APA 元素</th>
+<th>進度</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>W3</strong></td>
+<td>變項描述（完整句）</td>
+<td>✅ 已學會</td>
+</tr>
+<tr class="even">
+<td><strong>W4</strong></td>
+<td>方法段（資料處理）+ <em>N</em> 符號</td>
+<td>⬅️ 本週</td>
+</tr>
+<tr class="odd">
+<td>W5</td>
+<td>統計符號格式 (<em>M</em>, <em>SD</em>, <em>Mdn</em>)</td>
+<td>下週</td>
+</tr>
+<tr class="even">
+<td>W6</td>
+<td>圖表格式 (Figure/Table)</td>
+<td>即將學習</td>
+</tr>
+<tr class="odd">
+<td>W7</td>
+<td>結果段整合練習</td>
+<td>即將學習</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="本週作業1-小時實作" class="title-slide slide level1">
+<h1>本週作業（1 小時實作）</h1>
 
 </section>
 <section id="w4-作業資料清理挑戰" class="slide level2">
 <h2>W4 作業：資料清理挑戰</h2>
 <p><strong>資料檔</strong>：個人化資料（依學號生成）</p>
-<p><strong>任務</strong>：</p>
+<p><strong>jamovi 操作任務</strong>：</p>
 <ol type="1">
 <li>建立 Filter：排除 <code>Age &gt; 100</code></li>
-<li>統一 Gender 編碼</li>
-<li>建立 <code>Q3_r</code>（反向計分）</li>
-<li>計算 <code>Total_Score</code></li>
+<li>統一 Gender 編碼：建立 <code>Gender_clean</code>（1 → Male, 2 →
+Female）</li>
+<li>建立 <code>Q3_r</code>（反向計分公式：<code>6 - Q3</code>）</li>
+<li>計算
+<code>Total_Score</code>（公式：<code>Q1 + Q2 + Q3_r + Q4 + Q5</code>）</li>
 </ol>
 </section>
-<section id="繳交項目" class="slide level2">
-<h2>繳交項目</h2>
+<section id="繳交項目與時程" class="slide level2">
+<h2>繳交項目與時程</h2>
 <ol type="1">
-<li><code>學號_姓名_W4_Lab.omv</code></li>
-<li><code>學號_姓名_W4_Report.docx</code></li>
+<li><code>學號_姓名_W4_Lab.omv</code>（jamovi 檔案）</li>
+<li><code>學號_姓名_W4_Report.docx</code>（Word 報告）</li>
 </ol>
+<p><strong>報告模板</strong>：請從 Google Classroom 下載
+<code>W4_Report_Template.docx</code></p>
 <p><strong>報告內容</strong>：</p>
 <ul>
-<li>清理步驟紀錄</li>
-<li>前後資料比較</li>
-<li>反思問題回答</li>
+<li>【APA 寫作練習】：方法段（資料處理）描述</li>
+<li>【操作紀錄】：技術細節記錄</li>
+<li>【反思問題】：四題必答</li>
 </ul>
+<p><strong>繳交時間</strong>：本堂課下課前上傳至 Google Classroom</p>
+<p><strong>評量回饋</strong>：2 天內收到個人評量報告</p>
+<p><strong>修正機會</strong>：下次上課前可回報改進版本</p>
 </section>
-<section id="評分標準" class="slide level2">
-<h2>評分標準</h2>
+<section id="評分標準配分調整" class="slide level2">
+<h2>評分標準（配分調整）</h2>
 <table>
 <thead>
 <tr class="header">
 <th>項目</th>
 <th>配分</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Filter 設定</td>
-<td>20%</td>
-</tr>
-<tr class="even">
-<td>Gender 重編碼</td>
-<td>15%</td>
-</tr>
-<tr class="odd">
-<td>Q3 反向計分</td>
-<td>20%</td>
-</tr>
-<tr class="even">
-<td>Total_Score 計算</td>
-<td>15%</td>
-</tr>
-<tr class="odd">
-<td>Word 報告</td>
-<td>15%</td>
-</tr>
-<tr class="even">
 <td>檔名格式</td>
 <td>15%</td>
+<td>命名規範</td>
+</tr>
+<tr class="even">
+<td>Filter 設定</td>
+<td>15%</td>
+<td>Age &lt;= 100</td>
+</tr>
+<tr class="odd">
+<td>Gender 重編碼</td>
+<td>15%</td>
+<td>Gender_clean</td>
+</tr>
+<tr class="even">
+<td>Q3 反向計分</td>
+<td>15%</td>
+<td>Q3_r = 6 - Q3</td>
+</tr>
+<tr class="odd">
+<td>Total_Score 計算</td>
+<td>10%</td>
+<td>五題加總</td>
+</tr>
+<tr class="even">
+<td><strong>Word 報告與寫作</strong></td>
+<td><strong>30%</strong></td>
+<td>APA 方法段 + 4 題反思</td>
 </tr>
 </tbody>
 </table>
+<p><strong>報告寫作比重提升至 30%</strong>（W3 為 25%）</p>
 </section>
 <section id="反思問題報告必答" class="slide level2">
 <h2>反思問題（報告必答）</h2>
-<p><strong>Q1</strong>：為什麼使用 Filter 比直接刪除資料更好？</p>
-<blockquote>
-<p>請說明「非破壞性編輯」的重要性</p>
-</blockquote>
+<p><strong>Q1</strong>：為什麼使用 <strong>Computed Variable</strong>
+建立新變項（如 Q3_r），而不是直接修改原始的 Q3
+數值？這種「非破壞性編輯」有什麼好處？</p>
 </section>
-<section id="反思問題續" class="slide level2">
-<h2>反思問題（續）</h2>
-<p><strong>Q2</strong>：如果忘記對 Q3 做反向計分，直接加總會怎樣？</p>
-<blockquote>
-<p>思考：Q3 分數高代表什麼？與其他題的方向一致嗎？</p>
-</blockquote>
+<section class="slide level2">
+
+<p><strong>Q2</strong>：jamovi 的 <strong>Filter</strong> 功能與直接
+<strong>刪除列 (Delete Rows)</strong>
+有什麼不同？在學術研究中，為什麼我們偏好使用 Filter？</p>
 </section>
-<section id="反思問題續-1" class="slide level2">
-<h2>反思問題（續）</h2>
-<p><strong>Q3</strong>：你的資料中有多少筆因 Filter 被排除？</p>
-<blockquote>
-<p>這些被排除的資料應該如何處理？ - 直接刪除？ - 保留在原檔？ -
-在報告中說明？</p>
-</blockquote>
+<section class="slide level2">
+
+<p><strong>Q3</strong>：假設你要將這份作業的資料清理流程分享給同學，讓他能夠用不同的資料重現你的步驟。你在「方法段（資料處理）」中需要記錄哪些關鍵資訊？</p>
+</section>
+<section class="slide level2">
+
+<p><strong>Q4</strong>：在問卷設計中，為什麼會有些題目需要反向計分？請舉一個例子說明（可以參考
+WellBeing 量表或其他你知道的量表）。</p>
 </section></section>
 <section>
 <section id="重點回顧" class="title-slide slide level1">

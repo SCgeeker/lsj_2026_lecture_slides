@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="慈濟大學" />
-  <meta name="dcterms.date" content="2026-02-06" />
+  <meta name="dcterms.date" content="2026-02-10" />
   <title>W6：統計圖表——先看圖，再看數字</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   <h1 class="title">W6：統計圖表——先看圖，再看數字</h1>
   <h1 class="subtitle">基礎統計學 2026</h1>
   <h2 class="author">慈濟大學</h2>
-  <h3 class="date">2026-02-06</h3>
+  <h3 class="date">2026-02-10</h3>
 </section>
 
 <section>
@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <ol type="1">
 <li>使用 jamovi 2.7 的 Plots Tab 製作專業圖表</li>
 <li>識別並標註離群值</li>
-<li>匯出圖表至 PowerPoint 並撰寫圖表說明</li>
+<li>匯出圖表至 Word 報告並撰寫 APA 格式圖表說明</li>
 </ol>
 </section>
 <section id="對應教材" class="slide level2">
@@ -550,8 +550,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <ul>
 <li>《用 jamovi 上手統計學》
 <ul>
-<li><a href="https://scgeeker.github.io/lsj-book-zh_tw/">第 5
-章：繪製統計圖</a></li>
+<li><a href="https://scgeeker.github.io/lsj-book-zh_tw/05-Drawing-graphs.html">第
+5 章：繪製統計圖</a></li>
 </ul></li>
 </ul>
 <p><strong>簡報示範資料</strong>：電子書範例
@@ -644,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li>不需重新執行統計分析</li>
 </ul>
 <p><strong>操作路徑</strong>：</p>
-<pre><code>Analyses → Exploration → Plots</code></pre>
+<pre><code>切換Plot tab → 選擇要製作的Plot</code></pre>
 </section>
 <section id="plots-tab-介面" class="slide level2">
 <h2>Plots Tab 介面</h2>
@@ -652,30 +652,34 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <table>
 <thead>
 <tr class="header">
-<th>功能區</th>
+<th>Plot</th>
 <th>用途</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Variables</td>
-<td>選擇要繪製的變項</td>
+<td>Bar Plot</td>
+<td>柱狀圖</td>
 </tr>
 <tr class="even">
-<td>Plot Type</td>
-<td>選擇圖表類型（直方圖、箱形圖等）</td>
+<td>Box Plot</td>
+<td>箱形圖*</td>
 </tr>
 <tr class="odd">
-<td>Customization</td>
-<td>修改標題、軸標籤、顏色</td>
+<td>Histogram</td>
+<td>直方圖*</td>
 </tr>
 <tr class="even">
-<td>Density</td>
-<td>疊加常態曲線</td>
+<td>Scatter Plot</td>
+<td>散佈圖</td>
 </tr>
 <tr class="odd">
-<td>Outliers</td>
-<td>標註離群值</td>
+<td>Line Plot</td>
+<td>折線圖</td>
+</tr>
+<tr class="even">
+<td>Pareto Plot</td>
+<td>帕雷托圖</td>
 </tr>
 </tbody>
 </table>
@@ -727,20 +731,17 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </tbody>
 </table>
 </section>
-<section id="jamovi-操作製作直方圖" class="slide level2">
-<h2>jamovi 操作：製作直方圖</h2>
-<ol type="1">
-<li><strong>Analyses → Exploration → Plots</strong></li>
-<li>將 <code>Total_Score</code> 拖曳至 Variables</li>
-<li>勾選 <strong>Histogram</strong></li>
-<li>勾選 <strong>Density</strong>（疊加常態曲線）</li>
-</ol>
-<p><strong>預期輸出</strong>：</p>
+<section id="直方圖的製作要點" class="slide level2">
+<h2>直方圖的製作要點</h2>
+<p><strong>關鍵設定</strong>：</p>
 <ul>
-<li>橫軸：Total_Score</li>
-<li>縱軸：Density（密度）</li>
-<li>曲線：理論常態分佈</li>
+<li>疊加常態密度曲線（Density）</li>
+<li>選擇適當的組距（Bin Width）</li>
+<li>清楚標示橫軸與縱軸</li>
 </ul>
+<blockquote>
+<p><strong>詳細操作步驟見「本週作業」說明</strong></p>
+</blockquote>
 </section>
 <section id="直方圖-vs-w5-偏態指數" class="slide level2">
 <h2>直方圖 vs W5 偏態指數</h2>
@@ -818,19 +819,17 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li><strong>離群值</strong>：異常的極端值</li>
 </ol>
 </section>
-<section id="jamovi-操作製作箱形圖" class="slide level2">
-<h2>jamovi 操作：製作箱形圖</h2>
-<ol type="1">
-<li><strong>Analyses → Exploration → Plots</strong></li>
-<li>將 <code>Total_Score</code> 拖曳至 Variables</li>
-<li>勾選 <strong>Box Plot</strong></li>
-<li>勾選 <strong>Label Outliers</strong>（標註離群值編號）</li>
-</ol>
-<p><strong>預期輸出</strong>：</p>
+<section id="箱形圖的製作要點" class="slide level2">
+<h2>箱形圖的製作要點</h2>
+<p><strong>關鍵設定</strong>：</p>
 <ul>
-<li>箱形圖顯示資料分布</li>
-<li>離群值以 ID 標示</li>
+<li>標註離群值編號（Label Outliers）</li>
+<li>識別中位數、四分位距</li>
+<li>檢查資料對稱性</li>
 </ul>
+<blockquote>
+<p><strong>詳細操作步驟見「本週作業」說明</strong></p>
+</blockquote>
 </section>
 <section id="離群值的處理" class="slide level2">
 <h2>離群值的處理</h2>
@@ -938,7 +937,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <h2>jamovi 操作：製作小提琴圖</h2>
 <ol type="1">
 <li><strong>Analyses → Exploration → Plots</strong></li>
-<li>將 <code>Total_Score</code> 拖曳至 Variables</li>
+<li>將 <code>anscombesquartet</code> 拖曳至 Variables</li>
 <li>勾選 <strong>Violin</strong></li>
 <li>（選擇性）勾選 <strong>Box
 plot</strong>（在小提琴圖內疊加箱形圖）</li>
@@ -1131,13 +1130,13 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 <li>選擇格式與存檔位置</li>
 </ol>
 </section>
-<section id="本週重點匯出至-powerpoint" class="slide level2">
-<h2>本週重點：匯出至 PowerPoint</h2>
+<section id="本週重點匯出至-word" class="slide level2">
+<h2>本週重點：匯出至 Word</h2>
 <p><strong>W6 特別要求</strong>：</p>
 <ul>
 <li>將圖表匯出為 <strong>PNG</strong></li>
-<li>插入至 <strong>Word（DOCX）</strong></li>
-<li>撰寫 <strong>圖表說明（Figure Note）</strong></li>
+<li>插入至 <strong>Word（DOCX）</strong>報告</li>
+<li>撰寫 <strong>APA 格式圖表說明（Figure Note）</strong></li>
 </ul>
 <p><strong>為什麼用 Word？</strong></p>
 <ul>
@@ -1210,106 +1209,290 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 <section id="w6-作業視覺化診斷報告" class="slide level2">
 <h2>W6 作業：視覺化診斷報告</h2>
 <p><strong>資料來源</strong>：W5 延續的個人化資料（Total_Score）</p>
-<p><strong>任務</strong>：</p>
+<p><strong>核心任務</strong>：製作專業圖表並撰寫 APA 格式報告</p>
+</section>
+<section id="任務一製作直方圖" class="slide level2">
+<h2>任務一：製作直方圖</h2>
+<h3 id="step-1jamovi-操作">Step 1：jamovi 操作</h3>
 <ol type="1">
-<li>製作直方圖（含常態曲線）</li>
-<li>製作箱形圖（標註離群值）</li>
-<li>使用 Plots Tab 修改軸標籤</li>
-<li>匯出至 PowerPoint</li>
-<li>撰寫圖表說明</li>
+<li><strong>Analyses → Exploration → Plots</strong></li>
+<li>將 <code>Total_Score</code> 拖曳至 <strong>Variables</strong></li>
+<li>勾選 <strong>Histogram</strong></li>
+<li>勾選 <strong>Density</strong>（疊加常態曲線）</li>
 </ol>
+<p><strong>預期輸出</strong>：</p>
+<ul>
+<li>橫軸：Total_Score</li>
+<li>縱軸：Density（密度）</li>
+<li>疊加常態分佈曲線</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="step-2圖表專業化">Step 2：圖表專業化</h3>
+<p><strong>使用 Plots Tab 修改標籤</strong>：</p>
+<ol type="1">
+<li>設定選單展開 <strong>Plot &amp; Axis Title</strong></li>
+<li>修改：
+<ul>
+<li><strong>Plot Title</strong>：「量表計分分佈直方圖」</li>
+<li><strong>X-axis Title</strong>：「總分」</li>
+<li><strong>Y-axis Title</strong>：「人數」</li>
+</ul></li>
+</ol>
+<p><strong>檢查清單</strong>：</p>
+<ul class="task-list">
+<li><input type="checkbox"></input>無底線或原始變項名（如 Total_Score）</li>
+<li><input type="checkbox"></input>標題清楚明確</li>
+<li><input type="checkbox"></input>軸標籤使用中文或正式名稱</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="step-3匯出圖表">Step 3：匯出圖表</h3>
+<ol type="1">
+<li>右鍵點選圖表</li>
+<li>選擇 <strong>Export → Image</strong></li>
+<li>格式：<strong>PNG</strong>（高解析度）</li>
+<li>存檔備用</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<h3 id="step-4apa-格式圖表說明">Step 4：APA 格式圖表說明</h3>
+<p><strong>插入 Word 報告後，撰寫 Figure Note</strong>：</p>
+<pre><code>Figure 1. 學期總分分佈直方圖。
+樣本共 N = 100 人，總分呈現輕微正偏分佈
+（Skewness = 0.62），多數學生得分集中於 70-80 分。
+疊加的曲線為理論常態分佈。</code></pre>
+<p><strong>APA 格式要點</strong>：</p>
+<ul>
+<li><strong>Figure X.</strong> 開頭（句點後空格）</li>
+<li>簡潔標題 + 詳細解釋</li>
+<li>連結 W5 數值診斷（偏態指數）</li>
+<li>說明圖表特徵與意義</li>
+</ul>
+</section>
+<section id="任務二製作箱形圖" class="slide level2">
+<h2>任務二：製作箱形圖</h2>
+<h3 id="step-1jamovi-操作-1">Step 1：jamovi 操作</h3>
+<ol type="1">
+<li><strong>Analyses → Exploration → Plots</strong></li>
+<li>將 <code>Total_Score</code> 拖曳至 <strong>Variables</strong></li>
+<li>勾選 <strong>Box Plot</strong></li>
+<li>勾選 <strong>Label Outliers</strong>（標註離群值編號）</li>
+</ol>
+<p><strong>預期輸出</strong>：</p>
+<ul>
+<li>箱形圖顯示四分位數</li>
+<li>離群值以 ID 標示</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="step-2圖表專業化-1">Step 2：圖表專業化</h3>
+<p><strong>修改標籤</strong>（同直方圖流程）：</p>
+<ul>
+<li><strong>Plot Title</strong>：「量表計分箱形圖」</li>
+<li><strong>X-axis Title</strong>：「總分」</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="step-3匯出圖表-1">Step 3：匯出圖表</h3>
+<p>（同直方圖流程，匯出為 PNG）</p>
+</section>
+<section class="slide level2">
+
+<h3 id="step-4apa-格式圖表說明-1">Step 4：APA 格式圖表說明</h3>
+<p><strong>插入 Word 報告後，撰寫 Figure Note</strong>：</p>
+<pre><code>Figure 2. 學期總分箱形圖。
+中位數為 74.5 分，箱形顯示資料集中於 68-82 分區間。
+識別出 3 個離群值（ID: 5, 23, 87），
+需進一步檢查是否為測量錯誤或真實極端值。</code></pre>
+<p><strong>APA 格式要點</strong>：</p>
+<ul>
+<li>說明中位數與四分位距</li>
+<li>明確指出離群值 ID</li>
+<li>提出離群值的後續處理建議</li>
+<li>連結 W4 的資料清理邏輯</li>
+</ul>
+</section>
+<section id="任務三視覺化診斷寫作" class="slide level2">
+<h2>任務三：視覺化診斷寫作</h2>
+<p><strong>在 Word 報告第 3 頁回答</strong>：</p>
+<ol type="1">
+<li><strong>一致性檢查</strong>：
+<ul>
+<li>直方圖的形狀是否與 W5 的偏態指數一致？</li>
+<li>若不一致，可能的原因是什麼？</li>
+</ul></li>
+<li><strong>離群值診斷</strong>：
+<ul>
+<li>箱形圖識別出的離群值，在 W4 是否已處理？</li>
+<li>這些離群值是測量錯誤還是真實極端值？</li>
+</ul></li>
+<li><strong>視覺 vs 數值</strong>：
+<ul>
+<li>圖表是否比單純的統計量更容易理解資料？</li>
+<li>舉例說明圖表揭示了哪些數字無法呈現的特徵。</li>
+</ul></li>
+</ol>
+</section>
+<section id="選做加分小提琴圖" class="slide level2">
+<h2>選做加分：小提琴圖</h2>
+<p><strong>jamovi 操作</strong>：</p>
+<ol type="1">
+<li><strong>Analyses → Exploration → Descriptives → Plots</strong></li>
+<li>將 <code>Total_Score</code> 拖曳至 Variables</li>
+<li>勾選 <strong>Violin</strong></li>
+<li>（選擇性）勾選 <strong>Box plot</strong>（疊加箱形圖）</li>
+</ol>
+<p><strong>APA 格式圖表說明範例</strong>：</p>
+<pre><code>Figure 3. 學期總分小提琴圖（含箱形圖）。
+小提琴圖顯示資料的完整密度分布，
+揭示雙峰特徵（68 分與 82 分處各有高峰），
+此特徵在直方圖中不易察覺。</code></pre>
+</section>
+<section id="選做加分小提琴圖-1" class="slide level2">
+<h2>選做加分：小提琴圖</h2>
+<p><strong>加分要點</strong>：</p>
+<ul>
+<li>深入分析小提琴圖揭示的分布特徵</li>
+<li>比較與直方圖、箱形圖的差異</li>
+<li>說明小提琴圖的適用情境</li>
+</ul>
 </section>
 <section id="繳交項目" class="slide level2">
 <h2>繳交項目</h2>
+<h3 id="必繳檔案">必繳檔案</h3>
 <ol type="1">
-<li><code>學號_姓名_W6_Lab.omv</code> - jamovi 檔案（含圖表）</li>
-<li><code>學號_姓名_W6_Report.docx</code> - Word 報告</li>
+<li><strong><code>學號_姓名_W6_Lab.omv</code></strong>
+<ul>
+<li>jamovi 檔案（含直方圖、箱形圖）</li>
+<li>圖表已完成專業化修改</li>
+</ul></li>
+<li><strong><code>學號_姓名_W6_Report.docx</code></strong>
+<ul>
+<li>Word 報告（含圖表與 APA 格式說明）</li>
+</ul></li>
 </ol>
-<p><strong>截止時間</strong>：上課結束前</p>
 </section>
-<section id="word-報告內容" class="slide level2">
-<h2>Word 報告內容</h2>
+<section class="slide level2">
+
+<h3 id="word-報告結構">Word 報告結構</h3>
 <p><strong>第 1 頁：標題頁</strong></p>
 <pre><code>W6 作業：統計圖表與視覺化診斷
+
 學號：[你的學號]
 姓名：[你的姓名]
 日期：2026-XX-XX</code></pre>
 </section>
 <section class="slide level2">
 
-<p><strong>第 2 頁：直方圖</strong></p>
+<p><strong>第 2 頁：直方圖 + Figure 1 說明</strong></p>
 <ul>
-<li>插入修改後的直方圖</li>
-<li>圖表說明（Figure 1）：
+<li>插入修改後的直方圖（PNG 格式）</li>
+<li>撰寫 APA 格式 Figure Note</li>
+<li>連結 W5 偏態指數</li>
+</ul>
+<p><strong>第 3 頁：箱形圖 + Figure 2 說明</strong></p>
 <ul>
-<li>描述分布形狀（對稱/正偏/負偏）</li>
-<li>連結 W5 的偏態指數</li>
-<li>說明常態曲線的作用</li>
-</ul></li>
+<li>插入修改後的箱形圖（PNG 格式）</li>
+<li>撰寫 APA 格式 Figure Note</li>
+<li>說明離群值與後續處理</li>
 </ul>
 </section>
 <section class="slide level2">
 
-<p><strong>第 3 頁：箱形圖</strong></p>
+<p><strong>第 4 頁：視覺化診斷寫作</strong></p>
 <ul>
-<li>插入修改後的箱形圖</li>
-<li>圖表說明（Figure 2）：
-<ul>
-<li>指出中位數位置</li>
-<li>列出離群值 ID</li>
-<li>說明離群值的可能原因</li>
-</ul></li>
+<li>回答三個診斷問題</li>
+<li>展現對圖表的深入理解</li>
 </ul>
+<p><strong>（選做）第 5 頁：小提琴圖 + Figure 3 說明</strong></p>
 </section>
 <section class="slide level2">
 
-<p><strong>第 4 頁：視覺化診斷</strong></p>
-<p>回答以下問題：</p>
-<ol type="1">
-<li><strong>一致性檢查</strong>：直方圖的形狀是否與 W5
-的偏態指數一致？</li>
-<li><strong>離群值診斷</strong>：箱形圖識別出的離群值，在 W4
-是否已處理？</li>
-<li><strong>視覺 vs
-數值</strong>：圖表是否比單純的統計量更容易理解資料？</li>
-</ol>
+<p><strong>截止時間</strong>：本次上課結束前</p>
 </section>
 <section id="評分標準" class="slide level2">
 <h2>評分標準</h2>
+<h3 id="基本作業100-分">基本作業（100 分）</h3>
 <table>
 <thead>
 <tr class="header">
-<th>項目</th>
+<th>評分項目</th>
 <th style="text-align: center;">配分</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>直方圖製作與標籤</td>
-<td style="text-align: center;">20%</td>
+<td><strong>jamovi 操作</strong></td>
+<td style="text-align: center;">30%</td>
+<td></td>
 </tr>
 <tr class="even">
-<td>箱形圖製作與離群值標註</td>
-<td style="text-align: center;">20%</td>
+<td>- 直方圖製作</td>
+<td style="text-align: center;">15%</td>
+<td>含常態曲線、標籤修改</td>
 </tr>
 <tr class="odd">
-<td>圖表專業度（無原始代碼）</td>
+<td>- 箱形圖製作</td>
 <td style="text-align: center;">15%</td>
+<td>離群值標註、標籤修改</td>
 </tr>
 <tr class="even">
-<td>圖表說明（Figure Note）</td>
-<td style="text-align: center;">25%</td>
+<td><strong>APA 格式寫作</strong></td>
+<td style="text-align: center;">45%</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>視覺化診斷回答</td>
-<td style="text-align: center;">15%</td>
+<td>- Figure 1 說明</td>
+<td style="text-align: center;">20%</td>
+<td>直方圖的完整 APA 格式描述</td>
 </tr>
 <tr class="even">
-<td>檔名與格式</td>
+<td>- Figure 2 說明</td>
+<td style="text-align: center;">20%</td>
+<td>箱形圖的完整 APA 格式描述</td>
+</tr>
+<tr class="odd">
+<td>- 視覺化診斷</td>
 <td style="text-align: center;">5%</td>
+<td>回答三個診斷問題</td>
+</tr>
+<tr class="even">
+<td><strong>圖表專業度</strong></td>
+<td style="text-align: center;">20%</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>- 無原始變項名</td>
+<td style="text-align: center;">10%</td>
+<td>標籤已修改為正式名稱</td>
+</tr>
+<tr class="even">
+<td>- 圖表匯出品質</td>
+<td style="text-align: center;">10%</td>
+<td>PNG 高解析度、清晰可讀</td>
+</tr>
+<tr class="odd">
+<td><strong>檔名與格式</strong></td>
+<td style="text-align: center;">5%</td>
+<td>檔名正確、Word 排版整齊</td>
 </tr>
 </tbody>
 </table>
+<h3 id="加分項目最高-10-分">加分項目（最高 +10 分）</h3>
+<ul>
+<li>製作小提琴圖並深入分析：+5 分</li>
+<li>三種圖表的比較分析：+5 分</li>
+</ul>
+</section>
+<section class="slide level2">
+
 </section></section>
 <section>
 <section id="重點回顧" class="title-slide slide level1">

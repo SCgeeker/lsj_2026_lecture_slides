@@ -79,7 +79,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 心理學家 S.S. Stevens (1946) 提出的分類：
 
 1. **名義尺度** (Nominal)
-2. **順序尺度** (Ordinal)
+2. **次序尺度** (Ordinal)
 3. **等距尺度** (Interval)
 4. **等比尺度** (Ratio)
 
@@ -97,7 +97,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ---
 
-## 順序尺度 (Ordinal)
+## 次序尺度 (Ordinal)
 
 > **可以排序，但間距不等**
 
@@ -134,7 +134,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 | Stevens 尺度 | jamovi 類型 | 圖示 |
 |--------------|-------------|------|
 | 名義 | **Nominal** | ⚪⚪⚪ |
-| 順序 | **Ordinal** | 📊 |
+| 次序 | **Ordinal** | 📊 |
 | 等距 + 等比 | **Continuous** | 📏 |
 
 > jamovi 將等距與等比合併為「連續」
@@ -274,6 +274,45 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 > 提升資料可讀性，分析報表更清晰
 
+# Part 4.5：學術寫作第一步
+
+## 如何描述你的變項？
+
+> **統計不只是跑數據，更是「溝通」**
+
+在研究報告中，你需要用完整句子介紹你的資料背景。
+
+---
+
+## 變項描述規範
+
+建議包含以下四個要素：
+
+1. **變項名稱**
+2. **測量尺度**（名義、次序、連續）
+3. **水準/分類**（若是類別變項）
+4. **意義**（縮寫或分數代表什麼）
+
+---
+
+## 範例：Clinical Trial
+
+> **❌ 不良寫法**（條列式）：
+> - drug: nominal, 3 levels
+> - mood.gain: continuous
+
+> **✅ 專業寫法**（完整句）：
+> 「這份資料包含三個變項。`drug` 為名義變項，共有三個水準：placebo（安慰劑）、anxifree 與 joyzepam。`mood.gain` 為連續變項，代表參與者情緒改善的分數。」
+
+---
+
+## 本週作業要求
+
+從本週開始，作業報告將加入 **【APA 寫作練習】** 區塊。
+
+- **目標**：練習用完整句描述變項。
+- **評分重點**：是否包含尺度資訊、是否為完整句子。
+
 # Part 5：常見陷阱
 
 ## 陷阱 1：李克特量表
@@ -312,12 +351,16 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ## 作業內容
 
-使用 `clinicaltrial.csv` 完成以下任務：
+使用 `clinicaltrial.csv` 與`Likter.csv`完成以下任務：
 
 1. 匯入資料
-2. 正確設定所有變項類型
-3. 為 `drug` 和 `therapy` 設定適當的 Labels
-4. 執行分組描述統計
+2. 確認所有變項類型設定正確
+3. `clinicaltrial.csv`：為 `drug` 和 `therapy` 設定適當的 Labels
+4. 以'mood.gain'為主要變項，`drug` 和 `therapy`為分組變項，執行分組描述統計
+5. 測試改變變項尺度如何影響結果報表
+6. `Likter.csv`:執行`likert.raw`的描述統計，生成描述統計報表
+7. 變更`likert.raw`的變項類型，觀察描述統計表的變化
+8. 在WORD報告回答反思問題
 
 ---
 
@@ -325,7 +368,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 | 檔案 | 格式 | 內容 |
 |------|------|------|
-| 分析檔 | `學號_姓名_W3_Lab.omv` | 正確設定變項的 jamovi 專案 |
+| 分析檔 | `學號_姓名_W3_clinial.omv`,`學號_姓名_W3_likert.omv` | 正確設定變項的 jamovi 專案 |
 | 報告 | `學號_姓名_W3_Report.docx` | 包含操作紀錄與反思問題 |
 
 **繳交時間**：本堂課下課前上傳至 Google Classroom
@@ -342,7 +385,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 |------|------|
 | 變項類型設定正確 | 40% |
 | Labels 設定完整 | 20% |
-| 報告內容完整 | 25% |
+| WORD報告內容完整 | 25% |
 | 檔案命名規範 | 15% |
 
 ---
@@ -351,9 +394,9 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 請在報告中回答：
 
-1. 為什麼 `drug` 應該設為 Nominal 而非 Ordinal？
-2. 如果把李克特量表設為 Continuous，會有什麼影響？
-3. 在這份資料中，哪個是 IV？哪個是 DV？
+1. 在`clinicaltrial.csv`，哪個是 IV？哪個是 DV？以APA寫作格式說明。
+2. 為什麼 `drug` 應該設為 Nominal 而非 Ordinal？
+3. 如果把`likert.raw`設為 Nominal或Continuous，會有什麼影響？
 
 # 關鍵概念複習
 
@@ -362,7 +405,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 | 尺度 | 特性 | jamovi | 範例 |
 |------|------|--------|------|
 | 名義 | 分類 | Nominal | 性別、組別 |
-| 順序 | 排序 | Ordinal | 名次、滿意度 |
+| 次序 | 排序 | Ordinal | 名次、滿意度 |
 | 等距 | 間距相等 | Continuous | 溫度、IQ |
 | 等比 | 絕對零點 | Continuous | 身高、體重 |
 
@@ -374,7 +417,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 - 集中趨勢：平均數、中位數、眾數
 - 離散程度：標準差、變異數
-- 統計圖表：直方圖、盒鬚圖
+- 統計圖表：直方圖、箱形圖/小提琴圖
 
 # Q & A
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="慈濟大學" />
-  <meta name="dcterms.date" content="2026-02-06" />
+  <meta name="dcterms.date" content="2026-02-10" />
   <title>W5：描述統計——從數字看見數據的輪廓</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   <h1 class="title">W5：描述統計——從數字看見數據的輪廓</h1>
   <h1 class="subtitle">基礎統計學 2026</h1>
   <h2 class="author">慈濟大學</h2>
-  <h3 class="date">2026-02-06</h3>
+  <h3 class="date">2026-02-10</h3>
 </section>
 
 <section>
@@ -549,8 +549,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <ul>
 <li>《用 jamovi 上手統計學》
 <ul>
-<li><a href="https://scgeeker.github.io/lsj-book-zh_tw/">第 4
-章：描述統計</a></li>
+<li><a href="https://scgeeker.github.io/lsj-book-zh_tw/04-Descriptive-statistics.html">第
+4 章：描述統計</a></li>
 </ul></li>
 </ul>
 <p><strong>簡報示範資料</strong>：電子書範例
@@ -587,6 +587,100 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li><strong>比較</strong>：讓不同組別或變項能夠對照</li>
 <li><strong>溝通</strong>：用專業術語向他人說明資料特徵</li>
 </ol>
+</section></section>
+<section>
+<section id="part-1.5測量尺度與統計量的對應" class="title-slide slide level1">
+<h1>Part 1.5：測量尺度與統計量的對應</h1>
+
+</section>
+<section id="複習w3-的測量尺度" class="slide level2">
+<h2>複習：W3 的測量尺度</h2>
+<blockquote>
+<p><strong>回顧 W3</strong>：還記得我們學過的測量尺度嗎？</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>測量尺度</th>
+<th>jamovi 圖示</th>
+<th>範例變項</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nominal（名目）</td>
+<td>⚪⚪⚪</td>
+<td>性別、組別、血型</td>
+</tr>
+<tr class="even">
+<td>Ordinal（順序）</td>
+<td>📊</td>
+<td>名次、滿意度（1-5）</td>
+</tr>
+<tr class="odd">
+<td>Continuous（連續）</td>
+<td>📏</td>
+<td>身高、分數、反應時間</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="為什麼測量尺度很重要" class="slide level2">
+<h2>為什麼測量尺度很重要？</h2>
+<blockquote>
+<p><strong>因為它決定了你能用哪些統計方法！</strong></p>
+</blockquote>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 38%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>測量尺度</th>
+<th>可用的集中量數</th>
+<th>可用的變異量數</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nominal</td>
+<td><strong>眾數</strong></td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>Ordinal</td>
+<td>眾數、<strong>中位數</strong></td>
+<td>四分位距</td>
+</tr>
+<tr class="odd">
+<td>Continuous</td>
+<td>眾數、中位數、<strong>平均數</strong></td>
+<td>全距、四分位距、<strong>標準差</strong>、<strong>偏態</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="關鍵概念連續變項的限定產物" class="slide level2">
+<h2>關鍵概念：連續變項的限定產物</h2>
+<pre><code>只有連續變項（Continuous）才能計算：
+- 平均數（Mean）
+- 標準差（Standard Deviation）
+- 偏態係數（Skewness）</code></pre>
+<p><strong>這就是為什麼 W3 要正確設定變項類型！</strong></p>
+<p>如果你在 W3 把 <code>mood.gain</code>（心情改善分數）誤設為 Nominal，
+jamovi 就不會讓你計算平均數。</p>
+</section>
+<section id="今天的焦點連續變項的描述統計" class="slide level2">
+<h2>今天的焦點：連續變項的描述統計</h2>
+<p>本週我們專注於<strong>連續變項</strong>的描述統計：</p>
+<ol type="1">
+<li><strong>集中量數</strong>：平均數、中位數</li>
+<li><strong>變異量數</strong>：標準差</li>
+<li><strong>分佈形狀</strong>：偏態</li>
+</ol>
+<p>這些統計量都需要「加減乘除有意義」的連續變項才適用。</p>
 </section></section>
 <section>
 <section id="part-2集中量數" class="title-slide slide level1">
@@ -705,7 +799,7 @@ X_N}{N}\]</span></p>
 <li>如何判斷分佈是“對稱”或“偏態“？
 <ul>
 <li>統計圖視覺化資訊</li>
-<li>計算判態值(稍後介紹)</li>
+<li>計算偏態值(稍後介紹)</li>
 </ul></li>
 </ul>
 </section>
@@ -723,7 +817,7 @@ X_N}{N}\]</span></p>
 <li>平均數 → <strong>$25,043,750</strong> （暴增！）</li>
 <li>中位數 → <strong>$62,500</strong> （略微上升）</li>
 </ul>
-<p><strong>教訓</strong>：平均數容易被極端值「拉走」</p>
+<p><strong>啟示</strong>：平均數容易被極端值「拉走」</p>
 </section>
 <section id="眾數mode" class="slide level2">
 <h2>眾數（Mode）</h2>
@@ -771,12 +865,10 @@ X_N}{N}\]</span></p>
 <p><strong>標準差</strong>：資料與平均值「典型距離」</p>
 </blockquote>
 <p>計算步驟：</p>
-<ol type="1">
-<li>計算每筆資料與平均數的差異（離均差）</li>
-<li>將離均差平方</li>
-<li>取平均（變異數）</li>
-<li>開根號 → <strong>標準差</strong></li>
-</ol>
+<pre><code>1. 計算每筆資料與平均數的差異（離均差）
+2. 將離均差平方
+3. 取平均（變異數）
+4. 開根號 → 標準差</code></pre>
 <p><span class="math display">\[s = \sqrt{\frac{\sum(X_i -
 \bar{X})^2}{N-1}}\]</span></p>
 </section>
@@ -863,14 +955,14 @@ X_N}{N}\]</span></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">多數高分、少數低分</td>
+<td style="text-align: center;">高分多、低分少</td>
 <td style="text-align: center;">左右對稱</td>
-<td style="text-align: center;">多數低分、少數高分</td>
+<td style="text-align: center;">低分多、高分少</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">如：簡單考試</td>
-<td style="text-align: center;">如：常態分佈</td>
-<td style="text-align: center;">如：收入分佈</td>
+<td style="text-align: center;">例：簡單考試</td>
+<td style="text-align: center;">例：常態分佈</td>
+<td style="text-align: center;">例：收入分佈</td>
 </tr>
 </tbody>
 </table>
@@ -956,57 +1048,178 @@ X_N}{N}\]</span></p>
 <h1>Part 5：APA 格式寫作</h1>
 
 </section>
-<section id="統計報告的專業寫法" class="slide level2">
-<h2>統計報告的專業寫法</h2>
-<p><strong>APA 格式要點</strong>：</p>
-<ol type="1">
-<li>統計符號使用<strong>斜體</strong>：<em>M</em>, <em>SD</em>,
-<em>N</em></li>
-<li>數值通常保留<strong>兩位小數</strong></li>
-<li>使用一致的格式貫穿全文</li>
-</ol>
-</section>
-<section id="範例描述性統計報告" class="slide level2">
-<h2>範例：描述性統計報告</h2>
+<section id="學術寫作第三步統計符號格式" class="slide level2">
+<h2>學術寫作第三步：統計符號格式</h2>
 <blockquote>
-<p>本研究樣本共 <em>N</em> = 100
-人，受試者的測驗總分呈現輕微正偏（<em>Skewness</em> = 0.62），平均得分為
-<em>M</em> = 75.30（<em>SD</em> =
-12.45）。由於偏態程度不高，後續分析採用平均數作為集中趨勢指標。</p>
+<p><strong>W3-W5 APA 累積學習</strong></p>
 </blockquote>
-<p><strong>結構</strong>：</p>
-<ol type="1">
-<li>樣本數</li>
-<li>分布特徵（偏態）</li>
-<li>集中趨勢與變異程度</li>
-<li>決策說明</li>
-</ol>
-</section>
-<section id="常見錯誤" class="slide level2">
-<h2>常見錯誤</h2>
 <table>
 <thead>
 <tr class="header">
-<th>錯誤</th>
-<th>正確</th>
+<th style="text-align: center;">週次</th>
+<th style="text-align: left;">APA 元素</th>
+<th style="text-align: center;">本週狀態</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: center;">W3</td>
+<td style="text-align: left;">變項描述（完整句）</td>
+<td style="text-align: center;">✓ 已學</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">W4</td>
+<td style="text-align: left;">方法段（資料處理步驟）</td>
+<td style="text-align: center;">✓ 已學</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>W5</strong></td>
+<td style="text-align: left;"><strong>統計符號格式（Stat
+Block）</strong></td>
+<td style="text-align: center;"><strong>★ 本週重點</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="統計符號格式規範" class="slide level2">
+<h2>統計符號格式規範</h2>
+<p><strong>APA 第 7 版要點</strong>：</p>
+<ol type="1">
+<li><strong>統計符號使用斜體</strong>：<em>M</em>, <em>SD</em>,
+<em>N</em>, <em>Mdn</em>, <em>Skewness</em></li>
+<li><strong>數值保留兩位小數</strong>：75.30（不是 75.3）</li>
+<li><strong>符號與數值之間用等號</strong>：<em>M</em> = 75.30</li>
+<li><strong>括號內不需重複說明</strong>：(<em>SD</em> = 12.45) 不寫
+(standard deviation = 12.45)</li>
+</ol>
+</section>
+<section id="統計符號速查表w5-新增" class="slide level2">
+<h2>統計符號速查表（W5 新增）</h2>
+<table>
+<thead>
+<tr class="header">
+<th>統計量</th>
+<th>APA 符號</th>
+<th>範例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>樣本數</td>
+<td><em>N</em></td>
+<td><em>N</em> = 100</td>
+</tr>
+<tr class="even">
+<td>平均數</td>
+<td><em>M</em></td>
+<td><em>M</em> = 75.30</td>
+</tr>
+<tr class="odd">
+<td>標準差</td>
+<td><em>SD</em></td>
+<td><em>SD</em> = 12.45</td>
+</tr>
+<tr class="even">
+<td>中位數</td>
+<td><em>Mdn</em></td>
+<td><em>Mdn</em> = 74.50</td>
+</tr>
+<tr class="odd">
+<td>偏態</td>
+<td><em>Skewness</em></td>
+<td><em>Skewness</em> = 0.62</td>
+</tr>
+</tbody>
+</table>
+<p><strong>記住</strong>：這些符號在 Word 中要設為斜體（Ctrl + I）</p>
+</section>
+<section id="什麼是統計區塊" class="slide level2">
+<h2>什麼是統計區塊？</h2>
+<blockquote>
+<p><strong>統計區塊</strong>：用一段完整的文字，整合描述統計資訊</p>
+</blockquote>
+<p><strong>不專業的寫法</strong>：</p>
+<pre><code>平均數是 75.3，標準差是 12.45，樣本數是 100 人。</code></pre>
+<p><strong>專業的 APA 寫法</strong>：</p>
+<pre><code>本研究樣本共 *N* = 100 人，受試者的測驗總分呈現輕微正偏（*Skewness* = 0.62），平均得分為 *M* = 75.30（*SD* = 12.45）。由於偏態程度不高，後續分析採用平均數作為集中趨勢指標。</code></pre>
+</section>
+<section id="統計區塊寫作結構" class="slide level2">
+<h2>統計區塊寫作結構</h2>
+<p><strong>標準模板</strong>：</p>
+<ol type="1">
+<li><strong>樣本數</strong>：<em>N</em> = [數值]</li>
+<li><strong>分佈特徵</strong>：偏態方向與程度（<em>Skewness</em> =
+[數值]）</li>
+<li><strong>集中趨勢</strong>：<em>M</em> = [數值]（<em>SD</em> =
+[數值]）</li>
+<li><strong>決策說明</strong>：根據偏態選擇集中量數</li>
+</ol>
+</section>
+<section id="範例完整的-stat-block" class="slide level2">
+<h2>範例：完整的 Stat Block</h2>
+<blockquote>
+<p>本研究樣本共 <em>N</em> = 100
+人，受試者的測驗總分呈現輕微正偏（<em>Skewness</em> = 0.62），平均得分為
+<em>M</em> = 75.30（<em>SD</em> =
+12.45）。由於偏態程度不高（|<em>Skewness</em>| &lt;
+1），後續分析採用平均數作為集中趨勢指標。中位數為 <em>Mdn</em> =
+74.50，與平均數差異不大，顯示資料分佈相對穩定。</p>
+</blockquote>
+</section>
+<section id="常見錯誤與修正" class="slide level2">
+<h2>常見錯誤與修正</h2>
+<table>
+<thead>
+<tr class="header">
+<th>類型</th>
+<th>✗ 錯誤</th>
+<th>✓ 正確</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>符號格式</td>
 <td>Mean = 75.3</td>
 <td><em>M</em> = 75.30</td>
 </tr>
 <tr class="even">
-<td>SD: 12.45</td>
-<td><em>SD</em> = 12.45</td>
+<td>小數位數</td>
+<td>SD = 12.4</td>
+<td><em>SD</em> = 12.40</td>
 </tr>
 <tr class="odd">
+<td>中文敘述</td>
 <td>平均數是75.3分</td>
-<td>平均數為 75.30 分（<em>M</em> = 75.30）</td>
+<td>平均數為 <em>M</em> = 75.30</td>
+</tr>
+<tr class="even">
+<td>括號使用</td>
+<td>M = 75.30, SD = 12.45</td>
+<td><em>M</em> = 75.30（<em>SD</em> = 12.45）</td>
+</tr>
+<tr class="odd">
+<td>偏態符號</td>
+<td>Skew = 0.62</td>
+<td><em>Skewness</em> = 0.62</td>
 </tr>
 </tbody>
 </table>
 <p><strong>切記</strong>：統計符號斜體、數值對齊、前後一致</p>
+</section>
+<section id="w3-w5-apa-累積檢核" class="slide level2">
+<h2>W3-W5 APA 累積檢核</h2>
+<p><strong>到目前為止，你應該會</strong>：</p>
+<ul>
+<li>✅ <strong>W3</strong>：用完整句子描述變項（名稱、類型、水準）</li>
+<li>✅
+<strong>W4</strong>：描述資料處理步驟（<em>N</em>、排除準則、轉換邏輯）</li>
+<li>✅ <strong>W5</strong>：撰寫 Stat Block（<em>M</em>, <em>SD</em>,
+<em>Mdn</em>, <em>Skewness</em>）</li>
+</ul>
+<p><strong>下週預告</strong>：</p>
+<ul>
+<li>W6 將學習圖表格式（Figure/Table 編號與標題）</li>
+</ul>
 </section></section>
 <section>
 <section id="本週作業" class="title-slide slide level1">
@@ -1029,7 +1242,7 @@ X_N}{N}\]</span></p>
 <li><code>學號_姓名_W5_Lab.omv</code></li>
 <li><code>學號_姓名_W5_Report.docx</code></li>
 </ol>
-<p><strong>截止時間</strong>：下週上課前</p>
+<p><strong>截止時間</strong>：本次課程結束前</p>
 </section>
 <section id="word-報告內容" class="slide level2">
 <h2>Word 報告內容</h2>
