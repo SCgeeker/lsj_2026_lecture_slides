@@ -1,0 +1,537 @@
+---
+title: "W7：機率與樣本的常態性——從描述到推論"
+subtitle: "基礎統計學 2026"
+author: "慈濟大學"
+date: "`r Sys.Date()`"
+output:
+  revealjs::revealjs_presentation:
+    theme: simple
+    highlight: pygments
+    center: false
+    transition: slide
+    self_contained: true
+    css: custom.css
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+# 本週學習目標
+
+## 學習成效指標
+
+**哲學覺察**：
+
+1. 區分「描述」與「推論」的本質差異
+2. 理解統計推論是「機率的微光」，而非絕對確定性
+3. 認識常態分佈作為統計模型的核心地位
+
+**工具應用**：
+
+1. 使用 Q-Q Plot 視覺判斷常態性
+2. 使用 Shapiro-Wilk 檢定量化常態性
+3. 使用 jamovi Compute 功能建立理論百分位
+
+---
+
+## 對應教材
+
+- 《用 jamovi 上手統計學》
+  - [第 7 章：機率](https://scgeeker.github.io/lsj-book-zh_tw/07-Probability.html)
+  - [第 9 章：常態分佈](https://scgeeker.github.io/lsj-book-zh_tw/09-Normal-distribution.html)
+
+**簡報示範資料**：`IQsim.omv`（10,000 筆模擬 IQ 分數）
+
+**作業資料**：W5/W6 個人化資料（回頭檢驗 Exam_Score 與 Study_Hours）
+
+# Part 1：從「看到」到「預測」
+
+---
+
+## 回顧：到現在我們學了什麼？
+
+**描述統計**：總結「已經收集到」的資料
+
+- 計算 Mean、SD、Median
+- 繪製 Histogram、Box Plot、Violin Plot
+- 識別離群值
+
+**本質**：**描述已知事實**
+
+> 「這 100 位學生的平均成績是 75.3 分」
+
+---
+
+## 跨越：預測未知
+
+**推論統計**：從「樣本」推測「母群」
+
+- 問題：如果隨機抽一位學生，他的成績**超過 80 分的機率**是多少？
+- 工具：**機率分佈模型**
+- 關鍵：資料是否符合某個已知的機率分佈（如常態分佈）？
+
+**本質**：**從已知推測未知**
+
+> 「根據這 100 位學生的資料，我們推測下一位學生成績超過 80 分的機率約為 30%」
+
+---
+
+## 統計推論的不確定性
+
+> **「統計不能提供 100% 的確定性，只能提供機率意義的信號」**
+
+- 我們無法說：「下一位學生**一定**會超過 80 分」
+- 我們只能說：「有 30% 的機率超過 80 分」
+
+**為什麼？**
+
+- 樣本不等於母群
+- 隨機變異永遠存在
+- 我們只能用「模型」逼近現實
+
+---
+
+## 機率分佈：統計推論的基石
+
+**機率分佈**是一種數學模型，描述「所有可能結果的機率」
+
+兩大類機率分佈：
+
+1. **離散機率分佈**：結果是可數的（如：擲骰子、考試答對題數）
+2. **連續機率分佈**：結果是連續的（如：身高、體重、考試成績）
+
+**本週焦點**：**常態分佈（Normal Distribution）**
+
+
+# Part 2：認識常態分佈
+
+---
+
+## 為何常態分佈如此重要？
+
+**三大理由**：
+
+1. **自然界的普遍模式**：身高、體重、IQ 等許多自然現象都接近常態分佈
+2. **中央極限定理（W8重點）**：即使母群不是常態，取樣平均數的分佈也會逼近常態
+3. **統計方法的基礎**：許多推論統計方法（如 t 檢定）都假設資料符合常態分佈
+
+> **常態分佈是統計推論的「通用語言」**
+
+---
+
+## 常態分佈的數學形式
+
+**常態分佈由兩個參數決定**：
+
+- **$\mu$（mu，平均數）**：決定鐘型曲線的**中心位置**
+- **$\sigma$（sigma，標準差）**：決定鐘型曲線的**胖瘦程度**
+
+**記法**：$X \sim N(\mu, \sigma)$
+
+例如：IQ ~ N(100, 15) 表示 IQ 服從平均數 100、標準差 15 的常態分佈
+
+---
+
+## 常態分佈的視覺特徵
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+```{r normal-curves, fig.width=10, fig.height=5}
+library(ggplot2)
+library(tidyr)
+
+# 生成三種不同標準差的常態分佈
+x <- seq(-10, 10, length.out = 500)
+df <- data.frame(
+  x = rep(x, 3),
+  密度 = c(
+    dnorm(x, mean = 0, sd = 1),   # 高瘦型（sigma = 1）
+    dnorm(x, mean = 0, sd = 2),   # 標準型（sigma = 2）
+    dnorm(x, mean = 0, sd = 3)    # 矮胖型（sigma = 3）
+  ),
+  類型 = rep(
+    c("高瘦型 (σ = 1)", "標準型 (σ = 2)", "矮胖型 (σ = 3)"),
+    each = length(x)
+  )
+)
+
+ggplot(df, aes(x = x, y = 密度, color = 類型, linetype = 類型)) +
+  geom_line(size = 1.2) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "gray50", size = 0.5) +
+  annotate("text", x = 0, y = -0.02, label = "μ", size = 6, color = "gray30") +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73")) +
+  scale_linetype_manual(values = c("solid", "dashed", "dotted")) +
+  labs(
+    title = "常態分佈的視覺比較：標準差決定胖瘦",
+    x = "數值",
+    y = "機率密度",
+    color = NULL,
+    linetype = NULL
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "top",
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+:::
+::: {.column width="50%"}
+
+**特性**：
+
+- 對稱性：左右兩側完全對稱
+- 單峰性：只有一個高峰（在 $\mu$ 處）
+- 68-95-99.7 法則：68% 資料落在 $\mu \pm 1\sigma$，95% 落在 $\mu \pm 2\sigma$，99.7% 落在 $\mu \pm 3\sigma$
+
+:::
+::::::::::::::
+
+---
+
+## Z 分數：標準化的語言
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+**問題**：如何比較不同單位的資料？
+
+- 學生 A：身高 175 cm
+- 學生 B：體重 70 kg
+
+**解法**：轉換為「距離平均數幾個標準差」
+
+$$Z = \frac{X - \mu}{\sigma}$$
+
+:::
+::: {.column width="50%"}
+
+**Z 分數的意義**：
+
+- Z = 0：正好等於平均數
+- Z = 1：比平均數高 1 個標準差
+- Z = -2：比平均數低 2 個標準差
+
+:::
+::::::::::::::
+
+---
+
+## jamovi 示範：探索 IQsim 資料
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+**資料說明**：
+
+- `IQsim.omv`：10,000 筆模擬 IQ 分數
+- 使用 `NORM(100, 15)` 函數生成（理論完美常態）
+
+**示範步驟**：
+
+1. 開啟 `IQsim.omv`
+
+:::
+::: {.column width="50%"}
+
+2. Exploration → Descriptives → 選擇 `IQsim` 變項
+3. 查看 Mean、SD、Histogram
+
+**預期結果**：
+
+- Mean ≈ 100, SD ≈ 15
+- Histogram 呈現對稱鐘型曲線
+
+:::
+::::::::::::::
+
+# Part 3：常態性檢定——理想 vs. 現實
+
+---
+
+## 問題：現實資料真的是常態嗎？
+
+**理想**：IQsim 是用 NORM 函數生成的，**理論上**完全符合常態分佈
+
+**現實**：大部分真實資料都**不完美符合**常態分佈
+
+- 可能有偏態（左偏或右偏）
+- 可能有峰度問題（太尖或太平）
+- 可能有離群值
+
+**因此我們需要**：
+
+1. **視覺判斷**：Q-Q Plot
+2. **統計檢定**：Shapiro-Wilk Test
+
+---
+
+## 方法 1：Q-Q Plot（分位數-分位數圖）
+
+**原理**：比較「實際資料的分位數」與「理論常態分佈的分位數」
+
+**解讀規則**：
+
+- **點集中在斜線上** → 資料符合常態分佈
+- **點偏離斜線** → 資料不符合常態分佈
+  - 左下角翹起：右偏（正偏）
+  - 右上角翹起：左偏（負偏）
+  - S 型曲線：峰度問題
+
+---
+
+## jamovi 示範：產生 Q-Q Plot
+
+**操作步驟**：
+
+1. Exploration → Descriptives
+2. 選擇變項：`IQsim`
+3. 勾選 **Plots** 區塊：
+   - ✓ Q-Q plot
+
+**觀察重點**：
+
+- IQsim 的點是否集中在斜線上？
+- 與後續真實資料（W5 的 Exam_Score）比較
+
+---
+
+## 方法 2：Shapiro-Wilk 檢定
+
+**原理**：統計檢定資料是否來自常態分佈
+
+**虛無假設（$H_0$）**：資料符合常態分佈
+
+**對立假設（$H_1$）**：資料不符合常態分佈
+
+**判斷規則**：
+
+- **p > 0.05** → 無法拒絕 H₀，資料**可能**符合常態（保守結論）
+- **p < 0.05** → 拒絕 H₀，資料**顯著偏離**常態
+
+---
+
+## jamovi 示範：執行 Shapiro-Wilk 檢定
+
+**操作步驟**：
+
+1. Exploration → Descriptives
+2. 選擇變項：`IQsim`
+3. 勾選 **Statistics** 區塊：
+   - ✓ Shapiro-Wilk
+
+**結果解讀**：
+
+- W 統計量：越接近 1 越符合常態
+- p 值：IQsim 預期 p > 0.05（因為是理論常態）
+
+---
+
+## 重要警告：樣本數的影響
+
+**Shapiro-Wilk 檢定的限制**：
+
+- **樣本數小**（N < 50）：不容易檢測出偏離常態（容易漏判）
+- **樣本數大**（N > 1000）：非常容易檢測出微小偏離（過度敏感）
+
+**建議**：
+
+- 結合 Q-Q Plot 視覺判斷
+- 對於大樣本，微小偏離不影響後續分析
+
+> **原則**：統計顯著不等於真正有意義
+
+
+# Part 4：實作 Z 分數標準化
+
+---
+
+## 為何要學 Z 分數計算？
+
+**統計意義**：資料殘差($X - \bar{X}$)的標準化($S$)
+
+**實用價值**：
+
+- 將不同單位的資料轉換為「標準化分數」
+- 判別異常數值（Z > 3 或 Z < -3 通常視為極端值）
+- 比較不同資料集的相對位置
+- 為後續的推論統計做準備
+
+**計算方法**：使用 jamovi 的 **Compute** 功能
+
+---
+
+## 方法 1：使用內建 Z 函數
+
+**操作步驟**：
+
+1. **Data → Compute**
+2. 建立新變數名稱：`IQsim_Z`
+3. 輸入公式：
+
+```
+Z(IQsim)
+```
+
+**這個公式會自動**：
+- 計算 IQsim 的平均數（$\mu$）
+- 計算 IQsim 的標準差（$\sigma$）
+- 套用公式 $Z = \frac{X - \mu}{\sigma}$
+
+---
+
+## 方法 2：手動計算（理解原理）
+
+**分三步驟建立**：
+
+1. **計算平均數**（Data → Compute）：
+   - 變數名稱：`IQsim_Mean`
+   - 公式：`VMEAN(IQsim)`
+
+2. **計算標準差**：
+   - 變數名稱：`IQsim_SD`
+   - 公式：`VSTDEV(IQsim)`
+
+3. **手動計算 Z 分數**：
+   - 變數名稱：`IQsim_Z_Manual`
+   - 公式：`(IQsim - IQsim_Mean) / IQsim_SD`
+
+---
+
+## 驗證結果
+
+**比較兩種方法**：
+
+- `IQsim_Z`（內建函數）
+- `IQsim_Z_Manual`（手動計算）
+
+**預期結果**：兩個變數的數值應該**完全相同**！
+
+**Z 分數的特性**：
+- 平均數 = 0
+- 標準差 = 1
+- 範圍大約在 -3 到 +3 之間
+
+---
+
+## 應用：識別異常值
+
+**異常值判斷準則**（經驗法則）：
+
+- **|Z| > 3**：極端異常值（需特別注意）
+- **|Z| > 2.5**：可疑值（考慮排除）
+- **|Z| < 2**：正常範圍
+
+**在 jamovi 中查看**：
+
+1. Data Tab：檢視 `IQsim_Z` 欄位
+2. 找出 Z 分數 > 3 或 < -3 的資料點
+3. 使用 Filter 功能：`ABS(IQsim_Z) > 3`
+
+---
+
+## Z 分數與常態分佈的關係
+
+**68-95-99.7 法則（用 Z 分數表示）**：
+
+- 68% 資料落在 **Z = -1 到 Z = +1** 之間
+- 95% 資料落在 **Z = -2 到 Z = +2** 之間
+- 99.7% 資料落在 **Z = -3 到 Z = +3** 之間
+
+**實用意義**：
+
+- 如果你的 Z 分數是 2.5，表示你贏過約 99% 的人
+- 如果 Z 分數是 -1.5，表示你輸給約 93% 的人
+
+
+# Part 5：作業說明
+
+---
+
+## 作業任務：回頭檢驗你的資料
+
+**目標**：對 W5/W6 的個人化資料進行常態性檢定
+
+**步驟**：
+
+1. 從 `W5_Lab.omv` 或 `W6_Lab.omv` 匯出 CSV
+2. 重新載入建立新的 `W7_Lab.omv`
+3. 對 **Exam_Score** 和 **Study_Hours** 進行常態性檢定：
+   - Exploration → Descriptives（Q-Q Plot + Shapiro-Wilk）
+4. （選做，加分項）計算 Z 分數：
+   - 使用 `Z(Exam_Score)` 建立標準化分數
+
+---
+
+## 繳交要求
+
+**檔案 1：學號_姓名_W7_Lab.omv**
+
+- Descriptives 分析結果（Q-Q Plot + Shapiro-Wilk）
+- （加分）包含自製Z 分數與標準化殘差的計算變數，自製Q-Q Plot
+
+**檔案 2：學號_姓名_W7_Report.docx**
+
+- 分析結果：置入 Q-Q Plot 與 Shapiro-Wilk 表格
+- 報告寫作：以APA寫作格式描述分析結果
+- 反思問題（3 題）
+
+**繳交期限**：本週上課結束前
+
+---
+
+## 反思問題
+
+1. 從 Q-Q Plot 判斷，你的 Total_Score 是否符合常態分佈？若不符合，是正偏還是負偏？
+
+2. Shapiro-Wilk 檢定結果解讀：你的 p 值是多少？支持還是反對常態性假設？為什麼？
+
+3. 你認為為什麼現實數據很少完美符合常態分佈？
+
+
+# 小結與展望
+
+---
+
+## 本週核心概念
+
+1. **從描述到推論**：統計推論是「機率的信號」
+2. **常態分佈**：自然界最普遍的機率模型
+3. **常態性檢定**：
+   - 視覺判斷：Q-Q Plot
+   - 統計檢定：Shapiro-Wilk
+4. **理解原理**：手動建立理論百分位
+
+---
+
+## 下週預告：中央極限定理
+
+**下週問題**：
+
+- 即使母群不是常態，為何抽樣平均數會趨近常態？
+- 樣本數 N 對抽樣分佈有什麼影響？
+
+**示範資料**：繼續使用 IQsim.omv 的抽樣實驗
+
+---
+
+## 課後資源
+
+**電子書**：
+
+- [第 7 章：機率](https://scgeeker.github.io/lsj-book-zh_tw/07-Probability.html)
+- [第 9 章：常態分佈](https://scgeeker.github.io/lsj-book-zh_tw/09-Normal-distribution.html)
+
+**補充論文**（W11 預告）：
+
+Zhang et al. (2024). Watching videos of a drawing hand improves students' understanding of the normal probability distribution. *Memory & Cognition*.
+
+---
+
+## Q & A
