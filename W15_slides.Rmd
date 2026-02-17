@@ -1,0 +1,524 @@
+---
+title: "W15：線性迴歸——從相關到預測"
+subtitle: "基礎統計學 2026"
+author: "慈濟大學"
+date: "`r Sys.Date()`"
+output:
+  revealjs::revealjs_presentation:
+    theme: simple
+    highlight: pygments
+    center: false
+    transition: slide
+    self_contained: true
+    css: custom.css
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.width = 9, fig.height = 5)
+library(ggplot2)
+library(dplyr)
+
+# ===== parenthood 資料續用（W14 → W15）=====
+# 電子書第 12 章：迴歸部分
+parenthood <- data.frame(
+  dan.sleep = c(7.59, 7.91, 5.14, 7.71, 6.68, 5.99, 8.19, 7.19, 7.40, 6.58,
+                8.44, 7.18, 8.01, 5.51, 6.89, 8.00, 7.42, 6.36, 7.86, 7.79,
+                5.70, 7.19, 7.54, 3.93, 5.15, 6.57, 8.07, 5.92, 7.47, 6.85,
+                6.41, 6.60, 7.95, 6.53, 6.86, 5.82, 6.60, 7.84, 7.84, 7.25,
+                6.68, 6.62, 5.42, 7.56, 7.57, 5.53, 8.55, 6.39, 7.72, 6.09,
+                7.77, 8.15, 5.67, 5.84, 7.71, 7.23, 8.29, 7.71, 5.26, 7.14,
+                8.04, 7.52, 5.46, 5.59, 6.80, 5.57, 6.96, 8.25, 5.66, 5.63,
+                7.28, 6.91, 6.84, 5.57, 7.40, 5.65, 6.17, 7.66, 5.09, 7.00,
+                7.67, 6.77, 6.28, 5.44, 7.48, 6.37, 8.53, 5.36, 5.52, 6.59,
+                7.05, 5.17, 6.58, 5.76, 6.07, 6.71, 7.43, 5.68, 6.59, 5.05),
+  dan.grump = c(56, 60, 82, 55, 67, 72, 53, 60, 60, 69,
+                50, 61, 52, 84, 66, 54, 59, 77, 57, 55,
+                78, 61, 58, 100, 88, 66, 52, 80, 57, 66,
+                68, 70, 53, 67, 65, 80, 67, 57, 56, 59,
+                64, 70, 82, 60, 60, 79, 46, 72, 59, 74,
+                58, 50, 77, 81, 58, 61, 50, 56, 84, 67,
+                55, 60, 82, 80, 69, 77, 64, 53, 76, 78,
+                62, 64, 67, 78, 61, 77, 72, 55, 84, 66,
+                60, 63, 64, 83, 58, 73, 48, 80, 78, 67,
+                66, 83, 66, 79, 74, 68, 54, 78, 67, 84)
+)
+
+# 預計算迴歸
+fit <- lm(dan.grump ~ dan.sleep, data = parenthood)
+fit_summary <- summary(fit)
+parenthood$predicted <- fitted(fit)
+parenthood$residuals <- residuals(fit)
+```
+
+# 本週學習目標
+
+**理解概念**：
+
+1. 理解迴歸方程式 $Y = a + bX$ 的意義
+2. 掌握斜率 ($b$) 與截距 ($a$) 的解讀
+3. 學會殘差診斷（常態性檢查）
+4. 理解 SEM 與 SE 的區別
+
+---
+
+**軟體操作**：
+
+1. 在 jamovi 中執行 Linear Regression
+2. 儲存殘差（Save Residuals）
+3. 檢查殘差常態性
+4. 計算測量標準誤（SEM）
+
+---
+
+## 對應教材
+
+- 《用 jamovi 上手統計學》
+  - [第 12 章：線性迴歸](https://scgeeker.github.io/lsj-book-zh_tw/12-Correlation-and-linear-regression.html#sec-what-is-linear-model)
+
+**簡報示範資料**：
+
+- parenthood（續用 W14）：Dan 的睡眠時數 vs 暴躁程度
+
+**作業資料**：個人化 `W15_Regression_[學號].csv`
+
+
+# Part 1：從相關到預測
+
+---
+
+##  回顧：相關告訴我們什麼？
+
+**相關係數 $r$**：
+
+- 描述兩個變項之間的**線性關係強度與方向**
+- $r = `r round(cor(parenthood$dan.sleep, parenthood$dan.grump), 3)`$（parenthood 資料）
+
+**但相關無法回答**：
+
+- 如果 Dan **多睡一小時**，暴躁指數會降多少？
+- 如果知道睡眠時數，能不能**預測**暴躁指數？
+
+> 相關 → 描述關聯；迴歸 → **做出預測**
+
+---
+
+## 散佈圖 + 迴歸線
+
+```{r scatter-regression, fig.height=4}
+ggplot(parenthood, aes(x = dan.sleep, y = dan.grump)) +
+  geom_point(alpha = 0.6, size = 2.5, color = "#34495e") +
+  geom_smooth(method = "lm", se = TRUE, color = "#e74c3c", fill = "#e74c3c", alpha = 0.2) +
+  labs(title = "Dan 的睡眠時數 vs 暴躁指數",
+       x = "睡眠時數 (dan.sleep)",
+       y = "暴躁指數 (dan.grump)") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 這條紅線就是**迴歸線**——最能代表資料趨勢的直線
+
+---
+
+## 最小平方法的解方
+
+**目標**：找到一條線，讓所有資料點到這條線的**垂直距離（殘差）的平方和最小**
+
+$$\text{Residual} = (Y_i - \hat{Y}_i)$$
+
+$$\text{SSE} = \sum_{i=1}^{N} (Y_i - \hat{Y}_i)^2 \rightarrow \text{最小化}$$
+
+---
+
+## 符合最小平方法的迴歸線
+
+
+```{r residual-visual, fig.height=3.8}
+set.seed(42)
+sample_idx <- sort(sample(1:100, 15))
+parenthood_sample <- parenthood[sample_idx, ]
+
+ggplot(parenthood_sample, aes(x = dan.sleep, y = dan.grump)) +
+  geom_segment(aes(xend = dan.sleep, yend = predicted),
+               color = "#e74c3c", alpha = 0.6, linetype = "dashed") +
+  geom_point(size = 3, color = "#34495e") +
+  geom_line(aes(y = predicted), color = "#3498db", size = 1) +
+  labs(title = "殘差 = 觀測值到迴歸線的距離",
+       x = "睡眠時數", y = "暴躁指數") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 紅色虛線 = 殘差（越短越好）
+
+
+# Part 2：迴歸方程式
+
+---
+
+## $Y = a + bX$
+
+$$\hat{Y} = a + b \times X$$
+
+| 符號 | 名稱 | 意義 |
+|:-----|:-----|:-----|
+| $\hat{Y}$ | 預測值 | 根據 X 預測出的 Y 值 |
+| $a$ | 截距 (intercept) | 當 $X = 0$ 時，$\hat{Y}$ 的值 |
+| $b$ | 斜率 (slope) | $X$ 每增加 1 單位，$\hat{Y}$ 的變化量 |
+
+---
+
+## parenthood 的迴歸結果
+
+$$\text{dan.grump} = `r round(coef(fit)[1], 2)` + (`r round(coef(fit)[2], 2)`) \times \text{dan.sleep}$$
+
+**截距** $a = `r round(coef(fit)[1], 2)`$：
+
+- 如果 Dan 完全不睡覺（dan.sleep = 0），預測暴躁指數為 `r round(coef(fit)[1], 2)`
+- ⚠ 外推解讀需謹慎（實際不可能睡 0 小時）
+
+**斜率** $b = `r round(coef(fit)[2], 2)`$：
+
+- 每多睡**一小時**，暴躁指數預測下降 `r abs(round(coef(fit)[2], 2))` 點
+- 負號 = 負向關係（睡越多 → 越不暴躁）
+
+---
+
+## 斜率的意義
+
+```{r slope-illustration, fig.height=4}
+sleep_range <- data.frame(dan.sleep = c(5, 6, 7, 8))
+sleep_range$predicted <- predict(fit, newdata = sleep_range)
+
+ggplot(parenthood, aes(x = dan.sleep, y = dan.grump)) +
+  geom_point(alpha = 0.3, size = 1.5) +
+  geom_abline(intercept = coef(fit)[1], slope = coef(fit)[2],
+              color = "#e74c3c", size = 1.2) +
+  geom_point(data = sleep_range, aes(x = dan.sleep, y = predicted),
+             color = "#3498db", size = 4, shape = 17) +
+  annotate("segment", x = 5, xend = 6, y = sleep_range$predicted[1], yend = sleep_range$predicted[1],
+           color = "#27ae60", size = 1, arrow = arrow(length = unit(0.2, "cm"))) +
+  annotate("segment", x = 6, xend = 6, y = sleep_range$predicted[1], yend = sleep_range$predicted[2],
+           color = "#27ae60", size = 1, arrow = arrow(length = unit(0.2, "cm"))) +
+  annotate("text", x = 5.5, y = sleep_range$predicted[1] + 2,
+           label = "+1 小時", color = "#27ae60", size = 4, fontface = "bold") +
+  annotate("text", x = 6.3, y = mean(sleep_range$predicted[1:2]),
+           label = sprintf("%.1f 點", coef(fit)[2]),
+           color = "#27ae60", size = 4, fontface = "bold") +
+  labs(title = "斜率的視覺解讀",
+       x = "睡眠時數", y = "暴躁指數") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> X 增加 1 → Y 變化 b → 這就是「預測」
+
+
+# Part 3：$R^2$ 與模型好壞
+
+---
+
+## 迴歸模型能解釋多少變異？
+
+$$R^2 = 1 - \frac{SS_{\text{residual}}}{SS_{\text{total}}}$$
+
+| 成分 | 公式 | 意義 |
+|:-----|:-----|:-----|
+| $SS_{\text{total}}$ | $\sum(Y_i - \bar{Y})^2$ | 資料的**總變異** |
+| $SS_{\text{residual}}$ | $\sum(Y_i - \hat{Y}_i)^2$ | 模型**無法解釋**的變異 |
+| $SS_{\text{model}}$ | $SS_{\text{total}} - SS_{\text{residual}}$ | 模型**能解釋**的變異 |
+
+---
+
+## parenthood 的 $R^2$
+
+```{r r-squared}
+r_squared <- fit_summary$r.squared
+```
+
+$$R^2 = `r round(r_squared, 4)`$$
+
+**解讀**：睡眠時數可以解釋暴躁指數 **`r round(r_squared * 100, 1)`%** 的變異
+
+---
+
+## $R^2$ 的直覺
+
+```{r r-squared-visual, fig.height=4}
+parenthood_plot <- parenthood %>%
+  mutate(
+    y_mean = mean(dan.grump),
+    ss_total_i = (dan.grump - y_mean)^2,
+    ss_resid_i = (dan.grump - predicted)^2
+  )
+
+p1 <- ggplot(parenthood_plot, aes(x = dan.sleep, y = dan.grump)) +
+  geom_hline(yintercept = mean(parenthood$dan.grump),
+             linetype = "dashed", color = "#95a5a6", size = 0.8) +
+  geom_segment(aes(xend = dan.sleep, yend = predicted),
+               color = "#e74c3c", alpha = 0.3) +
+  geom_abline(intercept = coef(fit)[1], slope = coef(fit)[2],
+              color = "#3498db", size = 1) +
+  geom_point(alpha = 0.5, size = 1.5) +
+  annotate("text", x = 8.5, y = mean(parenthood$dan.grump) + 3,
+           label = sprintf("ȳ = %.1f", mean(parenthood$dan.grump)),
+           color = "#95a5a6", size = 3.5) +
+  labs(title = sprintf("R² = %.1f%%：迴歸線比平均線好多少？", r_squared * 100),
+       x = "睡眠時數", y = "暴躁指數") +
+  theme_minimal(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+p1
+```
+
+> 紅線（殘差）越短 → $R^2$ 越大 → 模型越好
+
+
+# Part 4：殘差診斷
+
+---
+
+## 殘差 = 觀測值 - 預測值
+
+$$e_i = Y_i - \hat{Y}_i$$
+
+**迴歸的關鍵假設**：殘差應該是**常態分佈**的
+
+如果殘差不符合常態分佈 → 迴歸推論（p 值、信賴區間）可能不可靠
+
+---
+
+## 殘差的直方圖
+
+```{r residual-histogram, fig.height=4}
+ggplot(parenthood, aes(x = residuals)) +
+  geom_histogram(binwidth = 3, fill = "#3498db", color = "white", alpha = 0.7) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "#e74c3c", size = 1) +
+  labs(title = "殘差分佈（理想上應為常態）",
+       x = "殘差（Residual）", y = "頻率") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 殘差大致對稱、集中在 0 附近 → 符合常態假設 ✓
+
+---
+
+## 殘差的 Q-Q Plot
+
+```{r residual-qq, fig.height=4}
+ggplot(parenthood, aes(sample = residuals)) +
+  stat_qq(color = "#3498db", alpha = 0.6, size = 2) +
+  stat_qq_line(color = "#e74c3c", size = 1) +
+  labs(title = "殘差的 Q-Q Plot",
+       x = "理論分位數", y = "樣本分位數") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 資料點沿對角線排列 → 殘差近似常態 ✓
+
+---
+
+## jamovi 操作：儲存殘差
+
+**步驟**：
+
+1. **Regression → Linear Regression**
+2. 將依變項（DV）拖入 **Dependent Variable**
+3. 將自變項（IV）拖入 **Covariates**
+4. 勾選 **Save → Residuals** → 資料表新增 `RES_1` 欄位
+5. 用 `RES_1` 做直方圖和 Q-Q Plot 檢查常態性
+
+
+# Part 5：測量標準誤 (SEM)
+
+---
+
+## SE vs SEM：別搞混了！
+
+| | SE（標準誤） | SEM（測量標準誤） |
+|:--|:--|:--|
+| **全名** | Standard Error of the Mean | Standard Error of Measurement |
+| **出現於** | W8 抽樣分佈 | W15 測量理論 |
+| **對象** | 樣本**平均數**的波動 | 個人**觀測分數**的不確定性 |
+| **公式** | $SE = \frac{s}{\sqrt{N}}$ | $SEM = s \times \sqrt{1 - r}$ |
+| **r 是什麼** | — | 信度係數（reliability） |
+
+---
+
+## SEM 的直覺
+
+每個人的**觀測分數 = 真實分數 + 測量誤差**
+
+$$X_{\text{observed}} = X_{\text{true}} + \varepsilon$$
+
+- 信度 $r$ 越高 → 誤差越小 → SEM 越小
+- 信度 $r = 1$（完美測量）→ $SEM = 0$
+- 信度 $r = 0$（純雜訊）→ $SEM = s$
+
+---
+
+## 真實分數區間
+
+$$\text{真實分數} \approx X_{\text{observed}} \pm 1 \times SEM$$
+
+（68% 信心區間）
+
+**例子**：
+
+- 某測驗 $s = 15$，$r = 0.91$
+- $SEM = 15 \times \sqrt{1 - 0.91} = 15 \times `r round(sqrt(1 - 0.91), 3)` = `r round(15 * sqrt(1 - 0.91), 2)`$
+- 小明考了 85 分 → 真實分數大約在 $85 \pm `r round(15 * sqrt(1 - 0.91), 1)`$ 之間
+
+> 沒有完美的測量，SEM 告訴你「多不完美」
+
+---
+
+## 「誤差三兄弟」
+
+```{r error-trio, fig.height=4}
+error_df <- data.frame(
+  type = c("SD\n(個別差異)", "SE\n(抽樣波動)", "SEM\n(測量誤差)"),
+  formula = c("s", "s / sqrt(N)", "s × sqrt(1-r)"),
+  question = c("個體之間\n差多少？", "平均數\n多不準？", "個人分數\n多不準？"),
+  x = 1:3,
+  y = 1
+)
+
+ggplot(error_df, aes(x = x, y = y)) +
+  geom_tile(width = 0.85, height = 0.6, fill = c("#3498db", "#e74c3c", "#2ecc71"),
+            alpha = 0.3, color = c("#3498db", "#e74c3c", "#2ecc71"), size = 1.5) +
+  geom_text(aes(label = type), y = 1.15, size = 5, fontface = "bold") +
+  geom_text(aes(label = question), y = 0.85, size = 3.5, color = "#555555") +
+  coord_cartesian(ylim = c(0.5, 1.5)) +
+  theme_void() +
+  labs(title = "誤差三兄弟：SD、SE、SEM") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 16))
+```
+
+
+# Part 6：本週作業
+
+---
+
+## 作業說明
+
+**資料**：個人化 `W15_Regression_[學號].csv`
+
+你的資料包含：
+
+| 變項 | 類型 | 說明 |
+|:-----|:-----|:-----|
+| `Study_Hours` | Continuous | 每週讀書時數 |
+| `Total_Score` | Continuous | 總測驗分數 |
+
+---
+
+## 任務 1：執行線性迴歸
+
+**操作**：
+
+1. **Regression → Linear Regression**
+2. DV（依變項）：`Total_Score`
+3. IV（自變項 / Covariates）：`Study_Hours`
+4. 記錄：截距 $a$、斜率 $b$、$R^2$、$p$ 值
+
+---
+
+## 任務 2：殘差診斷
+
+**操作**：
+
+1. 勾選 **Save → Residuals** → 產生 `RES_1`
+2. 用 `RES_1` 畫**直方圖** → 觀察是否對稱
+3. 用 `RES_1` 畫 **Q-Q Plot** → 檢查常態性
+4. 在報告中說明殘差是否符合常態分佈假設
+
+---
+
+## 任務 3：SEM 計算 + 反思問題
+
+**SEM 計算**：
+
+- 使用 `Total_Score` 的 SD
+- 假設信度 $r = 0.85$
+- 計算 $SEM = SD \times \sqrt{1 - 0.85}$
+- 解讀：某位觀測分數為 X 的學生，真實分數的 68% 區間
+
+---
+
+**反思問題**：
+
+1. **Q1**：斜率的正負代表什麼？你的資料中 Study_Hours 與 Total_Score 的關係方向如何？
+2. **Q2**：$R^2$ 的數值代表什麼意義？你的模型解釋了多少比例的變異？
+3. **Q3**：為什麼殘差需要符合常態分佈？如果不符合會有什麼影響？
+
+---
+
+## 繳交要求
+
+**檔案 1：學號_姓名_W15_Lab.omv**
+
+- 含線性迴歸分析結果
+- 已儲存殘差（RES_1）
+- 殘差的直方圖 + Q-Q Plot
+
+**檔案 2：學號_姓名_W15_Report.docx**
+
+- 迴歸方程式與解讀
+- 殘差診斷結果
+- SEM 計算過程與解讀
+- 3 題反思問題
+
+**繳交期限**：本週上課結束前
+
+
+# 小結與展望
+
+---
+
+## 本週核心概念
+
+1. **迴歸方程式**：$Y = a + bX$，斜率 = 預測變化量
+2. **最小平方法**：讓殘差平方和最小的直線
+3. **$R^2$**：模型解釋的變異比例
+4. **殘差診斷**：常態性假設的檢查
+5. **SEM**：測量標準誤，反映個人分數的不確定性
+6. **誤差三兄弟**：SD（個體差異）、SE（抽樣波動）、SEM（測量誤差）
+
+---
+
+## 下週預告
+
+**下週問題**：
+
+- 如果有**多個**自變項（IV）怎麼辦？
+- 多元迴歸 $Y = a + b_1 X_1 + b_2 X_2 + \dots$
+- 哪些預測變項最重要？
+
+---
+
+## 課後資源
+
+**電子書**：
+
+- [第 12 章：線性迴歸](https://scgeeker.github.io/lsj-book-zh_tw/12-Correlation-and-linear-regression.html#sec-what-is-linear-model)
+
+**關鍵術語對照**：
+
+| 中文 | 英文 | 符號 |
+|:-----|:-----|:-----|
+| 線性迴歸 | Linear Regression | — |
+| 截距 | Intercept | $a$ |
+| 斜率 | Slope | $b$ |
+| 殘差 | Residual | $e_i$ |
+| 決定係數 | R-squared | $R^2$ |
+| 測量標準誤 | Standard Error of Measurement | SEM |
+
+---
+
+## Q & A

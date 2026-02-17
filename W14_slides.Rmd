@@ -1,0 +1,582 @@
+---
+title: "W14：相關分析——數據間的交情"
+subtitle: "基礎統計學 2026"
+author: "慈濟大學"
+date: "`r Sys.Date()`"
+output:
+  revealjs::revealjs_presentation:
+    theme: simple
+    highlight: pygments
+    center: false
+    transition: slide
+    self_contained: true
+    css: custom.css
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.width = 9, fig.height = 5)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# ===== parenthood 資料：相關分析示範 =====
+# 電子書第 12 章：dan.sleep, baby.sleep, dan.grump
+parenthood <- data.frame(
+  dan.sleep = c(7.59, 7.91, 5.14, 7.71, 6.68, 5.99, 8.19, 7.19, 7.40, 6.58,
+                8.44, 7.18, 8.01, 5.51, 6.89, 8.00, 7.42, 6.36, 7.86, 7.79,
+                5.70, 7.19, 7.54, 3.93, 5.15, 6.57, 8.07, 5.92, 7.47, 6.85,
+                6.41, 6.60, 7.95, 6.53, 6.86, 5.82, 6.60, 7.84, 7.84, 7.25,
+                6.68, 6.62, 5.42, 7.56, 7.57, 5.53, 8.55, 6.39, 7.72, 6.09,
+                7.77, 8.15, 5.67, 5.84, 7.71, 7.23, 8.29, 7.71, 5.26, 7.14,
+                8.04, 7.52, 5.46, 5.59, 6.80, 5.57, 6.96, 8.25, 5.66, 5.63,
+                7.28, 6.91, 6.84, 5.57, 7.40, 5.65, 6.17, 7.66, 5.09, 7.00,
+                7.67, 6.77, 6.28, 5.44, 7.48, 6.37, 8.53, 5.36, 5.52, 6.59,
+                7.05, 5.17, 6.58, 5.76, 6.07, 6.71, 7.43, 5.68, 6.59, 5.05),
+  baby.sleep = c(10.18, 11.66, 7.92, 11.02, 10.49, 9.13, 10.15, 11.19, 10.17, 10.41,
+                 10.26, 10.06, 11.51, 8.50, 10.82, 10.50, 10.22, 8.77, 10.01, 11.22,
+                 9.37, 10.08, 9.59, 5.41, 7.43, 10.28, 9.18, 8.40, 10.73, 9.93,
+                 10.00, 9.36, 10.41, 10.63, 9.86, 8.65, 10.15, 11.48, 10.47, 11.28,
+                 11.10, 8.91, 7.57, 9.76, 9.46, 9.64, 10.70, 9.83, 10.41, 9.52,
+                 10.56, 11.09, 9.98, 7.52, 10.28, 10.73, 10.71, 10.29, 7.97, 8.88,
+                 11.86, 9.84, 7.79, 8.07, 9.16, 8.68, 10.38, 10.49, 8.90, 8.24,
+                 9.75, 10.11, 9.62, 6.99, 10.45, 8.22, 9.18, 10.55, 9.25, 10.40,
+                 9.05, 10.27, 9.55, 6.50, 10.23, 8.25, 11.48, 8.24, 8.23, 9.57,
+                 9.51, 8.48, 8.91, 7.81, 8.44, 8.73, 11.10, 8.67, 9.07, 7.65),
+  dan.grump = c(56, 60, 82, 55, 67, 72, 53, 60, 60, 69,
+                50, 61, 52, 84, 66, 54, 59, 77, 57, 55,
+                78, 61, 58, 100, 88, 66, 52, 80, 57, 66,
+                68, 70, 53, 67, 65, 80, 67, 57, 56, 59,
+                64, 70, 82, 60, 60, 79, 46, 72, 59, 74,
+                58, 50, 77, 81, 58, 61, 50, 56, 84, 67,
+                55, 60, 82, 80, 69, 77, 64, 53, 76, 78,
+                62, 64, 67, 78, 61, 77, 72, 55, 84, 66,
+                60, 63, 64, 83, 58, 73, 48, 80, 78, 67,
+                66, 83, 66, 79, 74, 68, 54, 78, 67, 84)
+)
+
+# ===== Anscombe's Quartet =====
+anscombe_long <- anscombe %>%
+  pivot_longer(everything(),
+               names_to = c(".value", "set"),
+               names_pattern = "(.)(.)")
+
+# 預計算
+r_sleep_grump <- cor(parenthood$dan.sleep, parenthood$dan.grump)
+r_baby_grump <- cor(parenthood$baby.sleep, parenthood$dan.grump)
+r_sleep_baby <- cor(parenthood$dan.sleep, parenthood$baby.sleep)
+```
+
+
+# 本週學習目標
+
+**概念理解**：
+
+1. 掌握**散佈圖**的判讀（方向、強弱、線性）
+2. 理解 **Pearson r** 的計算意義與範圍
+3. 學會解讀 **r²** 決定係數
+4. 建立「**相關 ≠ 因果**」的批判思考
+
+---
+
+**軟體操作**：
+
+1. 在 jamovi 中繪製**散佈圖**
+2. 產出**相關矩陣** (Correlation Matrix)
+3. 勾選信賴區間與顯著性標記
+4. 撰寫 APA 格式的相關分析報告
+
+---
+
+## 對應教材
+
+- 《用 jamovi 上手統計學》
+  - [第 12 章：相關與線性迴歸](https://scgeeker.github.io/lsj-book-zh_tw/12-Correlation-and-linear-regression.html)
+
+**簡報示範資料**：
+
+- **parenthood**：爸爸睡眠時數、寶寶睡眠時數與爸爸暴躁程度（N = 100）
+- **Anscombe's Quartet**：四組看似相同卻截然不同的資料
+
+**作業資料**：個人化 `W14_Correlation_[學號].csv`
+
+
+# Part 1：先看圖再談正事
+
+---
+
+## 散佈圖的「體型」
+
+散佈圖是觀察兩個連續變項關係的第一步：
+
+- **緊密直線** → 強相關
+- **鬆散雲霧** → 弱相關或無相關
+- **往右上** → 正相關
+- **往右下** → 負相關
+- **圓形散佈** → 零相關
+
+> 養成習慣：**永遠先看散佈圖，再算相關係數！**
+
+---
+
+## 爸爸的睡眠時數 vs 爸爸暴躁程度
+
+```{r scatter-sleep-grump, fig.height=4.5}
+ggplot(parenthood, aes(x = dan.sleep, y = dan.grump)) +
+  geom_point(color = "#3498db", alpha = 0.7, size = 2.5) +
+  geom_smooth(method = "lm", se = TRUE, color = "#e74c3c", linewidth = 1) +
+  labs(title = "Dan爸的睡眠時數 vs 暴躁程度",
+       subtitle = sprintf("r = %.3f", r_sleep_grump),
+       x = "Dan爸的睡眠時間（小時）",
+       y = "暴躁程度（0-100）") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5, color = "#e74c3c"))
+```
+
+> 睡越少，脾氣越差 → **負相關**
+
+---
+
+## 三種相關方向
+
+```{r three-directions, fig.height=4}
+set.seed(42)
+n <- 50
+demo_data <- data.frame(
+  x = rep(rnorm(n), 3),
+  type = rep(c("正相關", "負相關", "零相關"), each = n)
+)
+demo_data$y <- c(
+  demo_data$x[1:n] * 0.8 + rnorm(n, 0, 0.5),
+  demo_data$x[(n+1):(2*n)] * (-0.8) + rnorm(n, 0, 0.5),
+  rnorm(n, 0, 1)
+)
+demo_data$type <- factor(demo_data$type, levels = c("正相關", "負相關", "零相關"))
+
+ggplot(demo_data, aes(x = x, y = y)) +
+  geom_point(color = "#2c3e50", alpha = 0.6, size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "#e74c3c", linewidth = 1) +
+  facet_wrap(~ type, scales = "free") +
+  labs(title = "相關的三種方向", x = "X", y = "Y") +
+  theme_minimal(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        strip.text = element_text(size = 14, face = "bold"))
+```
+
+
+# Part 2：安斯庫姆四重奏
+
+---
+
+## 四組資料，同一個 r
+
+```{r anscombe-quartet, fig.height=5}
+# 計算各組的相關係數
+anscombe_stats <- anscombe_long %>%
+  group_by(set) %>%
+  summarise(r = round(cor(x, y), 3), .groups = "drop") %>%
+  mutate(label = paste0("Set ", set, " (r = ", r, ")"))
+
+anscombe_plot <- anscombe_long %>%
+  left_join(anscombe_stats, by = "set")
+
+ggplot(anscombe_plot, aes(x = x, y = y)) +
+  geom_point(color = "#2c3e50", size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, color = "#e74c3c", linewidth = 1) +
+  facet_wrap(~ label, ncol = 2) +
+  labs(title = "Anscombe's Quartet：四組 r 幾乎相同的資料",
+       x = "X", y = "Y") +
+  theme_minimal(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        strip.text = element_text(size = 12, face = "bold"))
+```
+
+---
+
+## 四重奏的教訓
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+四組資料的統計摘要**幾乎完全相同**：
+
+- 相同的 $\bar{X}$、$\bar{Y}$
+- 相同的 $s_X$、$s_Y$
+- 相同的 $r$
+- 相同的迴歸線
+
+:::
+::: {.column width="50%"}
+
+**但圖形完全不同**：
+
+- Set 1：正常線性
+- Set 2：曲線關係
+- Set 3：一個極端離群值
+- Set 4：X 幾乎不變，一個離群值撐起整條線
+
+:::
+::::::::::::::
+
+> **永遠先看圖！** 數字會騙人，圖像不會。
+
+
+# Part 3：Pearson 相關係數
+
+---
+
+## Pearson r 的公式
+
+$$r = \frac{\sum_{i=1}^{N} (X_i - \bar{X})(Y_i - \bar{Y})}{\sqrt{\sum_{i=1}^{N}(X_i - \bar{X})^2} \cdot \sqrt{\sum_{i=1}^{N}(Y_i - \bar{Y})^2}}$$
+
+**直覺解釋**：
+
+- 分子：X 和 Y **一起偏離平均值**的程度（共變）
+- 分母：各自偏離的程度（標準化）
+- 結果：$-1 \leq r \leq +1$
+
+---
+
+## r 的範圍與解讀
+
+| r 的絕對值 | 強度 | 白話 |
+|:---:|:---:|:---|
+| 0.00 - 0.10 | 幾乎無 | 兩者沒什麼關係 |
+| 0.10 - 0.30 | 弱 | 有點關係，但不明顯 |
+| 0.30 - 0.50 | 中等 | 看得出趨勢 |
+| 0.50 - 0.70 | 強 | 關係明顯 |
+| 0.70 - 1.00 | 非常強 | 幾乎可以預測 |
+
+> 這是經驗法則，不同領域的「強弱」標準可能不同
+
+---
+
+## parenthood 的相關矩陣
+
+```{r corr-matrix}
+cor_mat <- cor(parenthood)
+```
+
+|  | dan.sleep | baby.sleep | dan.grump |
+|:---|---:|---:|---:|
+| **dan.sleep** | 1.000 | `r round(r_sleep_baby, 3)` | `r round(r_sleep_grump, 3)` |
+| **baby.sleep** | `r round(r_sleep_baby, 3)` | 1.000 | `r round(r_baby_grump, 3)` |
+| **dan.grump** | `r round(r_sleep_grump, 3)` | `r round(r_baby_grump, 3)` | 1.000 |
+
+**解讀**：
+
+- Dan爸睡越多，脾氣越好：$r = `r round(r_sleep_grump, 3)`$（強負相關）
+- 寶寶睡越多，Dan爸脾氣越好：$r = `r round(r_baby_grump, 3)`$（中等負相關）
+- Dan爸和寶寶的睡眠正相關：$r = `r round(r_sleep_baby, 3)`$
+
+---
+
+## 相關矩陣的視覺化
+
+```{r corr-heatmap, fig.height=4}
+cor_df <- as.data.frame(as.table(cor_mat))
+names(cor_df) <- c("Var1", "Var2", "r")
+
+ggplot(cor_df, aes(x = Var1, y = Var2, fill = r)) +
+  geom_tile(color = "white", linewidth = 1) +
+  geom_text(aes(label = round(r, 3)), size = 5, fontface = "bold") +
+  scale_fill_gradient2(low = "#e74c3c", mid = "white", high = "#3498db",
+                       midpoint = 0, limits = c(-1, 1)) +
+  labs(title = "parenthood 相關矩陣", fill = "r") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        axis.title = element_blank(),
+        axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+---
+
+## jamovi 操作：Correlation Matrix
+
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+**步驟**：
+<small>
+
+1. **Regression → Correlation Matrix**
+
+2. 將所有連續變項拖入分析框
+
+3. 勾選 **Pearson**（預設已勾）
+
+4. 勾選 **Report significance**
+
+5. 勾選 **Flag significant correlations**
+
+6. 選用 **Confidence Intervals**（95% CI）
+
+</small>
+
+:::
+::: {.column width="50%"}
+
+**結果解讀**：
+
+- `***` 表示 $p < .001$
+- `**` 表示 $p < .01$
+- `*` 表示 $p < .05$
+
+:::
+::::::::::::::
+
+
+# Part 4：r² 決定係數
+
+---
+
+## r² 是什麼？
+
+$$r^2 = r \times r$$
+
+```{r venn-r2, fig.height=4}
+# 繪製 Venn Diagram 說明 r² 的「重疊面積」比喻
+theta <- seq(0, 2 * pi, length.out = 200)
+r_circle <- 1.2
+offset <- 0.7  # 兩圓圓心距離（控制重疊程度）
+
+circle_x <- data.frame(
+  x = -offset/2 + r_circle * cos(theta),
+  y = r_circle * sin(theta),
+  group = "X"
+)
+circle_y <- data.frame(
+  x = offset/2 + r_circle * cos(theta),
+  y = r_circle * sin(theta),
+  group = "Y"
+)
+
+# 計算重疊區域（兩圓交集）
+# 取 X 圓內且 Y 圓內的點
+grid_pts <- expand.grid(
+  x = seq(-2.5, 2.5, length.out = 500),
+  y = seq(-1.8, 1.8, length.out = 500)
+)
+grid_pts$in_x <- (grid_pts$x + offset/2)^2 + grid_pts$y^2 <= r_circle^2
+grid_pts$in_y <- (grid_pts$x - offset/2)^2 + grid_pts$y^2 <= r_circle^2
+overlap_pts <- grid_pts[grid_pts$in_x & grid_pts$in_y, ]
+
+ggplot() +
+  # 重疊區域填色
+  geom_tile(data = overlap_pts, aes(x = x, y = y),
+            fill = "#9b59b6", alpha = 0.4, width = 0.012, height = 0.012) +
+  # X 圓（輪廓）
+  geom_path(data = circle_x, aes(x = x, y = y),
+            color = "#3498db", linewidth = 1.5) +
+  # Y 圓（輪廓）
+  geom_path(data = circle_y, aes(x = x, y = y),
+            color = "#e74c3c", linewidth = 1.5) +
+  # 標籤
+  annotate("text", x = -offset/2 - 0.5, y = 0, label = "X 的\n變異",
+           size = 5, color = "#3498db", fontface = "bold") +
+  annotate("text", x = offset/2 + 0.5, y = 0, label = "Y 的\n變異",
+           size = 5, color = "#e74c3c", fontface = "bold") +
+  annotate("text", x = 0, y = 0, label = expression(r^2),
+           size = 7, color = "#8e44ad", fontface = "bold") +
+  annotate("text", x = 0, y = -1.7, label = "重疊面積 = X 能解釋 Y 變異的比例",
+           size = 4.5, color = "#2c3e50") +
+  coord_fixed() +
+  theme_void() +
+  theme(plot.margin = margin(5, 5, 5, 5))
+```
+
+---
+
+## parenthood 的 r²
+
+Dan 的睡眠 vs 暴躁程度：
+
+$$r = `r round(r_sleep_grump, 3)` \quad \Rightarrow \quad r^2 = `r round(r_sleep_grump^2, 3)`$$
+
+**白話解讀**：
+
+> 「Dan 的睡眠時間能解釋他暴躁程度的 **`r round(r_sleep_grump^2 * 100, 1)`%** 變異。」
+
+也就是說，還有 `r round((1 - r_sleep_grump^2) * 100, 1)`% 的暴躁程度來自其他因素（工作壓力、天氣、早餐...）
+
+---
+
+## r² 的解讀指引
+
+| r | r² | 解釋比例 |
+|:---:|:---:|:---|
+| 0.10 | 0.01 | 1% — 幾乎沒解釋力 |
+| 0.30 | 0.09 | 9% — 解釋力有限 |
+| 0.50 | 0.25 | 25% — 四分之一 |
+| 0.70 | 0.49 | 49% — 近半 |
+| 0.90 | 0.81 | 81% — 大部分 |
+
+> $r^2$ 比 $r$ 更能反映實際的「解釋力」
+
+
+# Part 5：相關 ≠ 因果
+
+---
+
+## 偽相關案例1~冰淇淋與溺水
+
+**事實**：冰淇淋銷量與溺水人數呈正相關
+
+**錯誤推論**：吃冰淇淋會導致溺水？
+
+**真正原因**：
+
+```
+          氣溫（第三變項）
+         ╱              ╲
+        ↓                ↓
+  冰淇淋銷量 ←--?--→ 溺水人數
+```
+
+**氣溫**同時影響了兩個變項，造成「虛假相關」（Spurious Correlation）
+
+---
+
+## 偽相關案例2~影帝開車原則
+
+有人發現：**有尼可拉斯凱吉開車劇情的電影數量**與**泳池溺水人數**高度相關（$r > 0.9$）
+
+> 這顯然是巧合，不是因果！
+
+**教訓**：
+
+- 有足夠多的變項，總能找到「相關」
+- 大數據時代更容易出現偽相關
+- 網站推薦：[Spurious Correlations](https://www.tylervigen.com/spurious-correlations)
+
+---
+
+## 三種可能的解釋
+
+觀察到 A 和 B 相關時，至少有三種可能：
+
+| 解釋 | 方向 | 例子 |
+|:-----|:---:|:-----|
+| A 導致 B | A → B | 睡眠不足 → 脾氣差 |
+| B 導致 A | B → A | 脾氣差 → 睡不好 |
+| C 同時影響 A 和 B | C → (A, B) | 寶寶哭鬧 → 兩人都睡不好且暴躁 |
+
+**只有實驗設計**（隨機分派 + 操弄自變項）才能建立因果關係。
+
+> 相關分析只能告訴你「有關係」，不能告訴你「誰造成誰」。
+
+
+# Part 6：本週作業
+
+---
+
+## 本週作業：相關分析實作
+
+**資料**：個人化 `W14_Correlation_[學號].csv`
+
+你的資料包含：
+
+| 變項 | 類型 | 說明 |
+|:-----|:-----|:-----|
+| `Study_Hours` | Continuous | 每週讀書時數 |
+| `Total_Score` | Continuous | 期末總成績 |
+| `Coffee_Cups` | Continuous | 每週咖啡杯數 |
+
+---
+
+## 任務 1：散佈圖
+
+**操作**：
+
+1. 為三對變項各繪製一張散佈圖：
+   - Study_Hours vs Total_Score
+   - Study_Hours vs Coffee_Cups
+   - Coffee_Cups vs Total_Score
+2. 在報告中描述每張圖的方向與強弱
+
+---
+
+## 任務 2：相關矩陣
+
+**操作**：
+
+1. 執行 **Regression → Correlation Matrix**
+2. 勾選 Pearson、Significance、CI
+3. 在報告中列出所有 r 值
+4. 計算 r² 並做白話解讀
+
+---
+
+## 任務 3：因果議題討論
+
+**反思問題**：
+
+1. **Q1**：Study_Hours 與 Total_Score 的相關係數是多少？r² 是多少？請用一句白話解釋 r² 的意義。
+2. **Q2**：「讀書時間多 → 成績好」是唯一可能的解釋嗎？請說明至少兩種替代解釋。
+3. **Q3**：如果要證明「讀書時間確實會提升成績」，應該採用什麼研究設計？為什麼相關分析不夠？
+
+---
+
+## 繳交要求
+
+**檔案 1：學號_姓名_W14_Lab.omv**
+
+- 含散佈圖（3 張）
+- 含相關矩陣（Pearson + CI）
+
+**檔案 2：學號_姓名_W14_Report.docx**
+
+- 散佈圖描述
+- 相關矩陣結果與 r² 解讀
+- 3 題反思問題回答
+
+**繳交期限**：本週上課結束前
+
+
+# 小結與展望
+
+---
+
+## 本週核心概念
+
+1. **先看圖**：散佈圖永遠是第一步（Anscombe 的教訓）
+2. **Pearson r**：衡量線性關係的方向與強度（-1 到 +1）
+3. **r²**：解釋變異量的百分比（比 r 更直觀）
+4. **相關 ≠ 因果**：A→B、B→A、C→(A,B) 三種可能
+5. **jamovi 操作**：Correlation Matrix + 散佈圖
+
+---
+
+## 下週預告
+
+**下週問題**：
+
+- 如果想用 X **預測** Y 呢？
+- 迴歸線的斜率和截距代表什麼？
+- 什麼是線性迴歸？
+
+---
+
+## 課後資源
+
+**電子書**：[第 12 章：相關與線性迴歸](https://scgeeker.github.io/lsj-book-zh_tw/12-Correlation-and-linear-regression.html)
+
+**關鍵術語對照**：
+
+| 中文 | 英文 | 符號 |
+|:-----|:-----|:-----|
+| 散佈圖 | Scatterplot | - |
+| 皮爾森相關係數 | Pearson correlation coefficient | $r$ |
+| 決定係數 | Coefficient of determination | $r^2$ |
+| 相關矩陣 | Correlation matrix | - |
+| 虛假相關 | Spurious correlation | - |
+| 第三變項 | Third variable (confound) | - |
+
+---
+
+## Q & A
