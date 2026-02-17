@@ -26,18 +26,27 @@
 .reveal table {
   margin: auto;
   border-collapse: collapse;
-  font-size: 0.9em;
+  font-size: 0.78em;
 }
 
 .reveal table th {
   background-color: #3498db;
   color: white;
-  padding: 8px 16px;
+  padding: 5px 12px;
 }
 
 .reveal table td {
-  padding: 8px 16px;
+  padding: 5px 12px;
   border-bottom: 1px solid #ddd;
+}
+
+/* 緊湊表格（表格較多的投影片使用） */
+.compact-table table {
+  font-size: 0.68em;
+}
+.compact-table table th,
+.compact-table table td {
+  padding: 3px 8px;
 }
 
 .reveal table tr:nth-child(even) {

@@ -1,0 +1,598 @@
+---
+title: "W10：假設檢定與決策——法庭上的攻防"
+subtitle: "基礎統計學 2026"
+author: "慈濟大學"
+date: "`r Sys.Date()`"
+output:
+  revealjs::revealjs_presentation:
+    theme: simple
+    highlight: pygments
+    center: false
+    transition: slide
+    self_contained: true
+    css: custom.css
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.width = 9, fig.height = 5)
+library(ggplot2)
+library(dplyr)
+
+# Zeppo 示範資料：20 位心理學學生成績
+zeppo <- data.frame(
+  grade = c(50, 60, 60, 64, 66, 66, 67, 69, 70, 74,
+            76, 76, 77, 79, 79, 79, 81, 82, 82, 89)
+)
+mu_0 <- 67.5  # 全體平均（虛無假設值）
+x_bar <- mean(zeppo$grade)
+s <- sd(zeppo$grade)
+n <- nrow(zeppo)
+se <- s / sqrt(n)
+t_obs <- (x_bar - mu_0) / se
+df <- n - 1
+p_val <- 2 * pt(-abs(t_obs), df)
+d_cohen <- (x_bar - mu_0) / s
+```
+
+# 本週學習目標
+
+**理解概念**：
+
+1. 區分虛無假設 ($H_0$) 與對立假設 ($H_1$)
+2. 理解 **p 值**的意義與決策邏輯
+3. 掌握 **t 統計量**的「訊號/雜訊」直覺
+4. 認識 **Cohen's d** 效果量
+
+---
+
+**數學工具**：
+
+1. $t = \frac{\bar{X} - \mu_0}{SE}$
+2. Cohen's $d = \frac{\bar{X} - \mu_0}{s}$
+
+**軟體操作**：
+
+1. 在 jamovi 中執行 One Sample T-Test
+2. 設定 Test Value、勾選 Effect Size
+
+---
+
+## 對應教材
+
+- 《用 jamovi 上手統計學》
+  - [第 9 章：假設檢定](https://scgeeker.github.io/lsj-book-zh_tw/09-Hypothesis-testing.html)
+  - [第 11 章 11.1-11.2：單一樣本 t 檢定](https://scgeeker.github.io/lsj-book-zh_tw/11-Comparing-two-means.html#sec-The-one-sample-t%E6%AA%A2%E5%AE%9A)
+
+**簡報示範資料**：Zeppo（20 位心理學學生成績）
+
+**作業資料**：個人化 `W10_Hypothesis_Test_[學號].csv`
+
+
+# Part 1：法庭譬喻——無罪推定
+
+---
+
+## 假設檢定 = 法庭審判
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+**法庭**
+
+- 被告**推定無罪**
+- 檢察官提出**證據**
+- 證據夠強 → **判有罪**
+- 證據不足 → **維持無罪**
+
+:::
+::: {.column width="50%"}
+
+**統計**
+
+- $H_0$：效果**不存在**
+- 數據 = **證據**
+- $p < .05$ → **拒絕 $H_0$**
+- $p \geq .05$ → **保留 $H_0$**
+
+:::
+::::::::::::::
+
+> 法庭不會「證明無罪」，統計也不會「證明 $H_0$ 為真」——只是**證據不足以推翻**。
+
+---
+
+## 兩種假設
+
+**虛無假設 $H_0$（被告）**：
+
+- 「沒有效果」、「沒有差異」、「跟母群一樣」
+- 例：心理系學生的統計成績 = 全校平均 67.5
+
+**對立假設 $H_1$（檢方主張）**：
+
+- 「有效果」、「有差異」
+- 例：心理系學生的成績 ≠ 67.5
+
+> $H_0$ 是預設立場，$H_1$ 是你想證明的事。
+
+---
+
+## 四種判決結果
+
+<div class="compact-table">
+
+| | 判「有罪」（拒絕 $H_0$） | 判「無罪」（保留 $H_0$） |
+|:---|:---:|:---:|
+| **真的有罪**（$H_0$ 為假） | ✓ 正確拒絕 | ✗ **Type II 錯誤** ($\beta$) |
+| **真的無罪**（$H_0$ 為真） | ✗ **Type I 錯誤** ($\alpha$) | ✓ 正確保留 |
+
+</div>
+
+- **Type I 錯誤**（$\alpha$）：冤枉好人（誤判有效）
+- **Type II 錯誤**（$\beta$）：放過壞人（漏掉真正的效果）
+
+> 我們設定 $\alpha = .05$，容忍最多 5% 的冤枉率。
+
+---
+
+## p 值 = 證據力
+
+**p 值的定義**：
+
+> 假設 $H_0$ 為真，觀察到**這麼極端或更極端**的數據的機率
+
+**決策規則**：
+
+- $p < \alpha$（通常 .05） → 證據太罕見 → **拒絕 $H_0$**
+- $p \geq \alpha$ → 證據不夠罕見 → **保留 $H_0$**
+
+**注意**：p 值**不是** $H_0$ 為真的機率！
+
+
+# Part 2：t 統計量——訊號與雜訊
+
+---
+
+## Zeppo 的問題
+
+**情境**：20 位心理學學生的統計成績
+
+全校學生統計平均分 = **67.5**（$\mu_0$）
+
+心理系樣本平均 = **`r round(x_bar, 1)`**（$\bar{X}$）
+
+**問題**：差了 `r round(x_bar - mu_0, 1)` 分，是真的比較厲害，還是只是運氣好？
+
+---
+
+## Zeppo 的成績分佈
+
+```{r zeppo-histogram, fig.height=4}
+ggplot(zeppo, aes(x = grade)) +
+  geom_histogram(binwidth = 5, fill = "#3498db", color = "white", alpha = 0.8) +
+  geom_vline(xintercept = mu_0, linetype = "dashed",
+             color = "#e74c3c", size = 1.2) +
+  geom_vline(xintercept = x_bar, linetype = "solid",
+             color = "#2ecc71", size = 1.2) +
+  annotate("text", x = mu_0 - 1.5, y = 4.5,
+           label = paste0("μ₀ = ", mu_0),
+           color = "#e74c3c", size = 5, fontface = "bold", hjust = 1) +
+  annotate("text", x = x_bar + 1.5, y = 4.5,
+           label = paste0("X̄ = ", round(x_bar, 1)),
+           color = "#2ecc71", size = 5, fontface = "bold", hjust = 0) +
+  labs(title = "Zeppo：20 位心理系學生的統計成績",
+       x = "成績", y = "人數") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 紅線 = 全校常模，綠線 = 心理系平均。差距**顯著**嗎？
+
+---
+
+## t 統計量的直覺
+
+$$t = \frac{\text{訊號}}{\text{雜訊}} = \frac{\bar{X} - \mu_0}{SE}$$
+
+- **分子（訊號）**：樣本跟常模**差多少**
+- **分母（雜訊）**：這個差距有多少是**抽樣誤差**
+
+---
+
+## Zeppo 的 t 值計算
+
+$$SE = \frac{s}{\sqrt{N}} = \frac{`r round(s, 2)`}{\sqrt{`r n`}} = `r round(se, 2)`$$
+
+$$t = \frac{`r round(x_bar, 1)` - `r mu_0`}{`r round(se, 2)`} = \frac{`r round(x_bar - mu_0, 1)`}{`r round(se, 2)`} = `r round(t_obs, 2)`$$
+
+**解讀**：樣本與常模的差距是**標準誤的 `r round(t_obs, 2)` 倍**
+
+> $|t|$ 越大 → 訊號相對於雜訊越強 → 越不可能只是運氣。
+
+---
+
+## 連結 W9 的 t 分佈
+
+回想 W9 學過的：
+
+- **t 分佈**的形狀由 $df = N - 1$ 決定
+- $df$ 越小 → 尾巴越厚 → 要更極端才算「罕見」
+
+Zeppo 的 $df = `r n` - 1 = `r df`$
+
+現在的問題：$t = `r round(t_obs, 2)`$ 在 $df = `r df`$ 的 t 分佈上，算罕見嗎？
+
+
+# Part 3：p 值決策樹
+
+---
+
+## t 分佈上的 Zeppo
+
+```{r t-distribution-zeppo, fig.height=4}
+x_vals <- seq(-4, 4, length.out = 300)
+t_crit <- qt(0.975, df)
+
+df_plot <- data.frame(x = x_vals, y = dt(x_vals, df))
+
+# 臨界區域
+tail_left <- data.frame(x = x_vals[x_vals <= -t_crit],
+                         y = dt(x_vals[x_vals <= -t_crit], df))
+tail_right <- data.frame(x = x_vals[x_vals >= t_crit],
+                          y = dt(x_vals[x_vals >= t_crit], df))
+
+ggplot(df_plot, aes(x, y)) +
+  geom_line(size = 1.2, color = "#34495e") +
+  geom_area(data = tail_left, aes(x, y), fill = "#e74c3c", alpha = 0.4) +
+  geom_area(data = tail_right, aes(x, y), fill = "#e74c3c", alpha = 0.4) +
+  geom_vline(xintercept = t_obs, color = "#2ecc71", size = 1.5, linetype = "solid") +
+  geom_vline(xintercept = c(-t_crit, t_crit), color = "#e74c3c",
+             size = 0.8, linetype = "dashed") +
+  annotate("text", x = t_obs + 0.2, y = 0.35,
+           label = sprintf("t = %.2f", t_obs),
+           color = "#2ecc71", size = 5, fontface = "bold", hjust = 0) +
+  annotate("text", x = t_crit + 0.15, y = 0.05,
+           label = sprintf("t* = %.2f", t_crit),
+           color = "#e74c3c", size = 4, hjust = 0) +
+  annotate("text", x = -t_crit - 0.15, y = 0.05,
+           label = sprintf("t* = -%.2f", t_crit),
+           color = "#e74c3c", size = 4, hjust = 1) +
+  annotate("text", x = 3.5, y = 0.3,
+           label = "拒絕區域\n(α/2 = .025)",
+           color = "#e74c3c", size = 3.5) +
+  labs(title = sprintf("t 分佈（df = %d）：Zeppo 的 t 值落在哪裡？", df),
+       x = "t 值", y = "機率密度") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 綠線（觀察 t）超過了紅虛線（臨界值）→ 落入拒絕區域！
+
+---
+
+## 雙尾 vs 單尾
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+**雙尾檢定**（$H_1: \mu \neq \mu_0$）
+
+- 「有差異」（不管方向）
+- 兩邊尾巴各 $\alpha/2 = .025$
+- 通常是預設選擇
+
+:::
+::: {.column width="50%"}
+
+**單尾檢定**（$H_1: \mu > \mu_0$）
+
+- 「比較好」（指定方向）
+- 只看一邊尾巴 $\alpha = .05$
+- 需要事前理論支持
+
+:::
+::::::::::::::
+
+**Zeppo 的結果（雙尾）**：
+
+$t(`r df`) = `r round(t_obs, 2)`,\quad p = `r sprintf("%.3f", p_val)` < .05$
+
+**拒絕 $H_0$**：心理系學生成績顯著高於全校平均
+
+---
+
+## jamovi 操作：One Sample T-Test
+
+**步驟**：
+
+1. **T-Tests → One Sample T-Test**
+2. 將變項拖入 **Dependent Variables**
+3. 設定 **Test Value** = 母群常模（如 67.5）
+4. 勾選 **Effect Size**（Cohen's d）
+
+---
+
+## jamovi 操作（續）
+
+**Hypothesis 選項**：
+
+| 選項 | 意義 | 何時使用 |
+|:-----|:-----|:---------|
+| $\neq$ Test Value | 雙側（預設） | 只要知道「有沒有差」 |
+| $>$ Test Value | 右側 | 預期**高於** $\mu$ |
+| $<$ Test Value | 左側 | 預期**低於** $\mu$ |
+
+**讀取報表**：
+
+- **t**：t 統計量
+- **df**：自由度（$N - 1$）
+- **p**：p 值（決定是否顯著）
+- **Cohen's d**：效果量
+
+
+# Part 4：效果量——顯著不等於重要
+
+---
+
+## Cohen's d 的直覺
+
+$$d = \frac{\bar{X} - \mu_0}{s} = \frac{`r round(x_bar, 1)` - `r mu_0`}{`r round(s, 2)`} = `r round(d_cohen, 2)`$$
+
+**意義**：差距相當於「幾個樣本標準差」
+
+| Cohen's d | 效果大小 | 日常譬喻 |
+|:--:|:--:|:--|
+| 0.2 | 小 | 看不太出來 |
+| 0.5 | 中 | 仔細看會注意到 |
+| 0.8 | 大 | 一眼就看到 |
+
+> Zeppo 的 $d = `r round(d_cohen, 2)`$（中等效果）
+
+---
+
+## 兩個分佈的重疊
+
+```{r effect-size-visual, fig.height=4.5}
+x_range <- seq(40, 100, length.out = 300)
+
+df_overlap <- rbind(
+  data.frame(x = x_range,
+             y = dnorm(x_range, mean = mu_0, sd = s),
+             group = sprintf("H₀ 母群 (μ = %.1f)", mu_0)),
+  data.frame(x = x_range,
+             y = dnorm(x_range, mean = x_bar, sd = s),
+             group = sprintf("心理系樣本 (X̄ = %.1f)", x_bar))
+)
+
+ggplot(df_overlap, aes(x = x, y = y, fill = group, color = group)) +
+  geom_area(alpha = 0.3, position = "identity") +
+  geom_line(size = 1) +
+  scale_fill_manual(values = c("#e74c3c", "#2ecc71")) +
+  scale_color_manual(values = c("#e74c3c", "#2ecc71")) +
+  annotate("segment", x = mu_0, xend = x_bar,
+           y = max(dnorm(mu_0, mu_0, s)) * 0.5,
+           yend = max(dnorm(mu_0, mu_0, s)) * 0.5,
+           arrow = arrow(ends = "both", length = unit(0.15, "inches")),
+           color = "#2c3e50", size = 1) +
+  annotate("text", x = (mu_0 + x_bar) / 2,
+           y = max(dnorm(mu_0, mu_0, s)) * 0.55,
+           label = sprintf("d = %.2f", d_cohen),
+           color = "#2c3e50", size = 5, fontface = "bold") +
+  labs(title = "效果量 d：兩個分佈的差異程度",
+       x = "成績", y = "密度") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.position = "top",
+        legend.title = element_blank())
+```
+
+---
+
+## 顯著 ≠ 重要：N 的陷阱
+
+```{r n-trap, fig.height=4}
+# 模擬：相同的微小效果（d ≈ 0.1），不同 N
+set.seed(1010)
+small_d <- 0.1  # 很小的效果量
+
+ns <- c(20, 50, 100, 200, 500, 1000, 5000)
+p_values <- sapply(ns, function(n_i) {
+  x <- rnorm(n_i, mean = mu_0 + small_d * s, sd = s)
+  t.test(x, mu = mu_0)$p.value
+})
+
+df_np <- data.frame(N = ns, p = p_values)
+
+ggplot(df_np, aes(x = N, y = p)) +
+  geom_line(size = 1.2, color = "#3498db") +
+  geom_point(size = 3, color = "#3498db") +
+  geom_hline(yintercept = 0.05, linetype = "dashed",
+             color = "#e74c3c", size = 1) +
+  annotate("text", x = 4000, y = 0.08,
+           label = "α = .05", color = "#e74c3c", size = 5) +
+  annotate("text", x = 3000, y = 0.4,
+           label = sprintf("效果量始終 d ≈ %.1f（微小）", small_d),
+           size = 5, color = "#7f8c8d") +
+  scale_x_log10(breaks = ns) +
+  labs(title = "N 越大 → p 越小，但效果量不變！",
+       x = "樣本數 N（對數刻度）", y = "p 值") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 同樣微小的差異（$d \approx 0.1$），$N = 5000$ 時 $p$ 就能 $< .05$。
+
+---
+
+## 為什麼需要效果量？
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+**p 值的問題**：
+
+- 同時受**效果大小**和**樣本數**影響
+- $N$ 夠大，任何微小差異都會「顯著」
+- 無法回答「這個效果**有多大**」
+
+:::
+::: {.column width="50%"}
+
+**Cohen's d 的優勢**：
+
+- 只反映效果的**實質大小**
+- 不受 $N$ 影響
+- 可以跨研究比較
+
+:::
+::::::::::::::
+
+> **p 值告訴你「有沒有」，d 告訴你「有多少」**
+
+
+# Part 5：作業說明
+
+---
+
+## 本週作業：顯著性陷阱
+
+**資料**：個人化 `W10_Hypothesis_Test_[學號].csv`
+
+你的資料包含 2 個變項：
+
+| 變項 | N | 說明 |
+|:-----|---:|:-----|
+| `Small_Study` | 20 | 大偏移，小樣本 |
+| `Huge_Study` | 500 | 小偏移，大樣本 |
+
+**Test Value**（母群平均數）：見你的個人資料說明
+
+---
+
+## 任務 1：執行檢定
+
+**操作**：
+
+1. 匯入 CSV，設定 Small_Study 和 Huge_Study 為 **Continuous**
+2. 注意 Small_Study 只有 20 筆有效資料（其餘為 NA）
+3. **T-Tests → One Sample T-Test**
+4. **Test Value** 設為你的母群平均數
+5. 勾選 **Effect Size**（Cohen's d）
+
+---
+
+**記錄**：整理兩組的檢定結果
+
+| | Small_Study | Huge_Study |
+|:--|:--:|:--:|
+| N | 20 | 500 |
+| Mean | | |
+| t | | |
+| df | | |
+| p | | |
+| Cohen's d | | |
+| 結論 | 顯著？ | 顯著？ |
+
+---
+
+## 任務 2：決策對比
+
+**問題**：比較兩組的 p 值和 Cohen's d
+
+- 哪一組 **p 值更小**（更顯著）？
+- 哪一組 **Cohen's d 更大**（效果更大）？
+- 為什麼差距小的 Huge_Study 反而「更顯著」？
+
+**提示**：想想 $t = \frac{\bar{X} - \mu_0}{SE}$，SE 和 N 的關係
+
+---
+
+## 任務 3：觀念辨析
+
+在報告中回答以下問題：
+
+1. **Q1: 樣本數對 p 值的影響**：為什麼增加 N 會讓 p 值變小？請用 $SE = SD / \sqrt{N}$ 解釋。
+
+2. **Q2: 效果量與實務重要性**：根據 Cohen's d，哪個研究的發現比較有「實務重要性」？為什麼 d 比 p 更適合衡量效果大小？
+
+3. **Q3: APA 格式報告**：針對 Small_Study 撰寫 APA 格式結果。
+   格式：$t(df) = \dots,\ p = \dots,\ d = \dots$
+
+---
+
+## 繳交要求
+
+**檔案 1：學號_姓名_W10_Lab.omv**
+
+- 兩個變項的 One Sample T-Test
+- 勾選 Effect Size（Cohen's d）
+
+**檔案 2：學號_姓名_W10_Report.docx**
+
+- 分析結果表格（兩組 t 檢定結果）
+- 決策對比分析（任務 2）
+- 反思問題：回答 3 題觀念問題
+
+**繳交期限**：本週上課結束前
+
+
+# 小結與展望
+
+---
+
+## 本週核心概念
+
+1. **假設檢定 = 法庭**：$H_0$ 無罪推定 → 用數據（證據）決定是否推翻
+2. **t 統計量**：訊號/雜訊比值，$t = (\bar{X} - \mu_0) / SE$
+3. **p 值**：假設 $H_0$ 為真時，觀察到這麼極端數據的機率
+4. **決策規則**：$p < .05$ → 拒絕 $H_0$
+5. **效果量**：$d = (\bar{X} - \mu_0) / s$，不受 N 影響，衡量實質大小
+6. **顯著 ≠ 重要**：大 N 能讓微小差異顯著，但 d 不會騙你
+
+---
+
+## W12 預告：兩組人怎麼比？
+
+**下週問題**：
+
+- 「實驗組 vs 控制組」該用什麼方法？
+- 「前測 vs 後測」又該用什麼方法？
+- 什麼是 Welch's t？什麼時候需要它？
+
+**核心概念**：
+
+- 獨立樣本 t 檢定（蘋果 vs 橘子）
+- 相依樣本 t 檢定（昨天的你 vs 今天的你）
+
+**資料**：W12 個人化雙組實驗資料
+
+---
+
+## 課後資源
+
+**電子書**：
+
+- [第 9 章：假設檢定](https://scgeeker.github.io/lsj-book-zh_tw/09-Hypothesis-testing.html)
+- [第 11 章 11.1-11.2：單一樣本 t 檢定](https://scgeeker.github.io/lsj-book-zh_tw/11-Comparing-two-means.html#sec-The-one-sample-t%E6%AA%A2%E5%AE%9A)
+
+---
+
+**關鍵術語對照**：
+
+| 中文 | 英文 | 符號 |
+|:-----|:-----|:-----|
+| 虛無假設 | Null Hypothesis | $H_0$ |
+| 對立假設 | Alternative Hypothesis | $H_1$ |
+| p 值 | p-value | $p$ |
+| 顯著水準 | Significance Level | $\alpha$ |
+| 效果量 | Effect Size | $d$ |
+| 型一錯誤 | Type I Error | $\alpha$ |
+| 型二錯誤 | Type II Error | $\beta$ |
+
+---
+
+## Q & A

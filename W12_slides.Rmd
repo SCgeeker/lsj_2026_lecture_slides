@@ -1,0 +1,548 @@
+---
+title: "W12：雙樣本檢定——獨立與相依的差異"
+subtitle: "基礎統計學 2026"
+author: "慈濟大學"
+date: "`r Sys.Date()`"
+output:
+  revealjs::revealjs_presentation:
+    theme: simple
+    highlight: pygments
+    center: false
+    transition: slide
+    self_contained: true
+    css: custom.css
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.width = 9, fig.height = 5)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# ===== Harpo 資料：獨立樣本 t 示範 =====
+# 電子書第 11 章：Anastasia vs Bernadette 的教學效果
+harpo <- data.frame(
+  grade = c(65, 72, 66, 74, 73, 71, 66, 76, 78, 81, 91, 84, 79, 88, 74,
+            52, 59, 64, 68, 62, 76, 71, 69, 65, 72, 70, 75, 68, 63, 73, 67, 77, 74),
+  tutor = c(rep("Anastasia", 15), rep("Bernadette", 18))
+)
+
+# ===== Chico 資料：相依樣本 t 示範 =====
+# 電子書第 11 章：20 位學生的前後測
+chico <- data.frame(
+  id = 1:20,
+  grade_test1 = c(42.9, 51.8, 71.7, 51.6, 63.5, 58.0, 59.8, 50.8, 62.5, 61.9,
+                  45.2, 52.6, 55.2, 48.2, 49.4, 61.4, 55.1, 45.2, 70.2, 64.3),
+  grade_test2 = c(44.6, 54.0, 72.3, 53.4, 63.8, 59.3, 60.8, 51.6, 64.3, 63.2,
+                  47.3, 53.9, 56.3, 49.5, 50.7, 62.6, 56.1, 46.4, 71.4, 65.5)
+)
+chico$diff <- chico$grade_test2 - chico$grade_test1
+
+# 預計算 Harpo 統計量
+harpo_a <- harpo %>% filter(tutor == "Anastasia")
+harpo_b <- harpo %>% filter(tutor == "Bernadette")
+harpo_t <- t.test(grade ~ tutor, data = harpo, var.equal = TRUE)
+harpo_welch <- t.test(grade ~ tutor, data = harpo, var.equal = FALSE)
+harpo_d <- (mean(harpo_a$grade) - mean(harpo_b$grade)) /
+           sqrt(((nrow(harpo_a)-1)*sd(harpo_a$grade)^2 + (nrow(harpo_b)-1)*sd(harpo_b$grade)^2) /
+                (nrow(harpo_a) + nrow(harpo_b) - 2))
+
+# 預計算 Chico 統計量
+chico_t <- t.test(chico$grade_test2, chico$grade_test1, paired = TRUE)
+chico_d <- mean(chico$diff) / sd(chico$diff)
+```
+
+# 本週學習目標
+
+**理解概念**：
+
+1. 區分**獨立樣本**與**相依樣本**的實驗設計
+2. 理解 **Levene's test** 的診斷功能
+3. 知道何時使用 **Welch's t** 修正
+4. 掌握**相依樣本 t = 差值的單一樣本 t**
+
+---
+
+**軟體操作**：
+
+1. 在 jamovi 中執行 Independent Samples T-Test
+2. 勾選 Assumptions 中的 Homogeneity test
+3. 執行 Paired Samples T-Test
+4. 報告兩種 Cohen's d
+
+---
+
+## 對應教材
+
+- 《用 jamovi 上手統計學》
+  - [第 11 章：比較兩個平均數](https://scgeeker.github.io/lsj-book-zh_tw/11-Comparing-two-means.html)
+
+**簡報示範資料**：
+
+- Harpo（獨立樣本 t）：兩位老師的教學成效
+- Chico（相依樣本 t）：前後測的學生進步
+
+**作業資料**：個人化 `W12_ttest_Data_[學號].csv`
+
+
+# Part 1：判斷你的實驗設計
+
+---
+
+## 獨立 vs 相依
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+**獨立樣本（受試者間）**
+
+- 兩組**不同的人**
+- 蘋果 vs 橘子
+- 例：男生 vs 女生
+- 例：實驗組 vs 控制組
+
+:::
+::: {.column width="50%"}
+
+**相依樣本（受試者內）**
+
+- **同一批人**測兩次
+- 昨天的你 vs 今天的你
+- 例：前測 vs 後測
+- 例：左眼 vs 右眼
+
+:::
+::::::::::::::
+
+---
+
+## 快速判斷法
+
+**問自己**：每一筆資料之間，有沒有「配對關係」？
+
+| 情境 | 類型 | 理由 |
+|:-----|:--:|:-----|
+| 男生 vs 女生的成績 | 獨立 | 不同人 |
+| 同一群人的前後測 | 相依 | 同一人測兩次 |
+| 夫妻對的態度比較 | 相依 | 自然配對 |
+| A 藥 vs B 藥（不同患者） | 獨立 | 不同人 |
+| A 藥 vs B 藥（同患者交叉） | 相依 | 同一人兩種藥 |
+
+> 有配對 → 相依，沒配對 → 獨立
+
+
+# Part 2：獨立樣本 t 檢定
+
+---
+
+## Harpo 資料集
+
+**情境**：比較兩位老師的教學成效
+
+```{r harpo-summary}
+harpo_summary <- harpo %>%
+  group_by(tutor) %>%
+  summarise(N = n(), Mean = round(mean(grade), 2),
+            SD = round(sd(grade), 2), .groups = "drop")
+```
+
+| 老師 | N | Mean | SD |
+|:-----|---:|---:|---:|
+| Anastasia | `r harpo_summary$N[1]` | `r harpo_summary$Mean[1]` | `r harpo_summary$SD[1]` |
+| Bernadette | `r harpo_summary$N[2]` | `r harpo_summary$Mean[2]` | `r harpo_summary$SD[2]` |
+
+**問題**：Anastasia 的班平均高了約 `r round(mean(harpo_a$grade) - mean(harpo_b$grade), 1)` 分，這是真正的差異還是運氣？
+
+---
+
+## 兩組的分佈
+
+```{r harpo-boxplot, fig.height=4.5}
+ggplot(harpo, aes(x = tutor, y = grade, fill = tutor)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 16) +
+  geom_jitter(width = 0.1, alpha = 0.5, size = 2) +
+  scale_fill_manual(values = c("#3498db", "#e74c3c")) +
+  labs(title = "Harpo：兩位老師的成績分佈",
+       x = "老師", y = "成績") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.position = "none")
+```
+
+---
+
+## 獨立樣本 t 的公式
+
+$$t = \frac{\bar{X}_1 - \bar{X}_2}{SE_{\text{pooled}}}$$
+
+其中聯合標準誤：
+
+$$SE_{\text{pooled}} = s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}$$
+
+$$s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$$
+
+**自由度**：$df = n_1 + n_2 - 2 = `r nrow(harpo) - 2`$
+
+---
+
+## Harpo 的 t 檢定結果
+
+$$t(`r harpo_t$parameter`) = `r round(harpo_t$statistic, 2)`,\quad p = `r sprintf("%.3f", harpo_t$p.value)`,\quad d = `r round(harpo_d, 2)`$$
+
+$p = `r sprintf("%.3f", harpo_t$p.value)` `r ifelse(harpo_t$p.value < 0.05, "< .05", ">= .05")`$ → `r ifelse(harpo_t$p.value < 0.05, "**拒絕 H₀**：兩組有顯著差異", "**保留 H₀**：差異不顯著")`
+
+$d = `r round(harpo_d, 2)`$（`r ifelse(abs(harpo_d) >= 0.8, "大", ifelse(abs(harpo_d) >= 0.5, "中", "小"))`效果）
+
+---
+
+## jamovi 操作：Independent Samples T-Test
+
+**步驟**：
+
+1. **T-Tests → Independent Samples T-Test**
+2. 將成績變項拖入 **Dependent Variables**
+3. 將分組變項拖入 **Grouping Variable**
+4. 勾選 **Effect Size**
+5. 勾選 **Assumptions → Homogeneity test**
+
+
+# Part 3：診斷先行——Levene's Test
+
+---
+
+## 前提假設：變異數同質性
+
+Student's t 假設兩組的**變異數相等**：
+
+$$\sigma_1^2 = \sigma_2^2$$
+
+如果不相等呢？→ 聯合標準誤 $s_p$ 的估計會有偏差
+
+**Levene's Test**：檢驗兩組變異數是否相等
+
+- $p \geq .05$ → 同質 → 使用 Student's t ✓
+- $p < .05$ → 不同質 → 改用 **Welch's t** ⚠
+
+---
+
+## 什麼是 Welch's t？
+
+**Student's t** 假設兩組 SD 一樣 → 合併計算
+
+**Welch's t** 不做這個假設 → 分開計算
+
+$$t_{\text{Welch}} = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
+
+**差異**：
+
+- 自由度不再是整數（Welch-Satterthwaite 近似法）
+- 更保守但更正確
+- 許多統計學家建議**一律使用 Welch's t**
+
+---
+
+## 診斷流程圖
+
+```
+執行 Independent Samples T-Test
+         │
+    勾選 Levene's Test
+         │
+    ┌────┴────┐
+    │         │
+ p ≥ .05   p < .05
+    │         │
+Student's t  Welch's t
+ (同質)      (不同質)
+    │         │
+    └────┬────┘
+         │
+   報告 t, df, p, d
+```
+
+> 養成習慣：**先看 Levene's，再看 t 檢定結果**
+
+---
+
+## Harpo 的 Levene's Test
+
+Harpo 資料中：
+
+- Anastasia 的 SD = `r round(sd(harpo_a$grade), 2)`
+- Bernadette 的 SD = `r round(sd(harpo_b$grade), 2)`
+
+```{r levene-harpo}
+# 模擬 Levene's test
+levene_p <- car::leveneTest(grade ~ factor(tutor), data = harpo)$`Pr(>F)`[1]
+```
+
+Levene's test: $p = `r sprintf("%.3f", levene_p)`$
+
+`r ifelse(levene_p >= 0.05, "→ p ≥ .05 → **同質**，使用 Student's t", "→ p < .05 → **不同質**，改用 Welch's t")`
+
+
+# Part 4：相依樣本 t 檢定
+
+---
+
+## Chico 資料集
+
+**情境**：20 位學生接受補救教學，比較前後測成績
+
+```{r chico-summary}
+chico_long <- chico %>%
+  pivot_longer(cols = c(grade_test1, grade_test2),
+               names_to = "test", values_to = "grade") %>%
+  mutate(test = ifelse(test == "grade_test1", "Test 1", "Test 2"))
+```
+
+| | Test 1 | Test 2 | 差值 |
+|:---|---:|---:|---:|
+| Mean | `r round(mean(chico$grade_test1), 1)` | `r round(mean(chico$grade_test2), 1)` | `r round(mean(chico$diff), 1)` |
+| SD | `r round(sd(chico$grade_test1), 1)` | `r round(sd(chico$grade_test2), 1)` | `r round(sd(chico$diff), 1)` |
+
+---
+
+## 相依 t 的直覺：回到 W10
+
+**關鍵洞察**：
+
+相依樣本 t 檢定 = **差值 (D)** 的單一樣本 t 檢定
+
+$$D_i = X_{i,\text{後}} - X_{i,\text{前}}$$
+
+$$t = \frac{\bar{D} - 0}{SE_D} = \frac{\bar{D}}{s_D / \sqrt{N}}$$
+
+- $H_0$：$\mu_D = 0$（前後沒差）
+- $H_1$：$\mu_D \neq 0$（前後有差）
+- **$df = N - 1$**（不是 $N - 2$！只有一組數值）
+
+---
+
+## 差值分佈
+
+```{r chico-diff, fig.height=4}
+ggplot(chico, aes(x = diff)) +
+  geom_histogram(binwidth = 0.3, fill = "#2ecc71", color = "white", alpha = 0.8) +
+  geom_vline(xintercept = 0, linetype = "dashed",
+             color = "#e74c3c", size = 1) +
+  geom_vline(xintercept = mean(chico$diff), linetype = "solid",
+             color = "#3498db", size = 1.2) +
+  annotate("text", x = 0 - 0.15, y = 5,
+           label = "D = 0\n(無進步)",
+           color = "#e74c3c", size = 4, hjust = 1) +
+  annotate("text", x = mean(chico$diff) + 0.15, y = 5,
+           label = sprintf("D̄ = %.2f", mean(chico$diff)),
+           color = "#3498db", size = 4.5, fontface = "bold", hjust = 0) +
+  labs(title = "Chico：每位學生的進步分數（Test 2 - Test 1）",
+       x = "差值（進步分數）", y = "人數") +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 幾乎所有人都有進步（差值 > 0），但幅度不大
+
+---
+
+## Chico 的相依 t 結果
+
+$$t(`r chico_t$parameter`) = `r round(chico_t$statistic, 2)`,\quad p `r ifelse(chico_t$p.value < 0.001, "< .001", sprintf("= %.3f", chico_t$p.value))`,\quad d = `r round(chico_d, 2)`$$
+
+$p `r ifelse(chico_t$p.value < 0.001, "< .001", sprintf("= %.3f", chico_t$p.value))`$ → **拒絕 $H_0$**：補救教學後成績顯著提升
+
+$d = `r round(chico_d, 2)`$（`r ifelse(abs(chico_d) >= 0.8, "大", ifelse(abs(chico_d) >= 0.5, "中", "小"))`效果）
+
+---
+
+## 前後測的視覺化
+
+```{r chico-paired-plot, fig.height=4}
+ggplot(chico, aes(x = grade_test1, y = grade_test2)) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed",
+              color = "#95a5a6", size = 0.8) +
+  geom_point(size = 3, color = "#3498db", alpha = 0.7) +
+  annotate("text", x = 72, y = 68,
+           label = "無進步線\n(Test2 = Test1)",
+           color = "#95a5a6", size = 4) +
+  labs(title = "Chico：前後測配對散佈圖",
+       x = "Test 1（前測）", y = "Test 2（後測）") +
+  coord_equal() +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+> 大部分點都在對角線**上方** → 後測 > 前測 → 有進步
+
+---
+
+## jamovi 操作：Paired Samples T-Test
+
+**步驟**：
+
+1. **T-Tests → Paired Samples T-Test**
+2. 將前測和後測變項**配對拖入** Paired Variables
+3. 勾選 **Effect Size**
+
+**注意**：
+
+- 如果資料中有分組，需先用 **Filter** 篩選目標組別
+- 例如：只分析實驗組的前後測
+
+
+# Part 5：一覽效果量計算方法
+
+---
+
+## 兩種 Cohen's d
+
+| | 獨立樣本 t | 相依樣本 t |
+|:--|:--|:--|
+| **公式** | $d = \frac{\bar{X}_1 - \bar{X}_2}{s_p}$ | $d_z = \frac{\bar{D}}{s_D}$ |
+| **分母** | 聯合 SD | 差值的 SD |
+| **自由度** | $n_1 + n_2 - 2$ | $N - 1$ |
+| **解讀** | 兩組差距佔 SD 的比例 | 進步幅度佔差值 SD 的比例 |
+
+> 兩種 Cohen's d 不能直接比較，因為分母不同！
+
+---
+
+## 回顧 W10：顯著 ≠ 重要
+
+W10 的核心教訓同樣適用：
+
+- **大 N → 小 p**，但 d 不變
+- 報告時**必須同時呈現 p 和 d**
+- APA 格式要求包含效果量
+
+
+# Part 6：作業說明
+
+---
+
+## 本週作業：雙重挑戰
+
+**資料**：個人化 `W12_ttest_Data_[學號].csv`
+
+你的資料包含：
+
+| 變項 | 類型 | 說明 |
+|:-----|:-----|:-----|
+| `ID` | ID | 受試者編號 |
+| `Group` | Nominal | Experimental / Control |
+| `Score_T1` | Continuous | 前測分數 |
+| `Score_T2` | Continuous | 後測分數 |
+
+**N = 50**（每組 25 人）
+
+---
+
+## 任務 1：獨立樣本 t（組間比較）
+
+**操作**：比較「實驗組」與「控制組」在 **Score_T1** 是否有起點差異
+
+1. 先執行 **Levene's Test** → 記錄結果
+2. 根據 Levene's 結果選擇 Student's t 或 Welch's t
+3. 勾選 Effect Size
+
+**診斷報告**：
+
+- 在報告中列出 Levene's Test 結果
+- 若不同質，說明為何改用 Welch's t
+
+---
+
+## 任務 2：相依樣本 t（組內變化）
+
+**操作**：針對「**實驗組**」，比較 Score_T1 與 Score_T2 是否有顯著進步
+
+1. 使用 **Filter** 篩選出 Group == "Experimental"
+2. 執行 **Paired Samples T-Test**
+3. 勾選 Effect Size
+
+---
+
+## 任務 3：APA 寫作 + 觀念辨析
+
+**APA 寫作**（2 段）：
+
+1. 獨立樣本 t 結果：$t(df) = \dots,\ p = \dots,\ d = \dots$
+2. 相依樣本 t 結果：$t(df) = \dots,\ p = \dots,\ d = \dots$
+
+**觀念辨析**（3 題）：
+
+1. **Q1**：請說明以下情境分別應使用獨立或相依樣本 t 檢定，並解釋原因：
+(a) 比較男生和女生的考試成績
+(b) 比較同一群學生上課前和上課後的測驗分數
+(c) 比較一對夫妻某議題的態度分數
+2. **Q2**：為什麼需要 Welch's 修正？
+3. **Q3**：為什麼獨立 t 的 df = N-2，相依 t 的 df = N-1？
+
+---
+
+## 繳交要求
+
+**檔案 1：學號_姓名_W12_Lab.omv**
+
+- 含 Levene's Test 結果
+- 獨立樣本 t 檢定 + 相依樣本 t 檢定
+- 勾選 Effect Size
+
+**檔案 2：學號_姓名_W12_Report.docx**
+
+- Levene's 診斷報告
+- 獨立 t 與相依 t 結果
+- 2 段 APA 格式報告
+- 3 題觀念辨析
+
+**繳交期限**：本週上課結束前
+
+
+# 小結與展望
+
+---
+
+## 本週核心概念
+
+1. **設計辨識**：有配對 → 相依，沒配對 → 獨立
+2. **診斷先行**：先看 Levene's，再看 t 結果
+3. **Welch's 修正**：變異數不等時的安全替代
+4. **相依 t = 差值的單一樣本 t**：連結 W10 的知識
+5. **df 不同**：獨立 $N_1 + N_2 - 2$，相依 $N - 1$
+6. **效果量**：兩種 d 的分母不同，不能直接比較
+
+---
+
+## 下週預告
+
+**下週問題**：
+
+- 如果有**三組以上**怎麼比？
+- 為什麼不能兩兩做 t 檢定？
+- 什麼是 ANOVA？
+
+---
+
+## 課後資源
+
+**電子書**：
+
+- [第 11 章：比較兩個平均數](https://scgeeker.github.io/lsj-book-zh_tw/11-Comparing-two-means.html)
+
+**關鍵術語對照**：
+
+| 中文 | 英文 | 符號 |
+|:-----|:-----|:-----|
+| 獨立樣本 t | Independent Samples t-test | — |
+| 相依樣本 t | Paired Samples t-test | — |
+| 變異數同質性 | Homogeneity of Variance | — |
+| Levene's 檢定 | Levene's Test | $F$ |
+| Welch's t | Welch's t-test | $t_w$ |
+| 聯合標準差 | Pooled SD | $s_p$ |
+
+---
+
+## Q & A
