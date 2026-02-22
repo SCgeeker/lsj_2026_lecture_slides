@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="慈濟大學" />
-  <meta name="dcterms.date" content="2026-02-10" />
+  <meta name="author" content="授課教師：陳紹慶 | e-mail: csc2009@mail.tcu.edu.tw" />
   <title>W4：資料清理——處理現實的雜亂</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -427,16 +426,24 @@ text-align: left;
 .reveal table {
 margin: auto;
 border-collapse: collapse;
-font-size: 0.9em;
+font-size: 0.78em;
 }
 .reveal table th {
 background-color: #3498db;
 color: white;
-padding: 8px 16px;
+padding: 5px 12px;
 }
 .reveal table td {
-padding: 8px 16px;
+padding: 5px 12px;
 border-bottom: 1px solid #ddd;
+}
+
+.compact-table table {
+font-size: 0.68em;
+}
+.compact-table table th,
+.compact-table table td {
+padding: 3px 8px;
 }
 .reveal table tr:nth-child(even) {
 background-color: #f8f9fa;
@@ -520,9 +527,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 <section id="title-slide">
   <h1 class="title">W4：資料清理——處理現實的雜亂</h1>
-  <h1 class="subtitle">基礎統計學 2026</h1>
-  <h2 class="author">慈濟大學</h2>
-  <h3 class="date">2026-02-10</h3>
+  <h1 class="subtitle">心理教育統計 2026</h1>
+  <h2 class="author">授課教師：陳紹慶 | e-mail: <a href="mailto:csc2009@mail.tcu.edu.tw" class="email">csc2009@mail.tcu.edu.tw</a></h2>
+  <h3 class="date">2026/03/16</h3>
 </section>
 
 <section>
@@ -810,16 +817,16 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </ul>
 <p><strong>問題</strong>：jamovi 會當成不同類別</p>
 </section>
-<section id="解決方案transform" class="slide level2">
-<h2>解決方案：Transform</h2>
+<section id="解決方案transform變項" class="slide level2">
+<h2>解決方案：Transform變項</h2>
 <ol type="1">
-<li>建立新變項 <code>Gender_clean</code></li>
+<li>建立Transform變項 <code>Gender_clean</code></li>
 <li>使用 Recode 功能統一編碼</li>
 </ol>
 <p><strong>目標</strong>：</p>
 <ul>
-<li>1, M, Male, male → 1（男）</li>
-<li>2, F, Female → 2（女）</li>
+<li>1, M, Male → male（男）</li>
+<li>2, F, Female → female（女）</li>
 </ul>
 </section>
 <section id="jamovi-操作transform" class="slide level2">
@@ -942,8 +949,8 @@ deletion（<em>整列排除</em>）</p>
 <p><strong>使用完整句子與連貫段落</strong>：</p>
 <ul>
 <li>✅ 正確：「原始資料包含 <em>N</em> = 150
-筆觀測值。為確保資料品質…」</li>
-<li>❌ 錯誤：
+筆觀察值。為確保資料品質…」</li>
+<li>❌ 錯誤（簡報式報告）：
 <ul>
 <li>原始樣本：150</li>
 <li>排除異常值</li>
@@ -951,8 +958,8 @@ deletion（<em>整列排除</em>）</p>
 </ul></li>
 </ul>
 </section>
-<section id="w4-報告新增區塊" class="slide level2">
-<h2>W4 報告新增區塊</h2>
+<section id="w4-報告新增目標" class="slide level2">
+<h2>W4 報告新增目標</h2>
 <p><strong>【APA 寫作練習：方法段（資料處理）】</strong></p>
 <p>請用一段完整的文字描述：</p>
 <ol type="1">
@@ -962,7 +969,6 @@ deletion（<em>整列排除</em>）</p>
 <li>Q3 反向計分（公式：6 - Q3）</li>
 <li>Total_Score 計算（Q1 + Q2 + Q3_r + Q4 + Q5）</li>
 </ol>
-<p><strong>這是從 W3 的「變項描述」進階到「方法描述」！</strong></p>
 </section>
 <section id="apa-累積進度" class="slide level2">
 <h2>APA 累積進度</h2>
@@ -1016,7 +1022,7 @@ deletion（<em>整列排除</em>）</p>
 <p><strong>資料檔</strong>：個人化資料（依學號生成）</p>
 <p><strong>jamovi 操作任務</strong>：</p>
 <ol type="1">
-<li>建立 Filter：排除 <code>Age &gt; 100</code></li>
+<li>建立 Filter：排除 <code>Age &lt;= 100</code></li>
 <li>統一 Gender 編碼：建立 <code>Gender_clean</code>（1 → Male, 2 →
 Female）</li>
 <li>建立 <code>Q3_r</code>（反向計分公式：<code>6 - Q3</code>）</li>
@@ -1081,11 +1087,10 @@ Female）</li>
 <tr class="even">
 <td><strong>Word 報告與寫作</strong></td>
 <td><strong>30%</strong></td>
-<td>APA 方法段 + 4 題反思</td>
+<td>APA 方法段落 + 4 題反思</td>
 </tr>
 </tbody>
 </table>
-<p><strong>報告寫作比重提升至 30%</strong>（W3 為 25%）</p>
 </section>
 <section id="反思問題報告必答" class="slide level2">
 <h2>反思問題（報告必答）</h2>
@@ -1139,7 +1144,7 @@ WellBeing 量表或其他你知道的量表）。</p>
 <section class="slide level2">
 
 <div style="text-align: center; margin-top: 2em;">
-<p><strong>基礎統計學 2026</strong></p>
+<p><strong>心理教育統計 2026</strong></p>
 <p>慈濟大學</p>
 </div>
 </section></section>

@@ -1,8 +1,8 @@
 ---
 title: "W15：線性迴歸——從相關到預測"
-subtitle: "基礎統計學 2026"
-author: "慈濟大學"
-date: "`r Sys.Date()`"
+subtitle: "心理教育統計 2026"
+author: "授課教師：陳紹慶 | e-mail: csc2009@mail.tcu.edu.tw"
+date: "2026/06/08"
 output:
   revealjs::revealjs_presentation:
     theme: simple

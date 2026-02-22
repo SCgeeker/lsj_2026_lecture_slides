@@ -1,8 +1,8 @@
 ---
 title: "W6：統計圖表——先看圖，再看數字"
-subtitle: "基礎統計學 2026"
-author: "慈濟大學"
-date: "`r Sys.Date()`"
+subtitle: "心理教育統計 2026"
+author: "授課教師：陳紹慶 | e-mail: csc2009@mail.tcu.edu.tw"
+date: "2026/03/30"
 output:
   revealjs::revealjs_presentation:
     theme: simple
@@ -835,7 +835,7 @@ W6 作業：統計圖表與視覺化診斷
 ---
 
 <div style="text-align: center; margin-top: 2em;">
-**基礎統計學 2026**
+**心理教育統計 2026**
 
 慈濟大學
 </div>

@@ -1,8 +1,8 @@
 ---
 title: "W14：相關分析——數據間的交情"
-subtitle: "基礎統計學 2026"
-author: "慈濟大學"
-date: "`r Sys.Date()`"
+subtitle: "心理教育統計 2026"
+author: "授課教師：陳紹慶 | e-mail: csc2009@mail.tcu.edu.tw"
+date: "2026/06/01"
 output:
   revealjs::revealjs_presentation:
     theme: simple

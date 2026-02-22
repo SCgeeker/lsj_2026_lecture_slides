@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="慈濟大學" />
-  <meta name="dcterms.date" content="2026-02-09" />
+  <meta name="author" content="授課教師：陳紹慶 | e-mail: csc2009@mail.tcu.edu.tw" />
   <title>W3：研究設計入門——賦予數字意義</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -427,16 +426,24 @@ text-align: left;
 .reveal table {
 margin: auto;
 border-collapse: collapse;
-font-size: 0.9em;
+font-size: 0.78em;
 }
 .reveal table th {
 background-color: #3498db;
 color: white;
-padding: 8px 16px;
+padding: 5px 12px;
 }
 .reveal table td {
-padding: 8px 16px;
+padding: 5px 12px;
 border-bottom: 1px solid #ddd;
+}
+
+.compact-table table {
+font-size: 0.68em;
+}
+.compact-table table th,
+.compact-table table td {
+padding: 3px 8px;
 }
 .reveal table tr:nth-child(even) {
 background-color: #f8f9fa;
@@ -520,9 +527,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 <section id="title-slide">
   <h1 class="title">W3：研究設計入門——賦予數字意義</h1>
-  <h1 class="subtitle">基礎統計學 2026</h1>
-  <h2 class="author">慈濟大學</h2>
-  <h3 class="date">2026-02-09</h3>
+  <h1 class="subtitle">心理教育統計 2026</h1>
+  <h2 class="author">授課教師：陳紹慶 | e-mail: <a href="mailto:csc2009@mail.tcu.edu.tw" class="email">csc2009@mail.tcu.edu.tw</a></h2>
+  <h3 class="date">2026/03/09</h3>
 </section>
 
 <section>
@@ -1004,17 +1011,29 @@ joyzepam。<code>mood.gain</code>
 </section>
 <section id="作業內容" class="slide level2">
 <h2>作業內容</h2>
-<p>使用 <code>clinicaltrial.csv</code> 完成以下任務：</p>
+<p>使用 <code>clinicaltrial.csv</code>
+與<code>Likter.csv</code>完成以下任務：</p>
 <ol type="1">
 <li>匯入資料</li>
-<li>正確設定所有變項類型</li>
-<li>為 <code>drug</code> 和 <code>therapy</code> 設定適當的 Labels</li>
-<li>執行分組描述統計</li>
+<li>確認所有變項類型設定正確</li>
+<li><code>clinicaltrial.csv</code>：為 <code>drug</code> 和
+<code>therapy</code> 設定適當的 Labels</li>
+<li>以’mood.gain’為主要變項，<code>drug</code> 和
+<code>therapy</code>為分組變項，執行分組描述統計</li>
+<li>測試改變變項尺度如何影響結果報表</li>
+<li><code>Likter.csv</code>:執行<code>likert.raw</code>的描述統計，生成描述統計報表</li>
+<li>變更<code>likert.raw</code>的變項類型，觀察描述統計表的變化</li>
+<li>在WORD報告回答反思問題</li>
 </ol>
 </section>
 <section id="繳交項目與時程" class="slide level2">
 <h2>繳交項目與時程</h2>
 <table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>檔案</th>
@@ -1025,7 +1044,7 @@ joyzepam。<code>mood.gain</code>
 <tbody>
 <tr class="odd">
 <td>分析檔</td>
-<td><code>學號_姓名_W3_Lab.omv</code></td>
+<td><code>學號_姓名_W3_clinial.omv</code>,<code>學號_姓名_W3_likert.omv</code></td>
 <td>正確設定變項的 jamovi 專案</td>
 </tr>
 <tr class="even">
@@ -1058,7 +1077,7 @@ joyzepam。<code>mood.gain</code>
 <td>20%</td>
 </tr>
 <tr class="odd">
-<td>報告內容完整</td>
+<td>WORD報告內容完整</td>
 <td>25%</td>
 </tr>
 <tr class="even">
@@ -1072,9 +1091,11 @@ joyzepam。<code>mood.gain</code>
 <h2>反思問題</h2>
 <p>請在報告中回答：</p>
 <ol type="1">
+<li>在<code>clinicaltrial.csv</code>，哪個是 IV？哪個是
+DV？以APA寫作格式說明。</li>
 <li>為什麼 <code>drug</code> 應該設為 Nominal 而非 Ordinal？</li>
-<li>如果把李克特量表設為 Continuous，會有什麼影響？</li>
-<li>在這份資料中，哪個是 IV？哪個是 DV？</li>
+<li>如果把<code>likert.raw</code>設為
+Nominal或Continuous，會有什麼影響？</li>
 </ol>
 </section></section>
 <section>

@@ -1,8 +1,8 @@
 ---
 title: "W4：資料清理——處理現實的雜亂"
-subtitle: "基礎統計學 2026"
-author: "慈濟大學"
-date: "`r Sys.Date()`"
+subtitle: "心理教育統計 2026"
+author: "授課教師：陳紹慶 | e-mail: csc2009@mail.tcu.edu.tw"
+date: "2026/03/16"
 output:
   revealjs::revealjs_presentation:
     theme: simple
@@ -445,7 +445,7 @@ Q1 + Q2 + Q3_r + Q4 + Q5
 ---
 
 <div style="text-align: center; margin-top: 2em;">
-**基礎統計學 2026**
+**心理教育統計 2026**
 
 慈濟大學
 </div>

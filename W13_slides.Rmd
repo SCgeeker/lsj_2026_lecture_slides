@@ -1,8 +1,8 @@
 ---
 title: "W13：類別資料分析——卡方檢定"
-subtitle: "基礎統計學 2026"
-author: "慈濟大學"
-date: "`r Sys.Date()`"
+subtitle: "心理教育統計 2026"
+author: "授課教師：陳紹慶 | e-mail: csc2009@mail.tcu.edu.tw"
+date: "2026/05/25"
 output:
   revealjs::revealjs_presentation:
     theme: simple
@@ -120,7 +120,7 @@ for (df_val in df_values) {
 }
 
 ggplot(chisq_df, aes(x = x, y = density, color = df)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   scale_color_brewer(palette = "Set1") +
   labs(title = "卡方分布：不同自由度的形狀",
        x = expression(chi^2), y = "密度",
@@ -154,11 +154,14 @@ ggplot(chisq_df, aes(x = x, y = density, color = df)) +
 
 ```{r dice-table}
 dice_df <- data.frame(
-  點數 = 1:6,
-  觀測次數 = as.integer(dice_table),
-  預期次數 = rep(300/6, 6)
+  face     = 1:6,
+  observed = as.integer(dice_table),
+  expected = rep(300/6, 6)
 )
-knitr::kable(dice_df, align = "c",
+knitr::kable(dice_df,
+             col.names = c("點數", "觀測次數", "預期次數"),
+             align = "c",
+             digits = 1,
              caption = "300 次觀測值 vs 預期值")
 ```
 
@@ -171,12 +174,12 @@ knitr::kable(dice_df, align = "c",
 
 ```{r dice-barplot, fig.height=4.5}
 dice_plot_df <- data.frame(
-  面 = factor(rep(1:6, 2)),
-  次數 = c(as.integer(dice_table), rep(300/6, 6)),
-  類型 = rep(c("觀測值", "預期值"), each = 6)
+  face  = factor(rep(1:6, 2)),
+  count = c(as.integer(dice_table), rep(300/6, 6)),
+  type  = rep(c("觀測值", "預期值"), each = 6)
 )
 
-ggplot(dice_plot_df, aes(x = 面, y = 次數, fill = 類型)) +
+ggplot(dice_plot_df, aes(x = face, y = count, fill = type)) +
   geom_col(position = "dodge", alpha = 0.8) +
   scale_fill_manual(values = c("預期值" = "#95a5a6", "觀測值" = "#3498db")) +
   labs(title = "骰子 300 次擲骰：觀測值 vs 預期值",
