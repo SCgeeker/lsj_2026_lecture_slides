@@ -324,7 +324,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 - 「5 分」是「1 分」的 5 倍嗎？
 - 「非常同意」比「同意」多多少？
 
-**建議**：設為 **Ordinal**
+> **建議**：設為 **Ordinal**
 
 ---
 
@@ -332,10 +332,10 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 **問題**：是/否 (0/1) 被判定為 Continuous
 
-**正確做法**：
+> **正確做法**：
 
-1. 設為 **Nominal**
-2. 加上 Labels：0=No, 1=Yes
+> 1. 設為 **Nominal**
+> 2. 加上 Labels：0=No, 1=Yes
 
 ---
 
@@ -345,7 +345,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 **思考**：計算郵遞區號的平均值有意義嗎？
 
-**正確做法**：設為 **Nominal** 或 **ID**
+> **正確做法**：設為 **Nominal** 或 **ID**
 
 # 本週作業（1 小時實作）
 

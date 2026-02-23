@@ -34,15 +34,15 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ## 對應教材
 
 - 《用 jamovi 上手統計學》
-  - [第 3 章：與 jamovi 的第一次接觸](https://scgeeker.github.io/lsj-book-zh_tw/)
+  - [第 3 章：與 jamovi 的第一次接觸](https://scgeeker.github.io/lsj-book-zh_tw/03-Getting-started-with-jamovi.html)
 
-**示範資料檔**：`booksales.csv`
+**示範資料檔**：`booksales.csv`（Part 2 匯入示範）／`W2_Intro_Data.csv`（Part 3 變項設定實作）
 
 # Part 1：認識 jamovi 介面
 
 ## jamovi 主畫面
 
-![jamovi 介面](images/jamovi_interface.png){width=80%}
+![jamovi 介面](images/jamovi_interface.png){width=50%}
 
 - **左上**：檔案選單（三條橫線 ☰）
 - **左側**：資料表 (Data)
@@ -51,9 +51,9 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ---
 
-## 五大工作區
+## 五大工作面板(Tab)
 
-| 區域 | 功能 |
+| 面板 | 功能 |
 |------|------|
 | **Variable** | 檢視與編輯資料變項 |
 | **Data** | 檢視與編輯資料 |
@@ -68,8 +68,8 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 **操作步驟**：
 
 1. 點選左上角 **☰**（三條橫線）
-2. 選擇 **Open** → **This Device**
-3. 選取 `booksales.csv`
+2. 選擇 **Open** → **Data Library**  → `learning statistics with jamovi`
+3. 選取 `booksales` (csv檔案)
 
 ---
 
@@ -93,35 +93,37 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 | `Month` | 月份 |
 | `Days` | 該月天數 |
 | `Sales` | 銷售冊數 |
+| `Stock.Levels` | 庫存狀態 |
 
 # Part 3：設定變項類型
 
 ## 為什麼要設定變項？
 
 > **jamovi 會「猜測」變項類型**
+
 > **但常常猜錯！**
 
-你需要告訴 jamovi 每個變項的正確類型
+>- 你需要告訴 jamovi 每個變項的正確類型
 
 ---
 
 ## 開啟變項編輯器
 
-**操作步驟**：
+**操作方式**：
 
 1. **雙擊**變項標題列
 2. 或點選 **Data** → **Setup**
 
 ---
 
-## 測量尺度 (Measure Type)
+## [測量尺度](https://scgeeker.github.io/lsj-book-zh_tw/02-A-brief-introduction-to-research-design.html#sec-Scales-of-measurement) (Measure Type)
 
 | 類型 | 圖示 | 說明 | 範例 |
-|------|------|------|------|
-| **ID** | 🔤 | 識別碼 | 學號、編號 |
-| **Nominal** | ⚪⚪⚪ | 名義（類別） | 性別、組別 |
-| **Ordinal** | 📊 | 次序 | 滿意度等級 |
-| **Continuous** | 📏 | 連續數值 | 分數、身高 |
+|------|:----:|------|------|
+| **ID** | ![](https://www.jamovi.org/assets/variable-id.svg){width=40} | 識別碼 | 學號、編號 |
+| **Nominal** | ![](https://www.jamovi.org/assets/variable-nominal.svg){width=40}  | 名義（類別） | 性別、組別 |
+| **Ordinal** | ![](https://www.jamovi.org/assets/variable-ordinal.svg){width=40} | 次序 | 滿意度等級 |
+| **Continuous** | ![](https://www.jamovi.org/assets/variable-continuous.svg){width=40} | 連續數值 | 分數、身高 |
 
 ---
 
@@ -135,15 +137,17 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 ---
 
-## 實作練習
+## 實作練習（Part 3）
 
-請設定 `booksales.csv` 的變項：
+請開啟老師發放的 `W2_Intro_Data.csv`，設定三種變項類型：
 
-| 變項 | 測量尺度 | 資料型態 |
-|------|----------|----------|
-| `Month` | Nominal | Text |
-| `Days` | Continuous | Integer |
-| `Sales` | Continuous | Integer |
+| 變項 | 測量尺度 | 資料型態 | 說明 |
+|------|----------|----------|------|
+| `ID` | **ID** | Integer | 受試者編號（只是標籤，非數值計算）|
+| `Group` | **Nominal** | Text | 實驗組別（Control / Treatment）|
+| `Score` | **Continuous** | Integer | 測驗分數（連續數值）|
+
+> `Grade` 欄位 **尚未存在**，需在 Part 4 用計算變項建立
 
 # Part 4：計算變項
 
@@ -151,7 +155,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 > **根據現有變項，產生新的變項**
 
-例如：計算平均值、轉換分數、反向計分
+>- 例如：計算平均值、轉換分數、反向計分
 
 ---
 
@@ -160,34 +164,51 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 **操作步驟**：
 
 1. 點選 **Data** → **Add** → **Computed Variable**
-2. 輸入新變項名稱
+2. 輸入新變項名稱（本例：`Grade`）
 3. 在公式欄輸入計算式
 
 ---
 
-## 示範：Tooth Growth 資料集
+## 實作：建立 Grade 變項
 
-jamovi 內建資料集，記錄維他命 C 對天竺鼠牙齒生長的影響。
+根據 `Score` 計算等第 Grade（用**整數**表示次序）：
 
-**開啟方式**：☰ → Open → Data Library → Tooth Growth
+```
+IF(Score >= 90, 1,
+  IF(Score >= 80, 2,
+    IF(Score >= 70, 3, 4)))
+```
+
+| 分數範圍 | Grade 值 | 意義 |
+|:--------:|:-------:|:----:|
+| ≥ 90 | 1 | 最高 |
+| 80–89 | 2 | |
+| 70–79 | 3 | |
+| < 70 | 4 | 最低 |
 
 ---
 
-## 計算範例
+## 建立後：將 Grade 設為 Ordinal
 
-計算 `len` 變項的 Z 分數：
+> Grade 有次序（1 < 2 < 3 < 4 代表高到低），但間距不等距
+
+> 整數計算變項可手動改 Measure Type → **Ordinal**
+
+**操作**：雙擊 `Grade` 欄標題 → Measure Type 改為 **Ordinal**
+
+---
+
+## 常用計算變項函式語法
 
 ```
-(len - VMEAN(len)) / VSTDEV(len)
+IF(條件, 成立時的值, 不成立時的值)
 ```
-
-**常用函數**：
 
 | 函數 | 說明 |
 |------|------|
+| `IF()` | 條件判斷 |
 | `VMEAN()` | 變項平均值 |
 | `VSTDEV()` | 變項標準差 |
-| `VSUM()` | 變項總和 |
 
 # Part 5：存檔與匯出
 
@@ -214,24 +235,25 @@ jamovi 內建資料集，記錄維他命 C 對天竺鼠牙齒生長的影響。
 ⚠️ **作業請嚴格遵守格式**：
 
 ```
-學號_姓名_W2_Lab.omv
-學號_姓名_W2_Report.docx
+學號_姓名_W02_Lab.omv
 ```
 
 範例：
-- `115930001_王小明_W2_Lab.omv`
-- `115930001_王小明_W2_Report.docx`
+- `115930001_王小明_W02_Lab.omv`
+
 
 # 本週作業（1 小時實作）
 
 ## 作業內容
 
-使用 `booksales.csv` 完成以下任務：
+使用老師發放的 `W2_Intro_Data.csv` 完成以下任務：
 
-1. 匯入資料
-2. 設定正確的變項類型
-3. 執行描述統計（Analyses → Exploration → Descriptives）
-4. 匯出結果至 Word
+1. 開啟 `W2_Intro_Data.csv`（☰ → Open → Browse）
+2. 正確設定三種變項類型：`ID` → ID、`Group` → Nominal、`Score` → Continuous
+3. 新增**計算變項** `Grade`，依 Score 計算等第：
+   - ≥ 90 → 1，80–89 → 2，70–79 → 3，< 70 → 4
+4. 確認 `Grade` 的 Measure Type 設為 **Ordinal**
+5. 另存為 OMV 格式
 
 ---
 
@@ -239,9 +261,9 @@ jamovi 內建資料集，記錄維他命 C 對天竺鼠牙齒生長的影響。
 
 | 檔案 | 格式 | 內容 |
 |------|------|------|
-| 分析檔 | `學號_姓名_W2_Lab.omv` | 正確設定變項的 jamovi 專案 |
+| 分析檔 | `學號_姓名_W02_Lab.omv` | 正確設定變項的 jamovi 專案 |
 
-**繳交時間**：本堂課下課前上傳至 Google Classroom
+**繳交時間**：本次LAB結束前上傳至 Google Classroom
 
 **評量回饋**：2 天內收到個人評量報告
 
@@ -251,10 +273,13 @@ jamovi 內建資料集，記錄維他命 C 對天竺鼠牙齒生長的影響。
 
 ## 評分標準
 
-| 項目 | 配分 |
-|------|------|
-| OMV 變項設定正確 | 50% |
-| 檔案命名規範 | 50% |
+| 項目 | 配分 | 說明 |
+|------|:----:|------|
+| 檔名格式正確 | 20% | 符合 `學號_姓名_W02_Lab.omv` |
+| ID 設為 ID 類型 | 20% | 避免被當成數值計算 |
+| Group 設為 Nominal | 20% | 類別變項 |
+| Score 設為 Continuous | 20% | 連續數值 |
+| Grade 為計算變項且設為 Ordinal | 20% | IF 公式回傳整數 + Measure Type = Ordinal |
 
 # 關鍵概念複習
 
@@ -279,11 +304,11 @@ jamovi 內建資料集，記錄維他命 C 對天竺鼠牙齒生長的影響。
 
 ## 下週預告
 
-**W3：描述統計**
+**W3：研究設計入門**
 
-- 集中趨勢：平均數、中位數、眾數
-- 離散程度：標準差、全距、四分位距
-- 分組描述統計
+- 變項的角色：自變項、依變項、混淆變項
+- 研究設計類型：實驗設計 vs. 觀察研究
+- 示範資料：`clinicaltrial.csv`（臨床試驗資料）
 
 # Q & A
 
@@ -291,12 +316,4 @@ jamovi 內建資料集，記錄維他命 C 對天竺鼠牙齒生長的影響。
 
 - 課堂提問
 - Google Classroom 討論串
-- Office Hour
-
----
-
-## 參考資源
-
-- 📖 [《用 jamovi 上手統計學》第 3 章](https://scgeeker.github.io/lsj-book-zh_tw/)
-- 📁 lsj資料集：`booksales.csv`
-- 🎥 [jamovi 官方教學](https://www.jamovi.org/community.html)
+- Office Hour: 每週四下午1:30~3:30 or 另約

@@ -54,13 +54,22 @@
 }
 
 /* 引用區塊 */
-.reveal blockquote {
+.reveal .slides section blockquote {
+  display: block;
   background-color: #f1f8ff;
-  border-left: 4px solid #3498db;
-  padding: 15px 20px;
-  margin: 20px auto;
-  font-style: italic;
-  width: 80%;
+  border-left: 5px solid #3498db;
+  border-radius: 0 4px 4px 0;
+  padding: 12px 20px;
+  margin: 16px 0;
+  font-style: normal;        /* 中文不使用斜體 */
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* blockquote 內段落間距 */
+.reveal .slides section blockquote p {
+  margin: 4px 0;
 }
 
 /* 程式碼區塊 - 淺色背景 */
