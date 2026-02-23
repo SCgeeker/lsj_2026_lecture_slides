@@ -564,7 +564,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </ul></li>
 </ul>
 <p><strong>示範資料檔</strong>：<code>booksales.csv</code>（Part 2
-匯入示範）／<code>W2_Intro_Data.csv</code>（Part 3 變項設定實作）</p>
+匯入示範）／<code>W2_Intro_Data.csv</code>（Part 3
+變項設定實作）／<code>zeppo.csv</code>（Part 4 計算變項示範）</p>
 </section></section>
 <section>
 <section id="part-1認識-jamovi-介面" class="title-slide slide level1">
@@ -838,70 +839,67 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <blockquote>
 <p><strong>根據現有變項，產生新的變項</strong></p>
 </blockquote>
-<p>例如：計算平均值、轉換分數、反向計分</p>
+<blockquote>
+<p>例如：條件判斷、計算平均值、轉換分數</p>
+</blockquote>
 </section>
-<section id="建立計算變項" class="slide level2">
-<h2>建立計算變項</h2>
+<section id="示範資料zeppo.csv" class="slide level2">
+<h2>示範資料：zeppo.csv</h2>
+<p><strong>操作</strong>：☰ → Open → Browse → 選取
+<code>zeppo.csv</code></p>
+<table>
+<thead>
+<tr class="header">
+<th>變項</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ID</code></td>
+<td>受試者編號（1–20）</td>
+</tr>
+<tr class="even">
+<td><code>x</code></td>
+<td>測驗分數（50–89）</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="示範建立-pass-計算變項" class="slide level2">
+<h2>示範：建立 Pass 計算變項</h2>
 <p><strong>操作步驟</strong>：</p>
 <ol type="1">
 <li>點選 <strong>Data</strong> → <strong>Add</strong> → <strong>Computed
 Variable</strong></li>
-<li>輸入新變項名稱（本例：<code>Grade</code>）</li>
-<li>在公式欄輸入計算式</li>
+<li>輸入新變項名稱：<code>Pass</code></li>
+<li>在公式欄輸入：</li>
 </ol>
-</section>
-<section id="實作建立-grade-變項" class="slide level2">
-<h2>實作：建立 Grade 變項</h2>
-<p>根據 <code>Score</code> 計算等第
-Grade（用<strong>整數</strong>表示次序）：</p>
-<pre><code>IF(Score &gt;= 90, 1,
-  IF(Score &gt;= 80, 2,
-    IF(Score &gt;= 70, 3, 4)))</code></pre>
+<pre><code>IF(x &gt;= 70, 1, 0)</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">分數範圍</th>
-<th style="text-align: center;">Grade 值</th>
+<th style="text-align: center;">x 分數</th>
+<th style="text-align: center;">Pass 值</th>
 <th style="text-align: center;">意義</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">≥ 90</td>
+<td style="text-align: center;">≥ 70</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">最高</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">80–89</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">70–79</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">及格</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">&lt; 70</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">最低</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">不及格</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="建立後將-grade-設為-ordinal" class="slide level2">
-<h2>建立後：將 Grade 設為 Ordinal</h2>
-<blockquote>
-<p>Grade 有次序（1 &lt; 2 &lt; 3 &lt; 4 代表高到低），但間距不等距</p>
-</blockquote>
-<blockquote>
-<p>整數計算變項可手動改 Measure Type → <strong>Ordinal</strong></p>
-</blockquote>
-<p><strong>操作</strong>：雙擊 <code>Grade</code> 欄標題 → Measure Type
-改為 <strong>Ordinal</strong></p>
-</section>
-<section id="常用-if-語法" class="slide level2">
-<h2>常用 IF 語法</h2>
+<section id="常用計算變項函式語法" class="slide level2">
+<h2>常用計算變項函式語法</h2>
 <pre><code>IF(條件, 成立時的值, 不成立時的值)</code></pre>
 <table>
 <thead>
@@ -975,6 +973,60 @@ Nominal、<code>Score</code> → Continuous</li>
 <strong>Ordinal</strong></li>
 <li>另存為 OMV 格式</li>
 </ol>
+</section>
+<section id="作業實作用-w2_intro_data.csv-建立-grade" class="slide level2">
+<h2>作業實作：用 W2_Intro_Data.csv 建立 Grade</h2>
+<blockquote>
+<p>請切換至老師發放的 <code>W2_Intro_Data.csv</code>（已在 Part 3
+開啟）</p>
+</blockquote>
+<p>根據 <code>Score</code> 計算等第
+Grade（用<strong>整數</strong>表示次序）：</p>
+<pre><code>IF(Score &gt;= 90, 1,
+  IF(Score &gt;= 80, 2,
+    IF(Score &gt;= 70, 3, 4)))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">分數範圍</th>
+<th style="text-align: center;">Grade 值</th>
+<th style="text-align: center;">意義</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">≥ 90</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">最高</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">80–89</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">70–79</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">&lt; 70</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">最低</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="建立後確認-grade-設為-ordinal" class="slide level2">
+<h2>建立後：確認 Grade 設為 Ordinal</h2>
+<blockquote>
+<p>Grade 有次序（1 &lt; 2 &lt; 3 &lt; 4 代表高到低），但間距不等距</p>
+</blockquote>
+<blockquote>
+<p>整數計算變項可手動改 Measure Type → <strong>Ordinal</strong></p>
+</blockquote>
+<p><strong>操作</strong>：雙擊 <code>Grade</code> 欄標題 → Measure Type
+改為 <strong>Ordinal</strong></p>
 </section>
 <section id="繳交項目與時程" class="slide level2">
 <h2>繳交項目與時程</h2>

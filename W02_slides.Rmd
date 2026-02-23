@@ -36,7 +36,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 - 《用 jamovi 上手統計學》
   - [第 3 章：與 jamovi 的第一次接觸](https://scgeeker.github.io/lsj-book-zh_tw/03-Getting-started-with-jamovi.html)
 
-**示範資料檔**：`booksales.csv`（Part 2 匯入示範）／`W2_Intro_Data.csv`（Part 3 變項設定實作）
+**示範資料檔**：`booksales.csv`（Part 2 匯入示範）／`W2_Intro_Data.csv`（Part 3 變項設定實作）／`zeppo.csv`（Part 4 計算變項示範）
 
 # Part 1：認識 jamovi 介面
 
@@ -155,46 +155,37 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 > **根據現有變項，產生新的變項**
 
->- 例如：計算平均值、轉換分數、反向計分
+> 例如：條件判斷、計算平均值、轉換分數
 
 ---
 
-## 建立計算變項
+## 示範資料：zeppo.csv
+
+**操作**：☰ → Open → Browse → 選取 `zeppo.csv`
+
+| 變項 | 說明 |
+|------|------|
+| `ID` | 受試者編號（1–20）|
+| `x` | 測驗分數（50–89）|
+
+---
+
+## 示範：建立 Pass 計算變項
 
 **操作步驟**：
 
 1. 點選 **Data** → **Add** → **Computed Variable**
-2. 輸入新變項名稱（本例：`Grade`）
-3. 在公式欄輸入計算式
-
----
-
-## 實作：建立 Grade 變項
-
-根據 `Score` 計算等第 Grade（用**整數**表示次序）：
+2. 輸入新變項名稱：`Pass`
+3. 在公式欄輸入：
 
 ```
-IF(Score >= 90, 1,
-  IF(Score >= 80, 2,
-    IF(Score >= 70, 3, 4)))
+IF(x >= 70, 1, 0)
 ```
 
-| 分數範圍 | Grade 值 | 意義 |
-|:--------:|:-------:|:----:|
-| ≥ 90 | 1 | 最高 |
-| 80–89 | 2 | |
-| 70–79 | 3 | |
-| < 70 | 4 | 最低 |
-
----
-
-## 建立後：將 Grade 設為 Ordinal
-
-> Grade 有次序（1 < 2 < 3 < 4 代表高到低），但間距不等距
-
-> 整數計算變項可手動改 Measure Type → **Ordinal**
-
-**操作**：雙擊 `Grade` 欄標題 → Measure Type 改為 **Ordinal**
+| x 分數 | Pass 值 | 意義 |
+|:-------:|:-------:|:----:|
+| ≥ 70 | 1 | 及格 |
+| < 70 | 0 | 不及格 |
 
 ---
 
@@ -254,6 +245,37 @@ IF(條件, 成立時的值, 不成立時的值)
    - ≥ 90 → 1，80–89 → 2，70–79 → 3，< 70 → 4
 4. 確認 `Grade` 的 Measure Type 設為 **Ordinal**
 5. 另存為 OMV 格式
+
+---
+
+## 作業實作：用 W2_Intro_Data.csv 建立 Grade
+
+> 請切換至老師發放的 `W2_Intro_Data.csv`（已在 Part 3 開啟）
+
+根據 `Score` 計算等第 Grade（用**整數**表示次序）：
+
+```
+IF(Score >= 90, 1,
+  IF(Score >= 80, 2,
+    IF(Score >= 70, 3, 4)))
+```
+
+| 分數範圍 | Grade 值 | 意義 |
+|:--------:|:-------:|:----:|
+| ≥ 90 | 1 | 最高 |
+| 80–89 | 2 | |
+| 70–79 | 3 | |
+| < 70 | 4 | 最低 |
+
+---
+
+## 建立後：確認 Grade 設為 Ordinal
+
+> Grade 有次序（1 < 2 < 3 < 4 代表高到低），但間距不等距
+
+> 整數計算變項可手動改 Measure Type → **Ordinal**
+
+**操作**：雙擊 `Grade` 欄標題 → Measure Type 改為 **Ordinal**
 
 ---
 
