@@ -22,6 +22,11 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 # 本週學習目標
 
+## 啟動示範
+
+- 參考直播畫面
+- 示範間隔及LAB過程，可自行回放觀看
+
 ## 學習成效指標
 
 1. **匯入資料**：將 CSV 檔案載入 jamovi
@@ -37,6 +42,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
   - [第 3 章：與 jamovi 的第一次接觸](https://scgeeker.github.io/lsj-book-zh_tw/03-Getting-started-with-jamovi.html)
 
 **示範資料檔**：`booksales.csv`（Part 2 匯入示範）／`W2_Intro_Data.csv`（Part 3 變項設定實作）／`zeppo.csv`（Part 4 計算變項示範）
+
 
 # Part 1：認識 jamovi 介面
 
