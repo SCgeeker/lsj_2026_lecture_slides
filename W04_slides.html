@@ -403,110 +403,7 @@ border-color: gray;
 }
 </style>
 
-    <style type="text/css">
-
-.reveal .slides {
-text-align: left;
-}
-.reveal .slides section {
-text-align: left;
-}
-
-.reveal h1 {
-font-size: 2.2em;
-color: #2c3e50;
-text-align: left;
-}
-.reveal h2 {
-font-size: 1.6em;
-color: #34495e;
-text-align: left;
-}
-
-.reveal table {
-margin: auto;
-border-collapse: collapse;
-font-size: 0.78em;
-}
-.reveal table th {
-background-color: #3498db;
-color: white;
-padding: 5px 12px;
-}
-.reveal table td {
-padding: 5px 12px;
-border-bottom: 1px solid #ddd;
-}
-
-.compact-table table {
-font-size: 0.68em;
-}
-.compact-table table th,
-.compact-table table td {
-padding: 3px 8px;
-}
-.reveal table tr:nth-child(even) {
-background-color: #f8f9fa;
-}
-
-.reveal blockquote {
-background-color: #f1f8ff;
-border-left: 4px solid #3498db;
-padding: 15px 20px;
-margin: 20px auto;
-font-style: italic;
-width: 80%;
-}
-
-.reveal pre {
-background-color: #f5f5f5;
-border: 1px solid #ddd;
-padding: 15px;
-border-radius: 5px;
-font-size: 0.8em;
-text-align: left;
-}
-.reveal pre code {
-background-color: transparent;
-color: #333;
-}
-.reveal code {
-font-family: 'Consolas', 'Monaco', monospace;
-background-color: #f0f0f0;
-padding: 2px 5px;
-border-radius: 3px;
-}
-
-.reveal .highlight {
-background-color: #fff3cd;
-padding: 2px 6px;
-border-radius: 3px;
-}
-
-.reveal .warning {
-color: #e74c3c;
-font-weight: bold;
-}
-
-.reveal .success {
-color: #27ae60;
-font-weight: bold;
-}
-
-.reveal ul li,
-.reveal ol li {
-margin-bottom: 10px;
-}
-
-.reveal {
-font-family: 'Microsoft JhengHei', '微軟正黑體', 'Noto Sans TC', sans-serif;
-}
-
-.reveal .slide-number {
-font-size: 14px;
-color: #666;
-}
-</style>
+    <style type="text/css">.reveal .slides {text-align: left;}.reveal .slides section {text-align: left;}.reveal h1 {font-size: 2.2em;color: #2c3e50;text-align: left;}.reveal h2 {font-size: 1.6em;color: #34495e;text-align: left;}.reveal table {margin: auto;border-collapse: collapse;font-size: 0.78em;}.reveal table th {background-color: #3498db;color: white;padding: 5px 12px;}.reveal table td {padding: 5px 12px;border-bottom: 1px solid #ddd;}.compact-table table {font-size: 0.68em;}.compact-table table th,.compact-table table td {padding: 3px 8px;}.reveal table tr:nth-child(even) {background-color: #f8f9fa;}.reveal .slides section blockquote {display: block;background-color: #f1f8ff;border-left: 5px solid #3498db;border-radius: 0 4px 4px 0;padding: 12px 20px;margin: 16px 0;font-style: normal; width: 100%;box-sizing: border-box;box-shadow: 0 1px 4px rgba(0,0,0,0.08);}.reveal .slides section blockquote p {margin: 4px 0;}.reveal pre {background-color: #f5f5f5;border: 1px solid #ddd;padding: 15px;border-radius: 5px;font-size: 0.8em;text-align: left;}.reveal pre code {background-color: transparent;color: #333;}.reveal code {font-family: 'Consolas', 'Monaco', monospace;background-color: #f0f0f0;padding: 2px 5px;border-radius: 3px;}.reveal .highlight {background-color: #fff3cd;padding: 2px 6px;border-radius: 3px;}.reveal .warning {color: #e74c3c;font-weight: bold;}.reveal .success {color: #27ae60;font-weight: bold;}.reveal ul li,.reveal ol li {margin-bottom: 10px;}.reveal {font-family: 'Microsoft JhengHei', '微軟正黑體', 'Noto Sans TC', sans-serif;}.reveal .slide-number {font-size: 14px;color: #666;}</style>
     <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
 document.addEventListener('DOMContentLoaded', function(e) {
@@ -622,7 +519,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <ul>
 <li>使用 <strong>Filter</strong> 排除異常值</li>
 <li>使用 <strong>Compute</strong> 建立新變項</li>
-<li>使用 <strong>Recode</strong> 統一編碼</li>
+<li>使用 <strong>Transform</strong> 統一編碼</li>
 </ul>
 </section></section>
 <section>
@@ -804,8 +701,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </ul>
 </section></section>
 <section>
-<section id="part-4recode-重新編碼" class="title-slide slide level1">
-<h1>Part 4：Recode 重新編碼</h1>
+<section id="part-4transform重新編碼" class="title-slide slide level1">
+<h1>Part 4：Transform重新編碼</h1>
 
 </section>
 <section id="編碼不一致的問題" class="slide level2">
@@ -931,12 +828,13 @@ deletion（<em>整列排除</em>）</p>
 <section id="範例資料處理描述" class="slide level2">
 <h2>範例：資料處理描述</h2>
 <blockquote>
-<p>「原始資料包含 <em>N</em> = 150
+<p>「原始資料包含 <em>N</em> = 100
 筆觀察值。為確保資料品質，移除年齡大於 100
-歲的不合理數值，篩選後有效樣本為 <em>N</em> = 142。性別變項 (Gender)
-的數值編碼統一採用 Male代表男性，Female代表女性。量表第三題
-採用反向計分，其餘題目維持原始分數。最後計算五個量表題目的總分(Total_Score)，總分範圍為
-5 至 25 分。」</p>
+歲的不合理數值，以及實驗依變項(RT_ms)為無效數值的觀察值，篩選後有效樣本數為
+<em>N</em> = 93。性別變項 (Gender) 的數值編碼統一採用 1 代表男性，2
+代表女性，共有46名女性。量表第三題採用反向計分（6 -
+Q3），其餘題目維持原始分數。最後計算五個量表題目的總分
+(Total_Score)，總分範圍為 8 至 25 分。」</p>
 </blockquote>
 </section>
 <section id="注意格式細節" class="slide level2">
@@ -1008,18 +906,21 @@ deletion（<em>整列排除</em>）</p>
 </tr>
 </tbody>
 </table>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
-<section id="本週作業1-小時實作" class="title-slide slide level1">
-<h1>本週作業（1 小時實作）</h1>
+<section id="本週lab作業1-小時實作" class="title-slide slide level1">
+<h1>本週LAB作業（1 小時實作）</h1>
 
 </section>
 <section id="w4-作業資料清理挑戰" class="slide level2">
 <h2>W4 作業：資料清理挑戰</h2>
 <p><strong>資料檔</strong>：個人化資料（依學號生成）</p>
+<blockquote>
+<p>資料檔已上傳至個人用資料夾</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
 <p><strong>jamovi 操作任務</strong>：</p>
 <ol type="1">
 <li>建立 Filter：排除 <code>Age &lt;= 100</code></li>
@@ -1030,8 +931,8 @@ Female）</li>
 <code>Total_Score</code>（公式：<code>Q1 + Q2 + Q3_r + Q4 + Q5</code>）</li>
 </ol>
 </section>
-<section id="繳交項目與時程" class="slide level2">
-<h2>繳交項目與時程</h2>
+<section id="繳交項目" class="slide level2">
+<h2>繳交項目</h2>
 <ol type="1">
 <li><code>學號_姓名_W4_Lab.omv</code>（jamovi 檔案）</li>
 <li><code>學號_姓名_W4_Report.docx</code>（Word 報告）</li>
@@ -1044,8 +945,12 @@ Female）</li>
 <li>【操作紀錄】：技術細節記錄</li>
 <li>【反思問題】：四題必答</li>
 </ul>
+</section>
+<section id="繳交時程" class="slide level2">
+<h2>繳交時程</h2>
 <p><strong>繳交時間</strong>：本堂課下課前上傳至 Google Classroom</p>
 <p><strong>評量回饋</strong>：2 天內收到個人評量報告</p>
+<p><strong>課後輔導</strong>：見google classroom預約表單</p>
 <p><strong>修正機會</strong>：下次上課前可回報改進版本</p>
 </section>
 <section id="評分標準配分調整" class="slide level2">
@@ -1097,9 +1002,6 @@ Female）</li>
 <p><strong>Q1</strong>：為什麼使用 <strong>Computed Variable</strong>
 建立新變項（如 Q3_r），而不是直接修改原始的 Q3
 數值？這種「非破壞性編輯」有什麼好處？</p>
-</section>
-<section class="slide level2">
-
 <p><strong>Q2</strong>：jamovi 的 <strong>Filter</strong> 功能與直接
 <strong>刪除列 (Delete Rows)</strong>
 有什麼不同？在學術研究中，為什麼我們偏好使用 Filter？</p>
@@ -1107,11 +1009,8 @@ Female）</li>
 <section class="slide level2">
 
 <p><strong>Q3</strong>：假設你要將這份作業的資料清理流程分享給同學，讓他能夠用不同的資料重現你的步驟。你在「方法段（資料處理）」中需要記錄哪些關鍵資訊？</p>
-</section>
-<section class="slide level2">
-
 <p><strong>Q4</strong>：在問卷設計中，為什麼會有些題目需要反向計分？請舉一個例子說明（可以參考
-WellBeing 量表或其他你知道的量表）。</p>
+五大人格量表或其他你知道的量表）。</p>
 </section></section>
 <section>
 <section id="重點回顧" class="title-slide slide level1">
@@ -1140,13 +1039,6 @@ WellBeing 量表或其他你知道的量表）。</p>
 <section id="qa" class="slide level2">
 <h2>Q&amp;A</h2>
 <p>有任何問題嗎？</p>
-</section>
-<section class="slide level2">
-
-<div style="text-align: center; margin-top: 2em;">
-<p><strong>心理教育統計 2026</strong></p>
-<p>慈濟大學</p>
-</div>
 </section></section>
     </div>
   </div>
