@@ -403,110 +403,7 @@ border-color: gray;
 }
 </style>
 
-    <style type="text/css">
-
-.reveal .slides {
-text-align: left;
-}
-.reveal .slides section {
-text-align: left;
-}
-
-.reveal h1 {
-font-size: 2.2em;
-color: #2c3e50;
-text-align: left;
-}
-.reveal h2 {
-font-size: 1.6em;
-color: #34495e;
-text-align: left;
-}
-
-.reveal table {
-margin: auto;
-border-collapse: collapse;
-font-size: 0.78em;
-}
-.reveal table th {
-background-color: #3498db;
-color: white;
-padding: 5px 12px;
-}
-.reveal table td {
-padding: 5px 12px;
-border-bottom: 1px solid #ddd;
-}
-
-.compact-table table {
-font-size: 0.68em;
-}
-.compact-table table th,
-.compact-table table td {
-padding: 3px 8px;
-}
-.reveal table tr:nth-child(even) {
-background-color: #f8f9fa;
-}
-
-.reveal blockquote {
-background-color: #f1f8ff;
-border-left: 4px solid #3498db;
-padding: 15px 20px;
-margin: 20px auto;
-font-style: italic;
-width: 80%;
-}
-
-.reveal pre {
-background-color: #f5f5f5;
-border: 1px solid #ddd;
-padding: 15px;
-border-radius: 5px;
-font-size: 0.8em;
-text-align: left;
-}
-.reveal pre code {
-background-color: transparent;
-color: #333;
-}
-.reveal code {
-font-family: 'Consolas', 'Monaco', monospace;
-background-color: #f0f0f0;
-padding: 2px 5px;
-border-radius: 3px;
-}
-
-.reveal .highlight {
-background-color: #fff3cd;
-padding: 2px 6px;
-border-radius: 3px;
-}
-
-.reveal .warning {
-color: #e74c3c;
-font-weight: bold;
-}
-
-.reveal .success {
-color: #27ae60;
-font-weight: bold;
-}
-
-.reveal ul li,
-.reveal ol li {
-margin-bottom: 10px;
-}
-
-.reveal {
-font-family: 'Microsoft JhengHei', '微軟正黑體', 'Noto Sans TC', sans-serif;
-}
-
-.reveal .slide-number {
-font-size: 14px;
-color: #666;
-}
-</style>
+    <style type="text/css">.reveal .slides {text-align: left;}.reveal .slides section {text-align: left;}.reveal h1 {font-size: 2.2em;color: #2c3e50;text-align: left;}.reveal h2 {font-size: 1.6em;color: #34495e;text-align: left;}.reveal table {margin: auto;border-collapse: collapse;font-size: 0.78em;}.reveal table th {background-color: #3498db;color: white;padding: 5px 12px;}.reveal table td {padding: 5px 12px;border-bottom: 1px solid #ddd;}.compact-table table {font-size: 0.68em;}.compact-table table th,.compact-table table td {padding: 3px 8px;}.reveal table tr:nth-child(even) {background-color: #f8f9fa;}.reveal .slides section blockquote {display: block;background-color: #f1f8ff;border-left: 5px solid #3498db;border-radius: 0 4px 4px 0;padding: 12px 20px;margin: 16px 0;font-style: normal; width: 100%;box-sizing: border-box;box-shadow: 0 1px 4px rgba(0,0,0,0.08);}.reveal .slides section blockquote p {margin: 4px 0;}.reveal pre {background-color: #f5f5f5;border: 1px solid #ddd;padding: 15px;border-radius: 5px;font-size: 0.8em;text-align: left;}.reveal pre code {background-color: transparent;color: #333;}.reveal code {font-family: 'Consolas', 'Monaco', monospace;background-color: #f0f0f0;padding: 2px 5px;border-radius: 3px;}.reveal .highlight {background-color: #fff3cd;padding: 2px 6px;border-radius: 3px;}.reveal .warning {color: #e74c3c;font-weight: bold;}.reveal .success {color: #27ae60;font-weight: bold;}.reveal ul li,.reveal ol li {margin-bottom: 10px;}.reveal {font-family: 'Microsoft JhengHei', '微軟正黑體', 'Noto Sans TC', sans-serif;}.reveal .slide-number {font-size: 14px;color: #666;}</style>
     <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
 document.addEventListener('DOMContentLoaded', function(e) {
@@ -542,13 +439,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <p><strong>認知規範</strong>：</p>
 <ol type="1">
 <li>理解平均數與中位數的適用時機</li>
-<li>掌握偏態對集中量數選擇的影響</li>
+<li>掌握變異量數與偏態如何影響集中量數的選擇</li>
 </ol>
-<p><strong>操作技能</strong>：</p>
+<p><strong>實作重點</strong>：</p>
 <ol type="1">
-<li>在 jamovi 中執行 Exploration → Descriptives</li>
-<li>計算並解讀偏態指數</li>
-<li>撰寫符合 APA 格式的統計描述</li>
+<li>認識jamovi 描述統計模組 Exploration → Descriptives</li>
+<li>計算並解讀各項描述統計指標</li>
+<li>撰寫符合 APA 格式的描述統計報告</li>
 </ol>
 </section>
 <section id="對應教材" class="slide level2">
@@ -560,13 +457,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
 4 章：描述統計</a></li>
 </ul></li>
 </ul>
-<p><strong>簡報示範資料</strong>：電子書範例
+<p><strong>簡報示範資料</strong>：AFL 勝隊得分
 <code>aflsmall_margins</code></p>
-<p><strong>作業資料</strong>：W4 清理後的個人化資料（Total_Score）</p>
+<p><strong>作業資料</strong>：W04 清理後的個人化資料（Total_Score）</p>
 </section></section>
 <section>
 <section id="part-1為何需要描述統計" class="title-slide slide level1">
-<h1>Part 1：為何需要描述統計？</h1>
+<h1>Part 1：為何需要描述統計？🧠</h1>
 
 </section>
 <section id="資料的第一印象" class="slide level2">
@@ -574,17 +471,12 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <blockquote>
 <p><strong>描述統計是將資料整理成簡約易讀格式的方法</strong></p>
 </blockquote>
-<p>單純「看資料」並不是解讀資料的有效方法</p>
-<p>想像面對 176 筆數字…你能看出什麼？</p>
-</section>
-<section id="示範資料afl-勝隊得分" class="slide level2">
-<h2>示範資料：AFL 勝隊得分</h2>
-<p><strong>AFL</strong>：澳洲足球聯盟（Australian Football League）</p>
 <ul>
-<li>2010 年球季 176 場例行賽</li>
-<li>變項 <code>afl.margins</code>：各場比賽的勝隊得分</li>
+<li class="fragment">單純「看資料」並不是解讀資料的有效方法</li>
 </ul>
-<p>請開啟 jamovi 示範檔案：<code>aflsmall_margins</code></p>
+<ul>
+<li class="fragment">想像面對上百筆甚至幾十萬百數字…你能看出什麼？</li>
+</ul>
 </section>
 <section id="用數字說故事" class="slide level2">
 <h2>用數字說故事</h2>
@@ -594,10 +486,22 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li><strong>比較</strong>：讓不同組別或變項能夠對照</li>
 <li><strong>溝通</strong>：用專業術語向他人說明資料特徵</li>
 </ol>
+</section>
+<section id="示範資料afl-勝隊得分" class="slide level2">
+<h2>示範資料：AFL 勝隊得分</h2>
+<p><strong>AFL</strong>：澳洲足球聯盟（Australian Football League）</p>
+<ul>
+<li>2010 年球季 176 場例行賽</li>
+<li>變項 <code>afl.margins</code>：各場比賽的勝隊得分</li>
+</ul>
+<p>請開啟 jamovi 示範檔案：<code>aflsmall_margins</code></p>
+<ul>
+<li class="fragment">為了後續介紹及實作，以filter保留前五筆</li>
+</ul>
 </section></section>
 <section>
 <section id="part-1.5測量尺度與統計量的對應" class="title-slide slide level1">
-<h1>Part 1.5：測量尺度與統計量的對應</h1>
+<h1>Part 1.5：測量尺度與統計量的對應🧠</h1>
 
 </section>
 <section id="複習w3-的測量尺度" class="slide level2">
@@ -606,6 +510,11 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <p><strong>回顧 W3</strong>：還記得我們學過的測量尺度嗎？</p>
 </blockquote>
 <table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 39%" />
+<col style="width: 30%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>測量尺度</th>
@@ -615,18 +524,18 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Nominal（名目）</td>
-<td>⚪⚪⚪</td>
+<td>Nominal（名義）</td>
+<td><img role="img" data-src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgaWQ9InN2ZzUyOTAiIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHhtbDpzcGFjZT0icHJlc2VydmUiIGhlaWdodD0iNDBweCIgd2lkdGg9IjQwcHgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDQwIiB5PSIwcHgiIHg9IjBweCIgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB2aWV3Qm94PSIwIDAgNDAgNDAiPjxtZXRhZGF0YSBpZD0ibWV0YWRhdGE1MzA0Ij48cmRmOlJERj48Y2M6V29yayByZGY6YWJvdXQ9IiI+PGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+PGRjOnR5cGUgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIvPjxkYzp0aXRsZS8+PC9jYzpXb3JrPjwvcmRmOlJERj48L21ldGFkYXRhPjxnIHN0cm9rZS13aWR0aD0iMS44Ij48cGF0aCBpZD0icGF0aDUyOTQiIGQ9Im0xOS42MzUgMzEuNTY1YzEuNjUzMS0yLjYzMjMgMS45MDUyLTYuMDIwOCAwLjQ0NDAyLTguOTQ1OC0wLjEwMDgzLTAuMjAyNTUtMC4yMDY5Ny0wLjQwNDIyLTAuMzI0NjEtMC42MDA1OC0wLjEzMDkxLTAuMjIyMDEtMC4yNzQyLTAuNDMzNDEtMC40MjEwMi0wLjYzOTUtMS44ODA0LTIuNjM2Ny00Ljk1NjctNC4wMDUtOC4wMzQ4LTMuODA2LTEuMzk1NyAwLjA5MTExLTIuNzkxNSAwLjUwMTUxLTQuMDc2NyAxLjI2NTctNC4zMzg1IDIuNTgzNi01Ljc2MjUgOC4xOTQtMy4xNzg5IDEyLjUzMiAyLjU4MjcgNC4zNDAyIDguMTk0IDUuNzYyNSAxMi41MzIgMy4xODA3IDEuMjg2OS0wLjc2NTk4IDIuMzE0Ny0xLjggMy4wNjA0LTIuOTg2MXoiIHN0cm9rZT0iIzIyNmRkZCIgZmlsbD0iI2E5YzZmMiIvPjxwYXRoIGlkPSJwYXRoNTI5NiIgZD0ibTM1Ljg3NiAzMS41NjVjMS42NTMxLTIuNjMyMyAxLjkwNTItNi4wMjA4IDAuNDQ0MDItOC45NDU4LTAuMTAwODMtMC4yMDI1NS0wLjIwNjk3LTAuNDA0MjItMC4zMjQ2MS0wLjYwMDU4LTAuMTMwOTEtMC4yMjIwMS0wLjI3NDItMC40MzM0MS0wLjQyMTAyLTAuNjM5NS0xLjg4MDQtMi42MzY3LTQuOTU2Ny00LjAwNS04LjAzNDgtMy44MDYtMS4zOTU3IDAuMDkxMTEtMi43OTE1IDAuNTAxNTEtNC4wNzY3IDEuMjY1Ny00LjMzODUgMi41ODM2LTUuNzYyNSA4LjE5NC0zLjE3ODkgMTIuNTMyIDIuNTgyNyA0LjM0MDIgOC4xOTQgNS43NjI1IDEyLjUzMiAzLjE4MDcgMS4yODctMC43NjU5OCAyLjMxNDctMS44IDMuMDYwNC0yLjk4NjF6IiBzdHJva2U9IiMyMjZkZGQiIGZpbGw9IiM2YjlkZTgiLz48cGF0aCBpZD0icGF0aDUyOTgiIGQ9Im0yNy44MzcgMTcuNzVjMS42NTMtMi42MzIgMS45MDUtNi4wMiAwLjQ0NC04Ljk0NTUtMC4xMDEtMC4yMDI2LTAuMjA3LTAuNDA0Mi0wLjMyNC0wLjYwMDYtMC4xMzEtMC4yMjItMC4yNzUtMC40MzM0LTAuNDIxLTAuNjM5NS0xLjg4MS0yLjYzNjctNC45NTctNC4wMDUtOC4wMzUtMy44MDYtMS4zOTYgMC4wOTExLTIuNzkyIDAuNTAxNS00LjA3NyAxLjI2NTctNC4zMzggMi41ODM3LTUuNzYyNCA4LjE5MzktMy4xNzkgMTIuNTMyIDIuNTgyNyA0LjM0MDIgOC4xOTQgNS43NjI1IDEyLjUzMiAzLjE4MDcgMS4yODY5LTAuNzY1OTggMi4zMTQ3LTEuOCAzLjA2MDQtMi45ODYxeiIgc3Ryb2tlPSIjYmY3YzAwIiBmaWxsPSIjZjFiZjYzIi8+PC9nPjwvc3ZnPgo=" width="40" /></td>
 <td>性別、組別、血型</td>
 </tr>
 <tr class="even">
 <td>Ordinal（順序）</td>
-<td>📊</td>
+<td><img role="img" data-src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgaWQ9InN2Zzc2MjciIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiBoZWlnaHQ9IjQwcHgiIHZpZXdCb3g9IjAgMCA0MCA0MCIgd2lkdGg9IjQwcHgiIHZlcnNpb249IjEuMSIgeT0iMHB4IiB4PSIwcHgiIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNDAgNDAiPjxtZXRhZGF0YSBpZD0ibWV0YWRhdGE3NjQxIj48cmRmOlJERj48Y2M6V29yayByZGY6YWJvdXQ9IiI+PGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+PGRjOnR5cGUgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIvPjxkYzp0aXRsZS8+PC9jYzpXb3JrPjwvcmRmOlJERj48L21ldGFkYXRhPjxnIGlkPSJnODIyMCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEuNjA0NCkiIHN0cm9rZT0iIzQ0ODJlMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSIjN2JhOGViIj48cmVjdCBpZD0icmVjdDc2MzEiIGhlaWdodD0iMTIuMzA0IiB3aWR0aD0iOC4wNzA1IiB5PSIyMy4wODUiIHg9IjYuNzI2MSIvPjxyZWN0IGlkPSJyZWN0NzYzMyIgaGVpZ2h0PSIyMS4xMDkiIHdpZHRoPSI4LjA2NTMiIHk9IjE0LjIxNyIgeD0iMTcuNTc0Ii8+PHJlY3QgaWQ9InJlY3Q3NjM1IiBoZWlnaHQ9IjI5LjcyOCIgd2lkdGg9IjguMDYzIiB5PSI1LjM5ODMiIHg9IjI4LjQxNiIvPjwvZz48L3N2Zz4K" width="40" /></td>
 <td>名次、滿意度（1-5）</td>
 </tr>
 <tr class="odd">
 <td>Continuous（連續）</td>
-<td>📏</td>
+<td><img role="img" data-src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgaWQ9InN2ZzY5ODMiIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHhtbDpzcGFjZT0icHJlc2VydmUiIGhlaWdodD0iNDBweCIgd2lkdGg9IjQwcHgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQwIDQwIiB5PSIwcHgiIHg9IjBweCIgeG1sbnM6Y2M9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zIyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB2aWV3Qm94PSIwIDAgNDAgNDAiPjxtZXRhZGF0YSBpZD0ibWV0YWRhdGE3MDAzIj48cmRmOlJERj48Y2M6V29yayByZGY6YWJvdXQ9IiI+PGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+PGRjOnR5cGUgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIvPjxkYzp0aXRsZS8+PC9jYzpXb3JrPjwvcmRmOlJERj48L21ldGFkYXRhPjxyZWN0IGlkPSJyZWN0Njk4NyIgcnk9IjAiIHRyYW5zZm9ybT0ibWF0cml4KC0uNzMzODQgLS42NzkzMyAtLjY3OTMzIC43MzM4NCAwIDApIiBoZWlnaHQ9IjMzLjc3IiB3aWR0aD0iMTcuNjM3IiBzdHJva2U9IiNlMzkzMDAiIHk9Ii0xNS42MDgiIHg9Ii0zNy4yNTQiIHN0cm9rZS13aWR0aD0iMS45Njg4IiBmaWxsPSIjZjFiZjYzIi8+PGcgaWQ9Imc2OTg5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZT0iI2NkODUwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9IiNmMWJmNjMiPjxwYXRoIGlkPSJwYXRoNjk5MSIgZD0ibTcuMzI5MyAyMi4zMDQgNC4xMTE3IDQuMDUyIi8+PHBhdGggaWQ9InBhdGg2OTkzIiBkPSJtMTIuMDg1IDE3LjE5OSA0LjQ0MSA0LjQxMSIvPjxwYXRoIGlkPSJwYXRoNjk5NSIgZD0ibTE2Ljc4IDExLjY5NSA0LjgzMDUgNC44MzA1Ii8+PHBhdGggaWQ9InBhdGg2OTk3IiBkPSJtMjIuMDM0IDYuNDIxOSA0LjMyMiA0LjE3MTEiLz48L2c+PC9zdmc+Cg==" width="40" /></td>
 <td>身高、分數、反應時間</td>
 </tr>
 </tbody>
@@ -668,6 +577,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </tr>
 </tbody>
 </table>
+<ul>
+<li class="fragment">先想好你想在報表上面看到什麼？再決定要如何操作模組選單</li>
+</ul>
 </section>
 <section id="關鍵概念連續變項的限定產物" class="slide level2">
 <h2>關鍵概念：連續變項的限定產物</h2>
@@ -691,7 +603,7 @@ jamovi 就不會讓你計算平均數。</p>
 </section></section>
 <section>
 <section id="part-2集中量數" class="title-slide slide level1">
-<h1>Part 2：集中量數</h1>
+<h1>Part 2：集中量數🧠👨‍💻</h1>
 
 </section>
 <section id="什麼是典型值" class="slide level2">
@@ -726,6 +638,9 @@ jamovi 就不會讓你計算平均數。</p>
 </tr>
 </tbody>
 </table>
+<ul>
+<li class="fragment">本次實作示範會搭配Plot功能解說，非本次LAB主題</li>
+</ul>
 </section>
 <section id="平均數mean" class="slide level2">
 <h2>平均數（Mean）</h2>
@@ -819,12 +734,18 @@ X_N}{N}\]</span></p>
 <li>平均數 = $58,333</li>
 <li>中位數 = $60,000</li>
 </ul>
-<p><strong>當億萬富翁加入</strong>（年收入 $100,000,000）</p>
 <ul>
-<li>平均數 → <strong>$25,043,750</strong> （暴增！）</li>
-<li>中位數 → <strong>$62,500</strong> （略微上升）</li>
+<li class="fragment"><strong>當億萬富翁加入</strong>（年收入
+$100,000,000）</li>
 </ul>
-<p><strong>啟示</strong>：平均數容易被極端值「拉走」</p>
+<ul>
+<li class="fragment">平均數 → <strong>$25,043,750</strong>
+（暴增！）</li>
+<li class="fragment">中位數 → <strong>$62,500</strong> （略微上升）</li>
+</ul>
+<ul>
+<li class="fragment"><strong>啟示</strong>：平均數容易被極端值「拉走」</li>
+</ul>
 </section>
 <section id="眾數mode" class="slide level2">
 <h2>眾數（Mode）</h2>
@@ -838,21 +759,28 @@ X_N}{N}\]</span></p>
 </section></section>
 <section>
 <section id="part-3變異量數" class="title-slide slide level1">
-<h1>Part 3：變異量數</h1>
+<h1>Part 3：變異量數🧠👨‍💻</h1>
 
 </section>
 <section id="資料有多離散" class="slide level2">
 <h2>資料有多「離散」？</h2>
 <blockquote>
-<p><strong>變異量數</strong>：告訴我們資料分布的「寬度」</p>
+<p><strong>變異量數</strong>：告訴我們資料分佈的「寬度」</p>
 </blockquote>
-<p>光知道「中心」不夠，還要知道資料有多分散</p>
+<ul>
+<li class="fragment">光知道「中心」不夠，還要知道資料有多分散</li>
+<li class="fragment">以下搭配示範關閉filter</li>
+</ul>
 </section>
 <section id="全距range" class="slide level2">
 <h2>全距（Range）</h2>
 <p><strong>定義</strong>：最大值 − 最小值</p>
 <p><strong>AFL 資料</strong>：116 − 0 = <strong>116</strong></p>
 <p><strong>缺點</strong>：容易被極端值影響</p>
+<ul>
+<li class="fragment">Descriptives模組操作：勾選 Dispersion → Min,
+Max</li>
+</ul>
 </section>
 <section id="四分位數間距iqr" class="slide level2">
 <h2>四分位數間距（IQR）</h2>
@@ -864,20 +792,27 @@ X_N}{N}\]</span></p>
 <li>Q3（75%）= 50.50</li>
 <li><strong>IQR = 37.75</strong></li>
 </ul>
-<p>jamovi 操作：勾選 Statistics → Quartiles</p>
+<ul>
+<li class="fragment">Descriptives模組操作：(1) 勾選 Dispersion → IQR;
+(2) Percentile Values</li>
+<li class="fragment">台灣學測的”級分”即IQR的應用。</li>
+</ul>
 </section>
 <section id="標準差standard-deviation" class="slide level2">
 <h2>標準差（Standard Deviation）</h2>
 <blockquote>
 <p><strong>標準差</strong>：資料與平均值「典型距離」</p>
 </blockquote>
-<p>計算步驟：</p>
 <pre><code>1. 計算每筆資料與平均數的差異（離均差）
 2. 將離均差平方
 3. 取平均（變異數）
 4. 開根號 → 標準差</code></pre>
 <p><span class="math display">\[s = \sqrt{\frac{\sum(X_i -
 \bar{X})^2}{N-1}}\]</span></p>
+<ul>
+<li class="fragment">Descriptives模組操作：勾選 Statistics → Std.
+deviation</li>
+</ul>
 </section>
 <section id="解讀標準差的簡易法則" class="slide level2">
 <h2>解讀標準差的簡易法則</h2>
@@ -905,7 +840,10 @@ X_N}{N}\]</span></p>
 </tbody>
 </table>
 <p><strong>AFL 資料</strong>：Mean = 35.30, SD = 26.07</p>
-<p>→ 約 65% 的得分落在 9.23 到 61.37 之間</p>
+<ul>
+<li class="fragment">約 65% 的得分落在 9.23 到 61.37 之間</li>
+<li class="fragment">使用“偏差”描述的資訊，都是根據”標準差”。例如日本高考。</li>
+</ul>
 </section>
 <section id="變異量數比較" class="slide level2">
 <h2>變異量數比較</h2>
@@ -938,20 +876,32 @@ X_N}{N}\]</span></p>
 </section></section>
 <section>
 <section id="part-4偏態診斷" class="title-slide slide level1">
-<h1>Part 4：偏態診斷</h1>
+<h1>Part 4：偏態診斷🧠👨‍💻</h1>
 
 </section>
 <section id="什麼是偏態skewness" class="slide level2">
 <h2>什麼是偏態（Skewness）？</h2>
 <blockquote>
-<p><strong>偏態</strong>：資料分布的不對稱程度</p>
+<p><strong>偏態</strong>：資料分佈的不對稱程度</p>
 </blockquote>
-<pre><code>對稱分布：平均數 ≈ 中位數
+<pre><code>對稱分佈：平均數 ≈ 中位數
 正偏態：平均數 &gt; 中位數（尾巴向右）
 負偏態：平均數 &lt; 中位數（尾巴向左）</code></pre>
 </section>
-<section id="偏態圖解" class="slide level2">
-<h2>偏態圖解</h2>
+<section id="實作偏態圖解" class="slide level2">
+<h2>實作偏態圖解</h2>
+<ol type="1">
+<li>建立三個計算變項: <code>Normal_data</code>,
+<code>Negative_data</code>,<code>Positive_data</code></li>
+<li>函式設定欄分別輸入: <code>BETA(1,1)+VMEAN(afl.margins)</code>,
+<code>BETA(1,0.01)+VMEAN(afl.margins)</code>,
+<code>BETA(1,100)+VMEAN(afl.margins)</code></li>
+<li>Descriptives模組: Statistics -&gt; Mean, Std, Skewness; Plots -&gt;
+Histogram</li>
+</ol>
+</section>
+<section class="slide level2">
+
 <table>
 <thead>
 <tr class="header">
@@ -973,7 +923,9 @@ X_N}{N}\]</span></p>
 </tr>
 </tbody>
 </table>
-<p><strong>記憶口訣</strong>：「尾巴指向哪邊，就是什麼偏態」</p>
+<ul>
+<li class="fragment"><strong>記憶口訣</strong>：「尾巴指向哪邊，就是什麼偏態」</li>
+</ul>
 </section>
 <section id="偏態指數的計算與解讀" class="slide level2">
 <h2>偏態指數的計算與解讀</h2>
@@ -1034,7 +986,10 @@ X_N}{N}\]</span></p>
 </tr>
 </tbody>
 </table>
-<p><strong>AFL 資料</strong>：Skew = 0.780，偏態不算嚴重，平均數可用</p>
+<ul>
+<li class="fragment"><strong>AFL 資料</strong>：Skew =
+0.780，偏態不算嚴重，可用平均數解釋</li>
+</ul>
 </section>
 <section id="實作練習診斷你的資料" class="slide level2">
 <h2>實作練習：診斷你的資料</h2>
@@ -1052,7 +1007,7 @@ X_N}{N}\]</span></p>
 </section></section>
 <section>
 <section id="part-5apa-格式寫作" class="title-slide slide level1">
-<h1>Part 5：APA 格式寫作</h1>
+<h1>Part 5：APA 格式寫作👨‍💻</h1>
 
 </section>
 <section id="學術寫作第三步統計符號格式" class="slide level2">
@@ -1140,10 +1095,10 @@ Block）</strong></td>
 </table>
 <p><strong>記住</strong>：這些符號在 Word 中要設為斜體（Ctrl + I）</p>
 </section>
-<section id="什麼是統計區塊" class="slide level2">
-<h2>什麼是統計區塊？</h2>
+<section id="什麼是統計寫作區塊" class="slide level2">
+<h2>什麼是統計寫作區塊？</h2>
 <blockquote>
-<p><strong>統計區塊</strong>：用一段完整的文字，整合描述統計資訊</p>
+<p><strong>統計寫作區塊</strong>：用一段完整的文字，整合描述統計資訊</p>
 </blockquote>
 <p><strong>不專業的寫法</strong>：</p>
 <pre><code>平均數是 75.3，標準差是 12.45，樣本數是 100 人。</code></pre>
@@ -1225,7 +1180,7 @@ Block）</strong></td>
 </ul>
 <p><strong>下週預告</strong>：</p>
 <ul>
-<li>W6 將學習圖表格式（Figure/Table 編號與標題）</li>
+<li>圖表格式（Figure/Table 編號與標題）的編輯</li>
 </ul>
 </section></section>
 <section>
@@ -1249,18 +1204,18 @@ Block）</strong></td>
 <li><code>學號_姓名_W5_Lab.omv</code></li>
 <li><code>學號_姓名_W5_Report.docx</code></li>
 </ol>
-<p><strong>截止時間</strong>：本次課程結束前</p>
+<p><strong>截止時間</strong>：本次課程結束後，午夜關閉作業上傳</p>
 </section>
 <section id="word-報告內容" class="slide level2">
 <h2>Word 報告內容</h2>
 <p><strong>1. 描述統計表格</strong>（貼上 jamovi 輸出）</p>
-<p><strong>2. 診斷分析</strong>（回答以下問題）：</p>
+<p><strong>2. APA 格式統計描述</strong>（完整段落）</p>
+<p><strong>3. 診斷分析</strong>（回答以下問題）：</p>
 <ul>
 <li>你的 Skewness 數值是多少？屬於哪種分佈？</li>
 <li>比較 Mean 與 Median，哪個較大？與偏態方向一致嗎？</li>
 <li>根據偏態程度，應該用平均數還是中位數？</li>
 </ul>
-<p><strong>3. APA 格式統計描述</strong>（完整段落）</p>
 </section>
 <section id="反思問題" class="slide level2">
 <h2>反思問題</h2>
@@ -1320,7 +1275,7 @@ Block）</strong></td>
 <h2>下週預告</h2>
 <p><strong>W6：統計圖表</strong></p>
 <ul>
-<li>直方圖與盒鬚圖</li>
+<li>可用jamovi實作的統計圖</li>
 <li>視覺化敘事</li>
 <li>圖表的 APA 格式</li>
 </ul>
@@ -1328,13 +1283,6 @@ Block）</strong></td>
 <section id="qa" class="slide level2">
 <h2>Q&amp;A</h2>
 <p>有任何問題嗎？</p>
-</section>
-<section class="slide level2">
-
-<div style="text-align: center; margin-top: 2em;">
-<p><strong>心理教育統計 2026</strong></p>
-<p>慈濟大學</p>
-</div>
 </section></section>
     </div>
   </div>
