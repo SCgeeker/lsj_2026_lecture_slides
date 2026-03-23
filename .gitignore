@@ -1,0 +1,4 @@
+# 只追蹤 HTML 簡報，排除源始檔
+*.Rmd
+*.R
+CLAUDE.md
