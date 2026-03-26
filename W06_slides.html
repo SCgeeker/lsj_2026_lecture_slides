@@ -589,11 +589,21 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </tr>
 <tr class="even">
 <td>Pareto Plot</td>
-<td>帕雷托圖</td>
+<td>帕雷托圖？</td>
 <td>次序, 連續</td>
 </tr>
 </tbody>
 </table>
+</section>
+<section class="slide level2">
+
+<blockquote>
+<p><strong>操作示範</strong> <code>aflsmall_margins</code></p>
+</blockquote>
+<ul>
+<li>本次操作示範並列Plot Tab與描述統計模組的Plot呈現</li>
+<li>作業的統計圖製作設定，請詳讀WORD檔案說明</li>
+</ul>
 </section></section>
 <section>
 <section id="part-3直方圖histogram" class="title-slide slide level1">
@@ -685,7 +695,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </tr>
 </tbody>
 </table>
-<p><strong>實作練習</strong>：對照偏態指數實作錄影，複習運用直方圖判斷資料分佈形態</p>
+<p><strong>實作練習</strong>：運用自已的W4資料變項<code>Total_Score</code>，複習運用直方圖判斷資料分佈形態</p>
 </section></section>
 <section>
 <section id="part-4箱形圖boxplot" class="title-slide slide level1">
@@ -730,16 +740,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li>識別中位數、四分位距</li>
 <li>檢查資料對稱性</li>
 </ul>
-<blockquote>
-<p><strong>操作示範</strong> <code>aflsmall_margins</code></p>
-</blockquote>
 </section>
 <section id="離群值的處理" class="slide level2">
 <h2>離群值的處理</h2>
 <p><strong>發現離群值後，該怎麼辦？</strong></p>
 <ol type="1">
-<li><strong>檢查資料</strong>：是真實數據還是錯誤？</li>
-<li><strong>回溯 W4</strong>：這些值在清理時是否已處理？</li>
+<li><strong>檢查資料</strong>：是真實數據還是測量錯誤？</li>
+<li><strong>回顧 W4</strong>：這些資料在清理時是否已處理？</li>
 <li><strong>決策</strong>：
 <ul>
 <li>若為測量錯誤 → 刪除或修正</li>
@@ -762,8 +769,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <ul>
 <li>外形：顯示資料的<strong>密度分佈</strong>（像旋轉 90°
 的直方圖）</li>
-<li>內部：包含<strong>箱形圖</strong>的五數摘要</li>
-<li>優勢：同時看到「分佈形狀」與「統計摘要」</li>
+<li>內部：包含<strong>箱形圖</strong>的五項指標</li>
+<li>優點：同時看到「分佈形狀」與「統計摘要」</li>
 </ul>
 </section>
 <section id="小提琴圖的結構" class="slide level2">
@@ -783,7 +790,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <ul>
 <li>保留箱形圖的統計摘要</li>
 <li>顯示完整的分佈形狀</li>
-<li>識別雙峰、多峰、偏態</li>
+<li>目視識別雙峰、多峰、偏態</li>
 </ul>
 </section>
 <section id="箱形圖-vs-小提琴圖" class="slide level2">
@@ -951,8 +958,8 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 <li>無法直接用於報告或簡報</li>
 </ul>
 </section>
-<section id="解決方案圖表化妝" class="slide level2">
-<h2>解決方案：圖表「化妝」</h2>
+<section id="圖表整型工程" class="slide level2">
+<h2>圖表整型工程</h2>
 <p><strong>使用 Plots Tab 修改</strong>：</p>
 <ol type="1">
 <li><strong>標題（Title）</strong>：加上有意義的標題
@@ -982,15 +989,15 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 </ul></li>
 <li>套用修改</li>
 </ol>
-</section>
-<section id="jamovi-操作修改圖表標籤-1" class="slide level2">
-<h2>jamovi 操作：修改圖表標籤</h2>
-<p><strong>檢查清單</strong>：</p>
-<ul class="task-list">
-<li><label><input type="checkbox"></input>無底線或代碼</label></li>
-<li><label><input type="checkbox"></input>使用英文或繁體中文(可能不完全支援)</label></li>
-<li><label><input type="checkbox"></input>標題簡潔明確</label></li>
-</ul>
+<!---
+
+## jamovi 操作：修改圖表標籤
+
+**檢查清單**：
+
+- [ ] 圖表標題符合**簡報需要**
+- [ ] 軸線說明使用英文或繁體中文簡稱
+- [ ] 說明文字需要底線或代碼--->
 </section>
 <section id="圖表匯出" class="slide level2">
 <h2>圖表匯出</h2>
@@ -1005,7 +1012,7 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 <tbody>
 <tr class="odd">
 <td>PNG</td>
-<td>高解析度圖片，適合 Word</td>
+<td>高解析度圖片，適合 Word或PPT 編輯</td>
 </tr>
 <tr class="even">
 <td>PDF</td>
@@ -1013,14 +1020,14 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 </tr>
 <tr class="odd">
 <td>SVG</td>
-<td>可編輯向量圖</td>
+<td>可編輯向量圖，多數學術發表指定格式</td>
 </tr>
 </tbody>
 </table>
 <p><strong>jamovi 操作</strong>：</p>
 <ol type="1">
 <li>右鍵點選圖表</li>
-<li>選擇 <strong>Export</strong> → <strong>Image</strong></li>
+<li>選擇 <strong>Image</strong> → <strong>Export</strong></li>
 <li>選擇格式與存檔位置</li>
 </ol>
 </section>
@@ -1031,7 +1038,7 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 <li>以“插入檔案”編輯 <strong>Word（DOCX）</strong>報告</li>
 <li>撰寫 <strong>APA 格式圖表說明（Figure Note）</strong></li>
 </ul>
-<p><strong>為什麼用 Word？</strong></p>
+<p><strong>使用Word的理由？</strong></p>
 <ul>
 <li>練習專業報告製作</li>
 <li>學習圖文整合</li>
@@ -1041,24 +1048,24 @@ plot</strong>（在小提琴圖內疊加箱形圖）</li>
 <section>
 <section id="part-6apa-格式圖表說明" class="title-slide slide level1">
 <h1>Part 6：APA 格式圖表說明👨‍💻</h1>
-
+<p>❗簡報及報告範例並非你的資料❗</p>
 </section>
 <section id="圖表說明的結構" class="slide level2">
 <h2>圖表說明的結構</h2>
 <p><strong>APA 格式圖表說明（Figure Note）</strong>：</p>
-<pre><code>Figure 1.
+<pre><code>圖 1.
 AFL 比賽得分差距分佈直方圖。
 
 {Figure File}
 
-註. 樣本共 N = 176 場比賽，得分差距範圍為 0–116 分，呈現明顯右偏分佈（Skewness = 0.78, SE = 0.18），顯示多數比賽差距偏小，少數比賽出現懸殊差距。疊加的曲線為理論常態分佈。</code></pre>
+註. 樣本共 N = 176 場比賽，得分差距範圍為 0–116 分，呈現明顯右偏分佈（Skewness = 0.78, SE = 0.18），顯示多數比賽差距偏小，少數比賽出現懸殊差距。疊加的曲線為理論機率分佈。</code></pre>
 </section>
 <section class="slide level2">
 
 <p><strong>結構</strong>：</p>
 <ol type="1">
-<li><strong>圖號與標題</strong>：<br>Figure 1.<br>[標題]</li>
-<li><strong>圖檔置放區</strong>：手動置入圖檔；可渲染的程式碼</li>
+<li><strong>圖號與標題</strong>：<br>圖 1.<br>[標題]</li>
+<li><strong>圖檔置放區</strong>：手動置入圖檔；可渲染的程式碼或Latex腳本</li>
 <li><strong>圖表元素說明</strong>：樣本數、分佈特徵、曲線、標記等意義</li>
 </ol>
 </section>
@@ -1114,7 +1121,7 @@ AFL 比賽得分差距箱形圖。
 </section>
 <section id="w6-作業視覺化診斷報告" class="slide level2">
 <h2>W6 作業：視覺化診斷報告</h2>
-<p><strong>資料來源</strong>：W5 延續的個人化資料（Total_Score）</p>
+<p><strong>資料來源</strong>：W4 的個人化資料（Total_Score）</p>
 <p><strong>核心任務</strong>：製作專業圖表並撰寫 APA 格式報告</p>
 </section>
 <section id="任務一製作直方圖" class="slide level2">
@@ -1135,7 +1142,7 @@ AFL 比賽得分差距箱形圖。
 </section>
 <section class="slide level2">
 
-<h3 id="step-2圖表專業化">Step 2：圖表專業化</h3>
+<h3 id="step-2圖表專業編輯">Step 2：圖表專業編輯</h3>
 <p><strong>使用 Plots Tab 修改標籤</strong>：</p>
 <ol type="1">
 <li>設定選單展開 <strong>Plot &amp; Axis Title</strong></li>
@@ -1161,7 +1168,7 @@ Total_Score）</label></li>
 <li>右鍵點選圖表</li>
 <li>選擇 <strong>Export → Image</strong></li>
 <li>格式：<strong>PNG</strong></li>
-<li>存檔備用</li>
+<li>存檔備用-&gt; <學號>_<姓名>_histogram.png</li>
 </ol>
 </section>
 <section class="slide level2">
@@ -1197,7 +1204,7 @@ Total_Score）</label></li>
 </section>
 <section class="slide level2">
 
-<h3 id="step-2圖表專業化-1">Step 2：圖表專業化</h3>
+<h3 id="step-2圖表專業化">Step 2：圖表專業化</h3>
 <p><strong>修改標籤</strong>（同直方圖流程）：</p>
 <ul>
 <li><strong>Plot Title</strong>：「量表計分箱形圖」</li>
@@ -1207,7 +1214,7 @@ Total_Score）</label></li>
 <section class="slide level2">
 
 <h3 id="step-3匯出圖表-1">Step 3：匯出圖表</h3>
-<p>（同直方圖流程，匯出為 PNG）</p>
+<p>（同直方圖流程，匯出為 PNG 圖檔 -&gt; <學號>_<姓名>_boxplot.png）</p>
 </section>
 <section class="slide level2">
 
@@ -1254,11 +1261,16 @@ Total_Score）</label></li>
 <li>勾選 <strong>Violin</strong></li>
 <li>（選擇性）勾選 <strong>Box plot</strong>（疊加箱形圖）</li>
 </ol>
+</section>
+<section class="slide level2">
+
 <p><strong>APA 格式圖表說明範例</strong>：</p>
-<pre><code>Figure 3. 學期總分小提琴圖（含箱形圖）。
-小提琴圖顯示資料的完整密度分佈，
-揭示雙峰特徵（68 分與 82 分處各有高峰），
-此特徵在直方圖中不易察覺。</code></pre>
+<pre><code>Figure 3. 
+學期總分小提琴圖（含箱形圖）。
+
+{Figure File}
+
+註. 小提琴圖顯示資料的完整密度分佈，揭示雙峰特徵（68 分與 82 分處各有高峰），此特徵在直方圖中不易察覺。</code></pre>
 </section>
 <section class="slide level2">
 
@@ -1276,55 +1288,66 @@ Total_Score）</label></li>
 <li><strong><code>學號_姓名_W6_Lab.omv</code></strong>
 <ul>
 <li>jamovi 檔案（含直方圖、箱形圖）</li>
-<li>圖表已完成專業化修改</li>
+<li>圖表已完成專業化編輯</li>
 </ul></li>
 <li><strong><code>學號_姓名_W6_Report.docx</code></strong>
 <ul>
 <li>Word 報告（含圖表與 APA 格式說明）</li>
 </ul></li>
+<li><strong>指定圖檔備份</strong>
+<ul>
+<li>直方圖、箱形圖PNG檔</li>
+</ul></li>
 </ol>
-</section>
-<section class="slide level2">
+<!---
 
-<h3 id="word-報告結構">Word 報告結構</h3>
-<p><strong>第 1 頁：標題頁</strong></p>
-<pre><code>W6 作業：統計圖表與視覺化診斷
+### Word 報告結構
+
+**第 1 頁：標題頁**
+
+```
+W6 作業：統計圖表與視覺化診斷
 
 學號：[你的學號]
 姓名：[你的姓名]
-日期：2026-XX-XX</code></pre>
-</section>
-<section class="slide level2">
+日期：2026-XX-XX
+```
 
-<p><strong>第 2 頁：直方圖 + Figure 1 說明</strong></p>
-<ul>
-<li>插入修改後的直方圖（PNG 格式）</li>
-<li>撰寫 APA 格式 Figure Note</li>
-<li>連結 W5 偏態指數</li>
-</ul>
-<p><strong>第 3 頁：箱形圖 + Figure 2 說明</strong></p>
-<ul>
-<li>插入修改後的箱形圖（PNG 格式）</li>
-<li>撰寫 APA 格式 Figure Note</li>
-<li>說明離群值與後續處理</li>
-</ul>
-</section>
-<section class="slide level2">
+---
 
-<p><strong>第 4 頁：視覺化診斷寫作</strong></p>
-<ul>
-<li>回答三個診斷問題</li>
-<li>展現對圖表的深入理解</li>
-</ul>
-<p><strong>（選做）第 5 頁：小提琴圖 + Figure 3 說明</strong></p>
-</section>
-<section class="slide level2">
+**第 2 頁：直方圖 + Figure 1 說明**
 
+- 插入修改後的直方圖（PNG 格式）
+- 撰寫 APA 格式 Figure Note
+- 連結 W5 偏態指數
+
+**第 3 頁：箱形圖 + Figure 2 說明**
+
+- 插入修改後的箱形圖（PNG 格式）
+- 撰寫 APA 格式 Figure Note
+- 說明離群值與後續處理
+
+---
+
+**第 4 頁：視覺化診斷寫作**
+
+- 回答三個診斷問題
+- 展現對圖表的深入理解
+
+**（選做）第 5 頁：小提琴圖 + Figure 3 說明**
+
+--->
 <p><strong>截止時間</strong>：本次上課結束前</p>
+</section>
+<section class="slide level2">
+
+<h3 id="加分項目">加分項目</h3>
+<ul>
+<li>見WORD加分區說明。有編輯內容，複評完成後手動評量。</li>
+</ul>
 </section>
 <section id="評分標準" class="slide level2">
 <h2>評分標準</h2>
-<h3 id="基本作業100-分">基本作業（100 分）</h3>
 <table>
 <thead>
 <tr class="header">
@@ -1391,14 +1414,14 @@ Total_Score）</label></li>
 </tr>
 </tbody>
 </table>
-<h3 id="加分項目最高-10-分">加分項目（最高 +10 分）</h3>
+</section>
+<section id="加分項目最高-10-分" class="slide level2">
+<h2>加分項目（最高 +10 分）</h2>
 <ul>
 <li>製作小提琴圖並深入分析：+5 分</li>
 <li>三種圖表的比較分析：+5 分</li>
+<li>得分可自選計入W02~W06任何一週的評分</li>
 </ul>
-</section>
-<section class="slide level2">
-
 </section></section>
 <section>
 <section id="重點回顧" class="title-slide slide level1">
