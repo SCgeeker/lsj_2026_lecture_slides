@@ -458,12 +458,12 @@ document.addEventListener('DOMContentLoaded', function(e) {
 7 章：機率</a></li>
 <li><a href="https://scgeeker.github.io/lsj-book-zh_tw/09-Normal-distribution.html">第
 9 章：常態分佈</a></li>
+<li><a href="https://blog.jamovi.org/2018/04/25/jamovi-filters.html">官方Filter功能說明</a></li>
 </ul></li>
 </ul>
-<p><strong>簡報示範資料</strong>：<code>IQsim.omv</code>（10,000 筆模擬
-IQ 分數）</p>
-<p><strong>作業資料</strong>：W5/W6 個人化資料（回頭檢驗 Exam_Score 與
-Study_Hours）</p>
+<p><strong>簡報示範資料</strong>：<code>IQsim</code>,<code>aflsmall_margins</code></p>
+<p><strong>作業資料</strong>：W04 個人化資料（回頭檢驗 Total_Score 與
+RT_ms）</p>
 </section></section>
 <section>
 <section id="part-1描述與推論" class="title-slide slide level1">
@@ -642,7 +642,7 @@ t 檢定），都是假設資料符合常態分佈</li>
 <p><strong>操作步驟</strong>：</p>
 <ol type="1">
 <li>Exploration → Descriptives</li>
-<li>選擇變項：<code>IQsim</code></li>
+<li>示範變項：<code>IQsim</code>,<code>aflsmall_margins</code></li>
 <li>勾選 <strong>Plots</strong> 區塊：
 <ul>
 <li>✓ Q-Q plot</li>
@@ -651,8 +651,7 @@ t 檢定），都是假設資料符合常態分佈</li>
 <p><strong>觀察重點</strong>：</p>
 <ul>
 <li>IQsim 的點是否集中在斜線上？</li>
-<li>比較真實資料（W4個人資料的
-<code>RT_ms</code>,<code>Total_Score</code>）</li>
+<li>LAB重點：個人資料的 <code>RT_ms</code>,<code>Total_Score</code></li>
 </ul>
 </section>
 <section id="方法-2shapiro-wilk-檢定" class="slide level2">
@@ -673,7 +672,7 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 <p><strong>操作步驟</strong>：</p>
 <ol type="1">
 <li>Exploration → Descriptives</li>
-<li>選擇變項：<code>IQsim</code></li>
+<li>示範變項：<code>IQsim</code>,<code>aflsmall_margins</code></li>
 <li>勾選 <strong>Statistics</strong> 區塊：
 <ul>
 <li>✓ Shapiro-Wilk</li>
@@ -682,7 +681,7 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 <p><strong>結果解讀</strong>：</p>
 <ul>
 <li>W 統計量：越接近 1 越符合常態</li>
-<li>p 值：IQsim 預期 p &gt; 0.05（因為是理論常態）</li>
+<li>p 值：IQsim 預期 p &gt; 0.05（不能拒絕理論常態性）</li>
 </ul>
 </section>
 <section id="重要警告樣本數的影響" class="slide level2">
@@ -697,10 +696,10 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 <p><strong>建議</strong>：</p>
 <ul>
 <li>結合 Q-Q Plot 視覺判斷</li>
-<li>對於大樣本，微小偏離不影響後續分析</li>
+<li>大樣本的微小偏離不影響後續分析</li>
 </ul>
 <blockquote>
-<p><strong>原則</strong>：統計顯著不等於真正有意義</p>
+<p><strong>原則</strong>：檢測有無顯著偏離<span class="math inline">\(\neq\)</span>符合/不符合常態性</p>
 </blockquote>
 </section></section>
 <section>
@@ -711,7 +710,7 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 <section id="z-分數資料的標準化" class="slide level2">
 <h2>Z 分數：資料的標準化</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:60%;">
 <p><strong>問題</strong>：如何比較不同單位的資料？</p>
 <ul>
 <li>學生 A：甲氏智力測驗 175 分</li>
@@ -719,7 +718,7 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 </ul>
 <p><strong>解法</strong>：轉換為「距離平均數幾個標準差」</p>
 <p><span class="math display">\[Z = \frac{X - \mu}{\sigma}\]</span></p>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:40%;">
 <p><strong>Z 分數的意義</strong>：</p>
 <ul>
 <li>Z = 0：正好等於平均數</li>
@@ -754,24 +753,23 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 </ol>
 <p><strong>這個公式會自動</strong>： - 計算 IQsim 的平均數（<span class="math inline">\(\mu\)</span>） - 計算 IQsim 的標準差（<span class="math inline">\(\sigma\)</span>） - 套用公式 <span class="math inline">\(Z = \frac{X - \mu}{\sigma}\)</span></p>
 </section>
-<section id="方法-2手動計算理解原理" class="slide level2">
-<h2>方法 2：手動計算（理解原理）</h2>
-<p><strong>分三步驟建立</strong>：</p>
+<section id="方法-2分解計算" class="slide level2">
+<h2>方法 2：分解計算</h2>
 <ol type="1">
 <li><strong>計算平均數</strong>（Data → Compute）：
 <ul>
-<li>變數名稱：<code>IQsim_Mean</code></li>
-<li>公式：<code>VMEAN(IQsim)</code></li>
+<li>變數名稱：<code>aflsmall_margins_Mean</code></li>
+<li>公式：<code>VMEAN(aflsmall_margins)</code></li>
 </ul></li>
 <li><strong>計算標準差</strong>：
 <ul>
-<li>變數名稱：<code>IQsim_SD</code></li>
-<li>公式：<code>VSTDEV(IQsim)</code></li>
+<li>變數名稱：<code>aflsmall_margins_SD</code></li>
+<li>公式：<code>VSTDEV(aflsmall_margins)</code></li>
 </ul></li>
 <li><strong>手動計算 Z 分數</strong>：
 <ul>
-<li>變數名稱：<code>IQsim_Z_Manual</code></li>
-<li>公式：<code>(IQsim - IQsim_Mean) / IQsim_SD</code></li>
+<li>變數名稱：<code>aflsmall_margins_Z</code></li>
+<li>公式：<code>(aflsmall_margins - aflsmall_margins_Mean) / aflsmall_margins_SD</code></li>
 </ul></li>
 </ol>
 </section>
@@ -780,25 +778,26 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 <p><strong>比較兩種方法</strong>：</p>
 <ul>
 <li><code>IQsim_Z</code>（內建函數）</li>
-<li><code>IQsim_Z_Manual</code>（手動計算）</li>
+<li><code>aflsmall_margins_Z</code>（分解計算）</li>
 </ul>
-<p><strong>預期結果</strong>：兩個變數的數值應該<strong>完全相同</strong>！</p>
-<p><strong>Z 分數的特性</strong>： - 平均數 = 0 - 標準差 = 1 -
+<p><strong>預期結果</strong>：用兩種變項的Z分數製作Q-Q
+plot，只有<code>IQsim_Z</code>會逼近<strong>常態分佈</strong>！</p>
+<p><strong>Z 分數分佈的特性</strong>： - 平均數 = 0 - 標準差 = 1 -
 範圍大約在 -3 到 +3 之間</p>
 </section>
-<section id="應用識別異常值" class="slide level2">
-<h2>應用：識別異常值</h2>
-<p><strong>異常值判斷準則</strong>（經驗法則）：</p>
+<section id="用z分數辨識異常數值" class="slide level2">
+<h2>用Z分數辨識異常數值</h2>
+<p><strong>異常數值的判斷準則</strong>（經驗法則）：</p>
 <ul>
-<li><strong>|Z| &gt; 3</strong>：極端異常值（需特別注意）</li>
-<li><strong>|Z| &gt; 2.5</strong>：可疑值（考慮排除）</li>
-<li><strong>|Z| &lt; 2</strong>：正常範圍</li>
+<li><strong>|Z| &gt; 3</strong>：異常離群值（需特別注意）</li>
+<li><strong>|Z| &gt; 2.5</strong>：可疑離群值（可考慮排除）</li>
+<li><strong>|Z| &lt; 2</strong>：正常數值範圍</li>
 </ul>
-<p><strong>在 jamovi 中查看</strong>：</p>
+<p><strong>jamovi 操作示範</strong>：</p>
 <ol type="1">
-<li>Data Tab：檢視 <code>IQsim_Z</code> 欄位</li>
-<li>找出 Z 分數 &gt; 3 或 &lt; -3 的資料點</li>
-<li>使用 Filter 功能：<code>ABS(IQsim_Z) &gt; 3</code></li>
+<li>建立計算變項<code>Outlier_Verify</code></li>
+<li>使用 Filter 功能：<code>-3 &lt; Z(IQsim) &lt; 3</code></li>
+<li>使用Frequency Table檢視符合Filter的資料點個數</li>
 </ol>
 </section>
 <section id="z-分數與常態分佈的關係" class="slide level2">
@@ -842,7 +841,7 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 <p><strong>檔案 1：學號_姓名_W07_Lab.omv</strong></p>
 <ul>
 <li>Descriptives 分析結果（Q-Q Plot + Shapiro-Wilk）</li>
-<li>（加分）包含自製Z 分數與標準化殘差的計算變數，自製Q-Q Plot</li>
+<li>包含 Z 分數計算變數（Total_Score_Z、RT_ms_Z）</li>
 </ul>
 <p><strong>檔案 2：學號_姓名_W07_Report.docx</strong></p>
 <ul>
@@ -850,6 +849,9 @@ H₀，資料<strong>顯著偏離</strong>常態</li>
 <li>報告寫作：以APA寫作格式描述分析結果</li>
 <li>反思問題（3 題）</li>
 </ul>
+</section>
+<section class="slide level2">
+
 <p><strong>檔案 3：學號_姓名_W07_Score_QQ.png</strong> -
 從報表匯出<code>Total_Score</code>的Q-Q Plot PNG檔</p>
 <p><strong>檔案 4：學號_姓名_W07_RT_QQ.png</strong> -
