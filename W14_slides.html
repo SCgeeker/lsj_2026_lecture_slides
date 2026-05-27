@@ -464,16 +464,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li><strong>Anscombe’s
 Quartet</strong>：四組看似相同卻截然不同的資料</li>
 </ul>
-<p><strong>操作示範資料</strong>：</p>
-<ul>
-<li>“Study2_copy.xls”, <a href="https://www.youtube.com/live/_UPqXWh1-Bs?si=12PvmLH83MUL_8Q2&amp;t=5119">前置處理操作錄影</a></li>
-</ul>
+<p><strong>操作示範資料</strong>： “Study2_copy.xls”, <a href="https://www.youtube.com/live/_UPqXWh1-Bs?si=12PvmLH83MUL_8Q2&amp;t=5119">前置處理操作錄影</a></p>
 <p><strong>作業資料</strong>：個人化
 <code>W14_Correlation_[學號].csv</code></p>
 </section></section>
 <section>
 <section id="part-1先看圖再談正事" class="title-slide slide level1">
-<h1>Part 1：先看圖再談正事</h1>
+<h1>Part 1：先看圖再談正事🧠</h1>
 
 </section>
 <section id="散佈圖是資料佈局的視覺化" class="slide level2">
@@ -503,7 +500,8 @@ Quartet</strong>：四組看似相同卻截然不同的資料</li>
 </section></section>
 <section>
 <section id="part-2安斯庫姆四重奏" class="title-slide slide level1">
-<h1>Part 2：<a href="https://zh.wikipedia.org/zh-tw/%E5%AE%89%E6%96%AF%E5%BA%93%E5%A7%86%E5%9B%9B%E9%87%8D%E5%A5%8F">安斯庫姆四重奏</a></h1>
+<h1>Part 2：<a href="https://zh.wikipedia.org/zh-tw/%E5%AE%89%E6%96%AF%E5%BA%93%E5%A7%86%E5%9B%9B%E9%87%8D%E5%A5%8F">安斯庫姆四重奏</a>
+🧠</h1>
 
 </section>
 <section id="四組資料的r完全相同" class="slide level2">
@@ -532,12 +530,13 @@ Quartet</strong>：四組看似相同卻截然不同的資料</li>
 </div>
 </div>
 <blockquote>
-<p><strong>永遠先看圖！</strong> 只看數字會被誤導，畫出來才能確定。</p>
+<p><strong>處理統計問題，先做視覺化！</strong>
+只看數字會被誤導，畫出來才能確定。</p>
 </blockquote>
 </section></section>
 <section>
 <section id="part-3pearson-相關係數" class="title-slide slide level1">
-<h1>Part 3：Pearson 相關係數</h1>
+<h1>Part 3：Pearson 相關係數 🧠👨‍💻</h1>
 
 </section>
 <section id="pearson-r-的公式" class="slide level2">
@@ -548,8 +547,8 @@ Quartet</strong>：四組看似相同卻截然不同的資料</li>
 <ul>
 <li>分子：X 和 Y <strong>偏離各自平均值</strong>的程度（共變）</li>
 <li>分母：各自偏離的程度（標準化）</li>
-<li>結果：<span class="math inline">\(-1 \leq r \leq +1\)</span> &gt;-
-<strong>散佈圖</strong>是將<span class="math inline">\(Y_i\)</span>和<span class="math inline">\(X_i\)</span>排列的視覺化成品</li>
+<li>係數值域：<span class="math inline">\(-1 \leq r \leq +1\)</span>
+&gt;- <strong>散佈圖</strong>是將<span class="math inline">\(Y_i\)</span>和<span class="math inline">\(X_i\)</span>排列的視覺化成品</li>
 </ul>
 </section>
 <section id="r-的範圍與解讀" class="slide level2">
@@ -565,27 +564,27 @@ Quartet</strong>：四組看似相同卻截然不同的資料</li>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">0.00 - 0.10</td>
-<td style="text-align: center;">幾乎無</td>
+<td style="text-align: center;">幾乎無關</td>
 <td style="text-align: left;">兩者沒什麼關係</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">0.10 - 0.30</td>
-<td style="text-align: center;">弱</td>
+<td style="text-align: center;">弱相關</td>
 <td style="text-align: left;">有點關係，但不明顯</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">0.30 - 0.50</td>
-<td style="text-align: center;">中等</td>
+<td style="text-align: center;">中等相關</td>
 <td style="text-align: left;">看得出趨勢</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">0.50 - 0.70</td>
-<td style="text-align: center;">強</td>
+<td style="text-align: center;">強相關</td>
 <td style="text-align: left;">關係明顯</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">0.70 - 1.00</td>
-<td style="text-align: center;">非常強</td>
+<td style="text-align: center;">強相關</td>
 <td style="text-align: left;">幾乎可以預測</td>
 </tr>
 </tbody>
@@ -631,12 +630,9 @@ Quartet</strong>：四組看似相同卻截然不同的資料</li>
 </table>
 <p><strong>解讀</strong>：</p>
 <ul>
-<li>Dan爸睡越多，脾氣越好：<span class="math inline">\(r =
--0.903\)</span>（強負相關）</li>
-<li>寶寶睡越多，Dan爸脾氣越好：<span class="math inline">\(r =
--0.566\)</span>（中等負相關）</li>
-<li>Dan爸和寶寶的睡眠正相關：<span class="math inline">\(r =
-0.628\)</span></li>
+<li class="fragment">Dan爸睡越多，脾氣越好：<span class="math inline">\(r = -0.903\)</span>（強負相關）</li>
+<li class="fragment">寶寶睡越多，Dan爸脾氣越好：<span class="math inline">\(r = -0.566\)</span>（中等負相關）</li>
+<li class="fragment">Dan爸和寶寶的睡眠正相關：<span class="math inline">\(r = 0.628\)</span></li>
 </ul>
 </section>
 <section id="correlation-matrix模組操作步驟" class="slide level2">
@@ -678,7 +674,7 @@ Quartet</strong>：四組看似相同卻截然不同的資料</li>
 </section></section>
 <section>
 <section id="part-4r2-決定係數" class="title-slide slide level1">
-<h1>Part 4：<span class="math inline">\(r^2\)</span> 決定係數</h1>
+<h1>Part 4：<span class="math inline">\(r^2\)</span> 決定係數 🧠👨‍💻</h1>
 
 </section>
 <section id="r2-是什麼" class="slide level2">
@@ -743,7 +739,8 @@ Quartet</strong>：四組看似相同卻截然不同的資料</li>
 </section>
 <section id="jamovi操作zhang-et-al.-2024-study-2-1" class="slide level2">
 <h2>jamovi操作：Zhang et al. (2024) Study 2</h2>
-<p>從相關矩陣結果中，選出顯著相關的變項對，計算 <span class="math inline">\(r^2\)</span>：</p>
+<p>從相關矩陣結果中，選出顯著相關的變項對，使用<code>Linear Regression</code>計算
+<span class="math inline">\(r^2\)</span>：</p>
 <ul>
 <li><strong><code>Pre_sum</code> ×
 <code>Post_sum</code></strong>：先備知識能解釋多少比例的後測成績變異？</li>
@@ -782,7 +779,7 @@ Correlations</a></li>
 </section>
 <section id="三種可能的解釋" class="slide level2">
 <h2>三種可能的解釋</h2>
-<p>觀察到 A 和 B 相關時，至少有三種可能：</p>
+<p>A 和 B 會有顯著相關，至少有三種可能：</p>
 <table>
 <thead>
 <tr class="header">
@@ -805,7 +802,7 @@ Correlations</a></li>
 <tr class="odd">
 <td style="text-align: left;">C 同時影響 A 和 B</td>
 <td style="text-align: center;">C → (A, B)</td>
-<td style="text-align: left;">寶寶哭鬧 → 兩人都睡不好且暴躁</td>
+<td style="text-align: left;">寶寶哭鬧 → Dan爸睡不好變暴躁</td>
 </tr>
 </tbody>
 </table>
@@ -872,6 +869,7 @@ Correlations</a></li>
 <li>執行 <strong>Regression → Correlation Matrix</strong></li>
 <li>勾選 Pearson、Significance</li>
 <li>在報告中列出所有 r 值</li>
+<li>執行 <strong>Regression → Linear Regression</strong></li>
 <li>計算 <span class="math inline">\(r^2\)</span> 並做白話解讀</li>
 </ol>
 </section>
@@ -911,7 +909,8 @@ Correlations</a></li>
 <section id="本週核心概念" class="slide level2">
 <h2>本週核心概念</h2>
 <ol type="1">
-<li><strong>先看圖</strong>：散佈圖永遠是第一步（Anscombe 的教訓）</li>
+<li><strong>先做視覺化</strong>：散佈圖永遠是第一步（Anscombe
+的教訓）</li>
 <li><strong>Pearson r</strong>：衡量線性關係的方向與強度（-1 到
 +1）</li>
 <li><strong><span class="math inline">\(r^2\)</span></strong>：解釋變異量的百分比（比 r
