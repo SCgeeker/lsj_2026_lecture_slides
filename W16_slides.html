@@ -430,6 +430,21 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </section>
 
 <section>
+<section id="暖身" class="title-slide slide level1">
+<h1>暖身</h1>
+
+</section>
+<section id="期中考模擬題組" class="slide level2">
+<h2>期中考模擬題組</h2>
+<blockquote>
+<p>開啟連結，完成題目後自行對答案；以及提供問卷設定的意見。</p>
+</blockquote>
+<!--- **<https://us.psytoolkit.org/c/3.7.0/survey?s=jdBbg>** 正式上課時開放 --->
+<blockquote>
+<p>後面還有兩道模擬題組，暖身題回饋回更新題組的設定。</p>
+</blockquote>
+</section></section>
+<section>
 <section id="本日課程須知" class="title-slide slide level1">
 <h1>本日課程須知</h1>
 <ul>
@@ -438,58 +453,41 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li>因缺席而無法了解W17 LAB須知而違規者，後果自負。</li>
 </ul>
 </section>
-<section id="複習大綱" class="slide level2">
-<h2>複習大綱</h2>
-<table>
-<thead>
-<tr class="header">
-<th>課題</th>
-<th style="text-align: center;">時長</th>
-<th>內容</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>學期概念地圖</td>
-<td style="text-align: center;">30 分</td>
-<td>W07–W15 統計原理複習</td>
-</tr>
-<tr class="even">
-<td>jamovi 操作彙整</td>
-<td style="text-align: center;">30 分</td>
-<td>各週模組操作指南</td>
-</tr>
-<tr class="odd">
-<td>成績公告</td>
-<td style="text-align: center;">15 分</td>
-<td>W15 複評截止通知、平時 LAB 成績</td>
-</tr>
-<tr class="even">
-<td>W17 期末 LAB 預告</td>
-<td style="text-align: center;">15 分</td>
-<td>任務說明與繳交規範</td>
-</tr>
-<tr class="odd">
-<td>“可重製統計”預告</td>
-<td style="text-align: center;">10 分</td>
-<td>新學期課程介紹</td>
-</tr>
-<tr class="even">
-<td>練習 + 問題討論</td>
-<td style="text-align: center;">至下課前</td>
-<td>自由操作 jamovi + Q&amp;A</td>
-</tr>
-</tbody>
-</table>
+<section id="課前說明" class="slide level2">
+<h2>課前說明</h2>
+<ul>
+<li><p>W11 LAB確實有程序安排的瑕疵：google
+form無明確指示，導致部分同學無法完成限時作答時需要改進的部分; google
+classroom上傳時限設定過嚴，雖讓多數同學無法即時確認有無繳交成果，事後補救皆確認收到在當時完成的檔案。公告及溝通過程造成同學不安及無法理解，<strong>在此致歉</strong>。本次也說明W17
+LAB的設定及改進。</p></li>
+<li><p>先請同學回顧本學期開始時， <a href="W01_slides.html#/%E8%AA%B2%E7%A8%8B%E8%A6%8F%E7%AF%84%E8%88%87%E5%AD%B8%E7%BF%92%E6%88%90%E6%95%88%E8%A9%95%E4%BC%B012">每次LAB的初評與複評機制</a></p></li>
+</ul>
+</section>
+<section id="lab機制的正讀與誤讀" class="slide level2">
+<h2>LAB機制的正讀與誤讀</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>✔️ 知道自已學習不夠的地方</p>
+<p>✔️ 了解如何改進觀念及操作學習不到位的地方</p>
+<p>✔️ 適度調整自已的學習狀況</p>
+<p>✔️ (教學端)<a href="grading_bug_log.md">打造真正的個人化學習助理</a></p>
+</div><div class="column" style="width:50%;">
+<p>❌ 可以拖延交作業的時間</p>
+<p>❌ 初評及格就好，有錯就算了</p>
+<p>❌ 反思問題不影響成績及格，顧好操作就好</p>
+</div>
+</div>
 </section></section>
 <section>
 <section id="學期概念地圖" class="title-slide slide level1">
 <h1>學期概念地圖</h1>
 
 </section>
-<section id="w07w15-統計邏輯鍊" class="slide level2">
-<h2>W07–W15 統計邏輯鍊</h2>
+<section id="w05w15-學習路徑" class="slide level2">
+<h2>W05–W15 學習路徑</h2>
 <pre><code>原始資料
+  ↓
+描述統計(W05,W06): 統計量數、常用統計圖
   ↓
 常態性 (W07)：常態分佈、z 分數、機率
   ↓
@@ -503,105 +501,164 @@ document.addEventListener('DOMContentLoaded', function(e) {
   ↓
 類別資料 (W13)：適合度檢定、獨立性檢定
   ↓
-雙變項關係 (W14)：Pearson r、r²
+雙變項關係 (W14)：Pearson r、r²、相關的解讀
   ↓
-預測 (W15)：線性迴歸、測量標準誤（SEM）</code></pre>
+預測 (W15)：簡單線性迴歸、迴歸係數估計及檢定</code></pre>
+</section></section>
+<section>
+<section id="phase-3w07w09-常態性-估計" class="title-slide slide level1">
+<h1>Phase 3：W07–W09 常態性 → 估計</h1>
+
 </section>
-<section id="一常態性與取樣理論w07w09" class="slide level2">
-<h2>一、常態性與取樣理論（W07–W09）</h2>
+<section id="期末複習題組-a" class="slide level2">
+<h2>期末複習題組 A</h2>
+<blockquote>
+<p>開啟連結，完成 6 題練習（限時 6 分鐘）</p>
+</blockquote>
+<!--- **<https://us.psytoolkit.org/c/3.7.0/survey?s=8sFEe>**  正式上課時開放 --->
+<p><em>涵蓋：W5 描述統計、W6 圖表、W7 常態性、W8 CLT、W9 CI</em></p>
+</section>
+<section id="概念複習" class="slide level2">
+<h2>概念複習</h2>
 <p><strong>W07 常態分佈</strong></p>
 <ul>
 <li>常態分佈的形狀由 <span class="math inline">\(\mu\)</span> 與 <span class="math inline">\(\sigma\)</span> 決定</li>
 <li><span class="math inline">\(z = \dfrac{X -
-\mu}{\sigma}\)</span>：標準化後可查機率</li>
-<li>判斷常態性：直方圖形狀 + Q-Q Plot + Shapiro-Wilk 檢定</li>
+\mu}{\sigma}\)</span>：原始資料標準化後可查機率</li>
+<li>判斷常態性：直方圖形狀、 Q-Q Plot 、 Shapiro-Wilk 檢定</li>
 </ul>
 </section>
 <section class="slide level2">
 
 <p><strong>W08 取樣分佈與 CLT</strong></p>
 <ul>
-<li>取樣分佈：從母群重複取樣，每次得到不同的樣本平均</li>
-<li>中央極限定理（CLT）：<span class="math inline">\(\bar{X}\)</span>
-的分佈趨近常態，不論母群形狀</li>
+<li>取樣分佈：從母群以相同<strong>樣本數(N)</strong>重複取樣，每次得到不同的樣本平均
+<span class="math inline">\(\bar{X}\)</span></li>
+<li>中央極限定理（CLT）：不論母群形狀， <span class="math inline">\(\bar{X}\)</span> 的分佈趨近常態分佈</li>
 <li><span class="math inline">\(SE =
-\dfrac{\sigma}{\sqrt{N}}\)</span>：樣本大 → SE 小 → 估計更精準</li>
+\dfrac{\sigma}{\sqrt{N}}\)</span>：樣本數越大 → SE越小 → 估計更精準</li>
 </ul>
 </section>
 <section class="slide level2">
 
-<p><strong>W09 信賴區間</strong></p>
+<p><strong>W09 信賴區間(CI)</strong></p>
 <ul>
 <li><span class="math inline">\(95\%\ CI = \bar{X} \pm t \times
 SE\)</span></li>
-<li>CI 的意義：<strong>重複取樣，95% 的 CI 會包含真實 <span class="math inline">\(\mu\)</span></strong></li>
-<li>CI 寬窄受 N 與 SD 影響：N 大 → CI 窄</li>
+<li>CI 的意義：以相同<strong>樣本數(N)</strong>重複隨機取樣，大約 95% 的
+CI 會包含真實 <span class="math inline">\(\mu\)</span></li>
+<li>CI 寬窄受 N 與 SD 影響：N越大 → SD越小 → CI 越窄</li>
+<li>任何可以估計的統計量數，包括<strong>效果量</strong>都可以估計CI</li>
 </ul>
+<!---
+
+## jamovi 操作：W07–W09
+
+| 分析目的 | jamovi 路徑 | 重點設定 |
+|:---------|:-----------|:--------|
+| 描述統計 + 圖表 | **Exploration → Descriptives** | Histogram、Q-Q Plot、Shapiro-Wilk |
+| z 分數標準化 | Exploration → Descriptives → **Scores** | 勾選 Standardized scores |
+| 信賴區間（CI） | **T-Tests → One Sample T-Test** | Hypothesized value（μ₀）、勾選 95% CI |
+
+**變項類型設定**（匯入資料後第一步）
+
+| 類型 | 適用變項 | 圖示 |
+|:-----|:---------|:----:|
+| Nominal | 類別但無順序（性別、組別） | 圓圈 |
+| Ordinal | 類別且有順序（李克特量表） | 方形 |
+| Continuous | 連續數值（分數、時間） | 圓點 |
+
+--->
+</section></section>
+<section>
+<section id="區段二w10w15-假設檢定-迴歸" class="title-slide slide level1">
+<h1>區段二：W10–W15 假設檢定 → 迴歸</h1>
+
 </section>
-<section id="二假設檢定w10w12" class="slide level2">
-<h2>二、假設檢定（W10–W12）</h2>
-<p><strong>W10 假設檢定與單一樣本 <em>t</em></strong></p>
+<section id="期末複習題組-b" class="slide level2">
+<h2>期末複習題組 B</h2>
+<blockquote>
+<p>開啟連結，完成 8 題練習（限時8分鐘）</p>
+</blockquote>
+<!--- **<https://us.psytoolkit.org/c/3.7.0/survey?s=W83TJ>**  正式上課時開放 --->
+<p><em>涵蓋：W10 假設檢定、W12 雙樣本 t、W13 卡方、W14 相關、W15
+迴歸</em></p>
+</section>
+<section id="概念複習-1" class="slide level2">
+<h2>概念複習</h2>
+<p><strong>W10 單一樣本 <em>t</em> 的假設檢定</strong></p>
 <ul>
 <li>虛無假設 <span class="math inline">\(H_0\)</span>：母群平均等於特定值（如 0、50）</li>
 <li>對立假設 <span class="math inline">\(H_1\)</span>：母群平均不等於（或大於 /
 小於）特定值</li>
+<li>適用條件：須符合樣本常態性 - Shapiro-Wilk 檢定</li>
 <li><span class="math inline">\(t = \dfrac{\bar{X} -
 \mu_0}{SE}\)</span>；df = N − 1</li>
 <li>p 值：若 <span class="math inline">\(H_0\)</span>
 為真，觀察到「至少這麼極端」結果的機率</li>
-<li>決策：<span class="math inline">\(p &lt; .05\)</span> → 拒絕 <span class="math inline">\(H_0\)</span></li>
+<li>決策：<span class="math inline">\(p &lt; \alpha\)</span> → 拒絕
+<span class="math inline">\(H_0\)</span></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <p><strong>W12 雙樣本 <em>t</em> 檢定</strong></p>
 <table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 40%" />
+<col style="width: 36%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">類型</th>
 <th style="text-align: left;">使用時機</th>
-<th style="text-align: left;">補充檢驗</th>
+<th style="text-align: left;">適用條件檢驗</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">獨立樣本 t</td>
 <td style="text-align: left;">兩組受試者互相獨立</td>
-<td style="text-align: left;">Levene’s F（變異數同質性）</td>
+<td style="text-align: left;">Levene’s F（變異數同質性）<br>
+Shapiro-Wilk (樣本常態性)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">相依樣本 t</td>
 <td style="text-align: left;">同一受試者前後測 / 配對設計</td>
-<td style="text-align: left;">差值的常態性</td>
+<td style="text-align: left;">Shapiro-Wilk ( 差值常態性)</td>
 </tr>
 </tbody>
 </table>
-<p>效果量 Cohen’s <em>d</em>：量化兩組差距的實際意義，不受 N 影響</p>
+<p>效果量 Cohen’s <em>d</em>：測量差距的標準化，不受 N 影響</p>
 </section>
-<section id="三雙變項分析w13w15" class="slide level2">
-<h2>三、雙變項分析（W13–W15）</h2>
+<section class="slide level2">
+
 <p><strong>W13 卡方檢定</strong></p>
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: left;">類型</th>
 <th style="text-align: left;">分析問題</th>
-<th style="text-align: left;">關鍵量</th>
+<th style="text-align: left;">效果量指標</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">適合度檢定</td>
-<td style="text-align: left;">觀察頻次 vs 期望頻次（一組）</td>
+<td style="text-align: left;">同組之觀察次數 vs 期望次數</td>
 <td style="text-align: left;"><span class="math inline">\(\chi^2\)</span>、<em>p</em></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">獨立性檢定</td>
+<td style="text-align: left;">獨立性檢定*</td>
 <td style="text-align: left;">兩類別變項是否相關</td>
 <td style="text-align: left;"><span class="math inline">\(\chi^2\)</span>、Cramer’s V</td>
 </tr>
 </tbody>
 </table>
+<p>*
+觀察次數限制：五分之一以上的細格預期次數&lt;5，或任一細格次數為0，應使用Fisher’s
+Exact Test</p>
 </section>
 <section class="slide level2">
 
@@ -615,155 +672,61 @@ SE\)</span></li>
 </section>
 <section class="slide level2">
 
-<p><strong>W15 線性迴歸與測量標準誤（SEM）</strong></p>
+<p><strong>W15 線性迴歸 </strong></p>
 <ul>
 <li>方程式：<span class="math inline">\(\hat{Y} = a + b \times
-X\)</span>（<span class="math inline">\(a\)</span> = 截距，<span class="math inline">\(b\)</span> = 斜率）</li>
-<li><span class="math inline">\(R^2\)</span>：模型解釋的變異量（0–1）</li>
-<li>殘差診斷：直方圖對稱 + Q-Q Plot 貼近對角線</li>
-<li><span class="math inline">\(SEM = s \times \sqrt{1 -
-r}\)</span>：測量分數的不確定性範圍</li>
+X\)</span>（<span class="math inline">\(a\)</span> = 截距，<span class="math inline">\(b\)</span> = 迴歸係數）</li>
+<li><span class="math inline">\(R^2\)</span>：模型可預測的變異範圍（0–1）</li>
+<li>殘差診斷：線性關係、常態性、變異同質性</li>
+<li>迴歸係數的推論統計：另一種單一樣本t檢定及區間估計</li>
 </ul>
-</section></section>
-<section>
-<section id="jamovi-操作彙整" class="title-slide slide level1">
-<h1>jamovi 操作彙整</h1>
+<!---
 
-</section>
-<section id="各週使用模組對照表" class="slide level2">
-<h2>各週使用模組對照表</h2>
-<table>
-<colgroup>
-<col style="width: 32%" />
-<col style="width: 38%" />
-<col style="width: 29%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">分析目的</th>
-<th style="text-align: left;">jamovi 路徑</th>
-<th style="text-align: left;">重點設定</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">描述統計 + 圖表</td>
-<td style="text-align: left;"><strong>Exploration →
-Descriptives</strong></td>
-<td style="text-align: left;">Histogram、Q-Q Plot、Shapiro-Wilk</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">z 分數標準化</td>
-<td style="text-align: left;">Exploration → Descriptives → Scores</td>
-<td style="text-align: left;">勾選 Standardized scores</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">單一樣本 <em>t</em></td>
-<td style="text-align: left;"><strong>T-Tests → One Sample
-T-Test</strong></td>
-<td style="text-align: left;">Hypothesized value（μ₀）、95% CI</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">獨立樣本 <em>t</em></td>
-<td style="text-align: left;"><strong>T-Tests → Independent Samples
-T-Test</strong></td>
-<td style="text-align: left;">Homogeneity test（Levene’s）、Effect
-size</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">相依樣本 <em>t</em></td>
-<td style="text-align: left;">T-Tests → Paired Samples T-Test</td>
-<td style="text-align: left;">Measure 1 / Measure 2、Effect size</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">適合度檢定</td>
-<td style="text-align: left;"><strong>Frequencies → Proportion Test (N
-Outcomes)</strong></td>
-<td style="text-align: left;">Expected counts</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">獨立性檢定</td>
-<td style="text-align: left;"><strong>Frequencies → Contingency
-Tables</strong></td>
-<td style="text-align: left;">Row / Column variable、Cramer’s V</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">相關矩陣</td>
-<td style="text-align: left;"><strong>Regression → Correlation
-Matrix</strong></td>
-<td style="text-align: left;">Pearson <em>r</em>、Report
-significance</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">線性迴歸</td>
-<td style="text-align: left;"><strong>Regression → Linear
-Regression</strong></td>
-<td style="text-align: left;">DV / Covariates、R²、Save Residuals</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="操作注意事項" class="slide level2">
-<h2>操作注意事項</h2>
-<p><strong>變項類型設定</strong>（每週最容易出錯的地方）</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">類型</th>
-<th style="text-align: left;">適用變項</th>
-<th style="text-align: left;">jamovi 圖示</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Nominal</td>
-<td style="text-align: left;">類別但無順序（性別、組別）</td>
-<td style="text-align: left;">圓圈</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Ordinal</td>
-<td style="text-align: left;">類別且有順序（李克特量表）</td>
-<td style="text-align: left;">方形</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Continuous</td>
-<td style="text-align: left;">連續數值（分數、時間）</td>
-<td style="text-align: left;">圓點</td>
-</tr>
-</tbody>
-</table>
-<p><strong>儲存殘差（W15 必備步驟）</strong></p>
-<ol type="1">
-<li>Linear Regression → <strong>Save</strong> 標籤</li>
-<li>勾選 <strong>Residuals</strong></li>
-<li>資料表中出現 <code>Residuals</code> 欄位後，再執行 Descriptives
-進行常態性診斷</li>
-</ol>
+## jamovi 操作：W10–W15
+
+| 分析目的 | jamovi 路徑 | 重點設定 |
+|:---------|:-----------|:--------|
+| 單一樣本 *t*（假設檢定）| **T-Tests → One Sample T-Test** | Hypothesized value（μ₀）、Effect size |
+| 獨立樣本 *t* | **T-Tests → Independent Samples T-Test** | Levene's（同質性）、Effect size |
+| 相依樣本 *t* | T-Tests → Paired Samples T-Test | Measure 1 / Measure 2、Effect size |
+| 適合度檢定 | **Frequencies → Proportion Test (N Outcomes)** | Expected counts |
+| 獨立性檢定 | **Frequencies → Contingency Tables** | Row / Column variable、Cramer's V |
+| 相關矩陣 | **Regression → Correlation Matrix** | Pearson *r*、Report significance |
+| 線性迴歸 | **Regression → Linear Regression** | DV / Covariates、R²、Save Residuals |
+
+
+
+**儲存殘差（W15 必備步驟）**
+
+1. Linear Regression → **Save** 標籤
+2. 勾選 **Residuals**
+3. 資料表中出現 `Residuals` 欄位後，再執行 Descriptives 進行常態性診斷
+
+--->
 </section></section>
 <section>
-<section id="成績公告" class="title-slide slide level1">
-<h1>成績公告</h1>
+<section id="成績結算公告" class="title-slide slide level1">
+<h1>成績結算公告</h1>
 
 </section>
 <section id="w15-lab-複評" class="slide level2">
 <h2>W15 LAB 複評</h2>
 <ul>
-<li><strong>複評截止</strong>：（待公告，請留意 Google Classroom
-通知）</li>
+<li><strong>複評截止</strong>：2026/6/15</li>
 <li>修正後上傳至 Google Drive：<code>LAB/W15/學號/Revision/</code></li>
 <li>上傳兩個檔案：<code>學號_姓名_W15_Lab.omv</code> +
 <code>學號_姓名_W15_Report.docx</code></li>
+<li>複評結算後，如未進行課後輔導(個案處理)，平時LAB成績即為結算</li>
 </ul>
 </section>
 <section id="平時-lab-成績計算" class="slide level2">
 <h2>平時 LAB 成績計算</h2>
-<p><strong>計入週次</strong>：W04、W05、W06、W07、W08、W09、W10、W12、W13、W14、W15（共
-11 週）</p>
+<p><strong>計入週次</strong>：W04 - W10、W12 - W15（共 11 週）</p>
 <ul>
-<li>每週有初評與複評兩次機會</li>
-<li><strong>final 分數</strong> = max(初評, 複評)</li>
-<li>平時 LAB 成績 = 11 週 final
-分數加總後換算(<strong>加總公式W16公告</strong>)</li>
+<li>每週有初評與複評兩次機會， <strong>final 分數</strong> = max(初評,
+複評)</li>
+<li>平時 LAB 成績 = 11 週 final 分數加總後換算（<strong>加總公式
+見個人累積成績報告</strong> <code>LAB/Cumulative/學號/</code>）</li>
 </ul>
 <table>
 <thead>
@@ -774,7 +737,7 @@ Regression</strong></td>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">平時 LAB（W04–W15）</td>
+<td style="text-align: left;">平時 LAB（W02–W15）</td>
 <td style="text-align: center;">70%</td>
 </tr>
 <tr class="even">
@@ -787,31 +750,237 @@ Regression</strong></td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>個人累積成績報告已上傳至 Google Drive
-<code>LAB/Cumulative/學號/</code></p>
-</blockquote>
 </section></section>
 <section>
 <section id="w17-期末-lab-預告" class="title-slide slide level1">
 <h1>W17 期末 LAB 預告</h1>
 
 </section>
-<section id="zhang-et-al.-2024-study-3" class="slide level2">
-<h2>Zhang et al. (2024) Study 3</h2>
-<p><strong>研究背景</strong>：Study 3 招募更多學生（N = 102）驗證 Study
-2 發現</p>
-<p><strong>研究問題</strong>：不同教學影片格式，對學習成效與自我評估準確度的影響</p>
+<section id="study-3-研究背景" class="slide level2">
+<h2>Study 3 研究背景</h2>
+<p><strong><a href="https://doi.org/10.3758/s13421-024-01526-7">Zhang et
+al. (2024)</a></strong>：不同教學影片設計對學習成效的影響</p>
+<p><small></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">項目</th>
+<th style="text-align: left;">內容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">研究問題</td>
+<td style="text-align: left;">手繪圖動作是否能提升學習成效與自我評估準確度？</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">招募人數</td>
+<td style="text-align: left;">N = 102（排除極端值後 N = 92）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">實驗條件（IV）</td>
+<td style="text-align: left;">顯手繪圖組（Drawing+Hand）、動態簡報組（Dynamic
+Slides）、控制組（Control）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">前測</td>
+<td style="text-align: left;">PRE_SUM（6 題，M = 3.38，SD = 1.67）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">後測</td>
+<td style="text-align: left;">POST_SUM（13 題，M = 7.05，SD =
+2.74）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">關鍵指標 (DV)</td>
+<td style="text-align: left;">後測分數( POST_SUM )；JOL = |後測分數 −
+主觀評估|</td>
+</tr>
+</tbody>
+</table>
+<p></small></p>
+</section>
+<section id="study-3-三組實驗條件" class="slide level2">
+<h2>Study 3 三組實驗條件</h2>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 44%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">組別</th>
+<th style="text-align: left;">學生觀看內容</th>
+<th style="text-align: left;">設計目的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Drawing+Hand</strong></td>
+<td style="text-align: left;">講師在電子平板手繪圖表的教學影片</td>
+<td style="text-align: left;">體現認知假設：手的存在是否為學習關鍵？</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Dynamic Slides</strong></td>
+<td style="text-align: left;">展示靜態投影片，講師<strong>移動游標</strong>指示重點</td>
+<td style="text-align: left;">游標可否替代手的效果，引導學習者注意力？</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Control</strong></td>
+<td style="text-align: left;">與常態分配<strong>無關</strong>的迴歸分析教學影片</td>
+<td style="text-align: left;">測試基準線：排除「前測即練習」的測試效應</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Study 3 的核心問題：Study 2
+顯手繪圖的優勢，是來自<strong>體現認知</strong>（手的存在），還是只是<strong>引導注意力</strong>？</p>
+</blockquote>
+</section>
+<section id="插曲w14反思問題的最佳解答" class="slide level2">
+<h2>插曲：W14反思問題的最佳解答</h2>
 <ul>
-<li><strong>條件設計</strong>：三組教學條件（同 Study
-2：靜態簡報、無手繪圖、顯手繪圖）</li>
-<li><strong>資料檔</strong>：<code>W17_Study3.csv</code>（LAB開始後公布於
-Google Classroom）</li>
+<li>W14:
+如果要證明「讀書時間確實會提升成績」，應該採用什麼研究設計？為什麼相關分析不夠？</li>
 </ul>
+<ul>
+<li class="fragment">最有對照價值的控制組：讀書時間與實驗組相同，研讀內容相同，但是非上課用教材。</li>
+</ul>
+<ul>
+<li class="fragment">雙重控制組：實驗組 vs. 異教材控制組
+vs. 異活動控制組</li>
+</ul>
+</section>
+<section id="study-3-jol-準確性" class="slide level2">
+<h2>Study 3 JOL 準確性</h2>
+<p><strong>W11 Study 2</strong>：Drawing+Hand 組 JOL 最準確（誤差接近
+0）</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">組別</th>
+<th style="text-align: left;">JOL 準確性（M = 0 最準確）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Drawing+Hand</td>
+<td style="text-align: left;">顯著高估（<span class="math inline">\(t(31) = 4.11,\ p &lt; .001\)</span>）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dynamic Slides</td>
+<td style="text-align: left;">顯著高估（<span class="math inline">\(t(29) = 3.74,\ p &lt; .001\)</span>）</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">兩組差異</td>
+<td style="text-align: left;">無顯著差異（<span class="math inline">\(t(60) = 0.77,\ p = .444\)</span>）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Study 3 的兩組都顯著<strong>高估</strong>自己的學習成效，與 Study 2
+的結果不同</p>
+</blockquote>
+<ul>
+<li class="fragment">W17 LAB的反思問題之一</li>
+</ul>
+</section>
+<section id="study-3-主要統計發現" class="slide level2">
+<h2>Study 3 主要統計發現</h2>
+<p><strong>後測成效（共變數分析，控制前測）</strong> <span class="math inline">\(F(2, 88) = 4.48,\ p = .014,\ \eta^2 =
+.12\)</span></p>
+<p><small></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">比較</th>
+<th style="text-align: left;">結果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Drawing+Hand vs. Control</td>
+<td style="text-align: left;"><span class="math inline">\(t(88) = 4.86,\
+p_\text{adj} &lt; .001\)</span> ✅ 顯著</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dynamic Slides vs. Control</td>
+<td style="text-align: left;"><span class="math inline">\(t(88) = 3.08,\
+p_\text{adj} = .008\)</span> ✅ 顯著</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Drawing+Hand vs. Dynamic Slides</td>
+<td style="text-align: left;"><span class="math inline">\(t(88) = 1.73,\
+p_\text{adj} = .264\)</span> ❌ 無顯著差異</td>
+</tr>
+</tbody>
+</table>
+<p><strong>結論</strong>：兩個實驗組均優於控制組，但彼此<strong>無顯著差異</strong>
+→ 游標引導注意力即可達到與手繪相近的學習效果</p>
+<ul>
+<li class="fragment">此頁非W17
+LAB的操作題目或反思問題，僅為背景介紹</li>
+</ul>
+<p></small></p>
+</section>
+<section id="study-3-各組結果預覽" class="slide level2">
+<h2>Study 3 各組結果預覽</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">組別</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">前測 M(SD)</th>
+<th style="text-align: center;">後測 M(SD)</th>
+<th style="text-align: center;">gain M(SD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">control</td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">3.19(1.67)</td>
+<td style="text-align: center;">6.07(2.63)</td>
+<td style="text-align: center;">2.88(1.57)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Drawing+Hand</td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">3.39(1.57)</td>
+<td style="text-align: center;">7.79(2.39)</td>
+<td style="text-align: center;">4.39(2.10)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dynamic Slides</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">3.55(1.80)</td>
+<td style="text-align: center;">7.18(3.00)</td>
+<td style="text-align: center;">3.63(2.13)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>W17 LAB 任務：用 W5–W15 所學的統計方法，重現這份資料的分析</p>
+</blockquote>
 </section>
 <section id="w17-lab-內容" class="slide level2">
 <h2>W17 LAB 內容</h2>
 <table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>部分</th>
@@ -823,20 +992,20 @@ Google Classroom）</li>
 <tbody>
 <tr class="odd">
 <td><strong>Part A</strong></td>
-<td>觀念測驗（10 題選擇）</td>
-<td style="text-align: center;">20</td>
-<td>Google Form（自動記錄）</td>
+<td>觀念測驗（限時選擇題）</td>
+<td style="text-align: center;">30</td>
+<td>PsyToolkit（同本日模擬題組）</td>
 </tr>
 <tr class="even">
 <td><strong>Part B</strong></td>
 <td>jamovi 資料分析</td>
-<td style="text-align: center;">50</td>
+<td style="text-align: center;">30</td>
 <td><code>學號_姓名_W17_Lab.omv</code></td>
 </tr>
 <tr class="odd">
 <td><strong>Part C</strong></td>
 <td>詮釋報告</td>
-<td style="text-align: center;">30</td>
+<td style="text-align: center;">40</td>
 <td><code>學號_姓名_W17_Report.docx</code></td>
 </tr>
 </tbody>
@@ -845,38 +1014,49 @@ Google Classroom）</li>
 <section id="w17-時程" class="slide level2">
 <h2>W17 時程</h2>
 <ul>
-<li><strong>Part A</strong>：課程開始後 10 分鐘內限時作答（Closed
+<li>第三節課鐘響後開啟google classroom作業</li>
+<li><strong>Part A</strong>： 10:20 AM __分鐘限時作答（Closed
 Book）</li>
-<li><strong>Part B + C</strong>：10:30 AM – 11:30 AM（Open Book）</li>
-<li><strong>上傳截止</strong>：課堂結束前，<strong>無複評機會</strong></li>
+<li><strong>Part B + C</strong>：10:30 AM – 12:00 PM（Open Book）</li>
+<li><strong>上傳遲交時限</strong>：12:10 PM</li>
 </ul>
 <blockquote>
 <p>詳細操作說明請見 <code>W17_Report_Template.docx</code></p>
 </blockquote>
 </section>
-<section id="w17-準備建議" class="slide level2">
-<h2>W17 準備建議</h2>
+<section id="w17-lab-準備建議" class="slide level2">
+<h2>W17 LAB 準備建議</h2>
 <ol type="1">
-<li>複習 W7–W12 的統計原理及分析方法</li>
-<li>確認熟悉本日複習的操作</li>
+<li>複習 W5–W15 的統計原理及分析方法</li>
+<li>確認熟悉各週LAB的所有 jamovi 操作</li>
 <li>整理目前已練習過的 APA 書寫格式</li>
-<li>複習 W11 Part C 的詮釋報告</li>
+<li>彙整 <a href="https://link.springer.com/article/10.3758/s13421-024-01526-7#Sec28">Zhang
+et al.(2024) Study 3</a> 的結果分析及討論</li>
 </ol>
 </section></section>
-<section>
+<section id="研究方法預告" class="title-slide slide level1">
+<h1>“研究方法”預告</h1>
+<ul>
+<li>教科書: <a href="http://www.yehyeh.com.tw/bookchi.aspx?mode=dbview&amp;sysid=00107425">研究方法:入門與實務</a></li>
+<li>反向工程模式：從解析已出版的研究論文，學習研究過程的八大步驟</li>
+<li>統計約佔整體內容 15% ~ 20%
+以下，需要的統計方法在本學期已經打下基礎</li>
+<li>要完整解讀研究論文的統計方法，可在「可重製統計」學習</li>
+<li>Psytoolkit使用方法將在”研究方法”課程介紹及實作</li>
+</ul>
+</section>
+
 <section id="可重製統計預告" class="title-slide slide level1">
 <h1>“可重製統計”預告</h1>
-
-</section>
-<section id="修課優勢" class="slide level2">
-<h2>修課優勢</h2>
+<p><strong>修課優勢</strong></p>
 <ul>
 <li>裝備修習進階課程需要的所有基本統計方法：ANOVA、多元迴歸、因素分析</li>
-<li>學習運用線性模型整合所有基本統計方法</li>
+<li>學習運用<strong>線性模型</strong>整合所有基本統計方法</li>
 <li>提昇個人處理「不確定性」課題的心理韌性</li>
 <li>累積的統計學學分與全球心理學系學生一致</li>
 </ul>
-</section></section>
+</section>
+
 <section>
 <section id="練習-問題討論" class="title-slide slide level1">
 <h1>練習 + 問題討論</h1>
@@ -885,20 +1065,20 @@ Book）</li>
 <section id="自由練習" class="slide level2">
 <h2>自由練習</h2>
 <blockquote>
-<p>利用剩餘時間，練盤任意週次的個人資料</p>
+<p>利用剩餘時間，重新練習任意週次的個人資料</p>
 </blockquote>
 <p><strong>建議練習方向</strong>：</p>
 <ul>
-<li>重跑 W15 線性迴歸：確認斜率解讀與殘差診斷</li>
-<li>重跑 W10/W12 t 檢定：對照 APA 報告格式</li>
-<li>解讀 Q-Q Plot：什麼樣的偏離表示違反常態性假設？</li>
-<li>運用課程GEMINI模擬出題及解題</li>
+<li>更新 W15 LAB：加強迴歸方程式的解讀與殘差診斷</li>
+<li>運用課程 GEMINI 模擬出題及解題</li>
 </ul>
 </section>
 <section id="q-a" class="slide level2">
 <h2>Q &amp; A</h2>
 <blockquote>
-<p>有任何關於本學期統計內容、作業評量、或 W17 的問題，請提出！</p>
+<p>有任何關於本學期統計內容、作業評量、或 W17 LAB 的問題，請提出！
+模擬題組開放到本週連假前一日，可在關閉前自行練習
+本週連假之前還能預約課後輔導，登記表見google classroom W15說明</p>
 </blockquote>
 </section></section>
     </div>
