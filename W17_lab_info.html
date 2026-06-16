@@ -1,0 +1,254 @@
+<!-- SOURCE: W16_slides.Rmd lines 367-374
+     更新時請同步 W16_slides.Rmd 對應段落，並重新部署兩個檔案。 -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>W17 期末 LAB 程序 — 心理教育統計 2026</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #9b59b6;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+      --text: #333;
+      --muted: #666;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Microsoft JhengHei', 'Noto Sans TC', 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 2.5rem 1rem 2rem;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      border-radius: 3px;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    header .date-chip {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    main {
+      max-width: 640px;
+      margin: 2.5rem auto;
+      padding: 0 1rem 3rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .timeline {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .timeline li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.96rem;
+    }
+
+    .time-chip {
+      flex-shrink: 0;
+      background: #eaf4fd;
+      color: #1a73e8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 12px;
+      white-space: nowrap;
+      margin-top: 0.15rem;
+    }
+
+    .timeline li.deadline .time-chip {
+      background: #fdecea;
+      color: #c0392b;
+    }
+
+    .mode-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      margin-left: 0.3rem;
+    }
+
+    .closed { background: #fdecea; color: #c0392b; }
+    .open   { background: #e8f5e9; color: #1e7a3c; }
+
+    .notice-box {
+      background: #fff8e1;
+      border-left: 4px solid #f39c12;
+      padding: 0.85rem 1.1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.91rem;
+      margin-top: 0.6rem;
+    }
+
+    .more-link-card {
+      background: #f0ebf8;
+      border: 1px solid #d8cfe8;
+      border-radius: 10px;
+      padding: 1.2rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--primary);
+      transition: background 0.15s;
+    }
+
+    .more-link-card:hover { background: #e6ddf5; }
+
+    .more-link-card .label {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .more-link-card .title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .more-link-card .arrow {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1.4rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">W17 · 期末</div>
+  <h1>期末 LAB 程序</h1>
+  <p class="subtitle">心理教育統計 2026 · 慈濟大學</p>
+  <div class="date-chip">📅 2026 年 6 月 22 日（一）</div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>W17 LAB 程序</h2>
+    <ul class="timeline">
+      <li>
+        <span class="time-chip">第三節鐘響後</span>
+        <span>Google Classroom 作業正式開放</span>
+      </li>
+      <li>
+        <span class="time-chip">10:20 AM</span>
+        <span>
+          <strong>Part A</strong> 開始
+          <span class="mode-tag closed">🔒 Closed Book</span><br>
+          限時 12 分鐘，PsyToolkit 線上作答
+        </span>
+      </li>
+      <li>
+        <span class="time-chip">10:32 AM</span>
+        <span>
+          <strong>Part B + C</strong> 開始
+          <span class="mode-tag open">📖 Open Book</span><br>
+          jamovi 資料分析 + 詮釋與反思課題
+        </span>
+      </li>
+      <li class="deadline">
+        <span class="time-chip">12:10 PM ⛔</span>
+        <span><strong>上傳遲交時限</strong>（Google Classroom 關閉）</span>
+      </li>
+    </ul>
+    <div class="notice-box">
+      詳細操作說明請見 Google Classroom 作業頁面說明。
+    </div>
+  </div>
+
+  <!-- 連結至 W16 簡報 W17 預告段落 -->
+  <a class="more-link-card" href="W16_slides.html#/w17-期末-lab-預告" target="_blank" rel="noopener">
+    <div>
+      <div class="label">更多資訊</div>
+      <div class="title">W17 期末 LAB 預告（W16 簡報）</div>
+    </div>
+    <div class="arrow">→</div>
+  </a>
+
+  <a class="back-link" href="index.html">← 返回課程簡報總覽</a>
+
+</main>
+
+<footer>
+  慈濟大學 心理教育統計 2026 春季班 ｜ 授課教師：陳紹慶
+</footer>
+
+</body>
+</html>
